@@ -9,25 +9,25 @@
             text-align: center;
             margin: 0;
             padding-top: 50px;
-            /* Back to your original Sky Background */
+            /* Your original Sky Background */
             background: url("images/sky.jpeg") no-repeat center center fixed;
             background-size: cover;
             color: white;
         }
 
-        /* Dark & Sleek Login/Message Elements */
+        /* Input styling - Dark and clean */
         input { 
             padding: 12px; 
             margin: 8px; 
             border-radius: 8px; 
-            border: 1px solid #333; 
-            background: rgba(0, 0, 0, 0.7); 
+            border: 1px solid rgba(255,255,255,0.2); 
+            background: rgba(0, 0, 0, 0.6); 
             color: white; 
             width: 80%;
             max-width: 300px;
         }
 
-        /* Black Buttons with White Text */
+        /* Black buttons as requested */
         button { 
             padding: 12px 20px; 
             cursor: pointer; 
@@ -38,36 +38,32 @@
             color: #ffffff; 
             font-weight: bold;
         }
-        button:hover { background: #333; opacity: 0.9; }
+        button:hover { opacity: 0.8; background: #222; }
 
         #hearts { margin-top:10px; font-size:20px; }
 
-        /* Dark Hint/Error Boxes */
         #hint, #error {
             display: none;
             margin-top: 10px;
             padding: 12px;
             border-radius: 12px;
-            background: rgba(0,0,0,0.8);
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            border: 1px solid #444;
         }
-        #hint { color: #fff; }
-        #error { color: #ff4d4d; }
+        #error { color: #ffb3b3; }
 
         /* Sleek Black Read Me Button */
         #readBtn {
             display:none;
             margin-top:40px;
-            border-radius:30px;
+            border-radius:25px;
             background: #000000;
             color: white;
-            padding: 15px 40px;
+            padding: 15px 35px;
             border: 1px solid #444;
-            font-size: 1.1rem;
         }
 
         #introScreen {
@@ -84,26 +80,15 @@
 
         #memoriesSection { display:none; margin-top:40px; padding-bottom: 120px; }
         
-        /* Dark Note Card */
-        .noteCard {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 25px;
-            border-radius: 15px;
-            margin: 20px auto;
-            border: 1px solid #333;
-            max-width: 500px;
-            width: 90%;
-        }
-
         .memoryBlock {
             opacity:0;
             transform:translateY(30px);
             transition:0.6s;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .memoryBlock.show { opacity:1; transform:translateY(0); }
         
-        .photo { width:90%; max-width:500px; border-radius:12px; cursor:pointer; border: 1px solid rgba(255,255,255,0.1); }
+        .photo { width:90%; max-width:500px; border-radius:12px; cursor:pointer; }
         
         .sideBySide {
             display: flex;
@@ -112,34 +97,34 @@
             gap: 15px;
             margin-top: 10px;
         }
-        .sideImg { width:140px; border-radius:12px; cursor:pointer; }
+        .sideImg { width:145px; border-radius:12px; cursor:pointer; }
         .groupClose { font-size:20px; cursor:pointer; display: block; margin-bottom: 10px; color: #ff4d4d; }
         
-        /* Birthday Button Fixed to Bottom Right so it doesn't cover titles */
+        /* Birthday Button Fixed to Bottom Right */
         #bdayContainer {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 90px;
+            width: 100px;
             text-align: center;
             z-index: 99999;
         }
         #bdayBtn {
-            width: 70px;
-            height: 70px;
-            font-size: 35px;
+            width: 75px;
+            height: 75px;
+            font-size: 38px;
             border-radius: 50%;
             background: #000;
             border: 2px solid white;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         #bdayText {
             margin-top:5px;
-            font-size:10px;
+            font-size:11px;
             color:white;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.6);
             padding:4px;
-            border-radius:5px;
+            border-radius:8px;
         }
 
         #imgPopup {
@@ -152,18 +137,17 @@
             align-items:center;
             z-index:10000;
         }
-        #popupImg { max-width:95%; max-height:90%; border-radius:10px; border: 1px solid white; }
+        #popupImg { max-width:90%; max-height:90%; border-radius:10px; }
 
         #adminView {
             display: none;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.85);
             padding: 20px;
             border-radius: 15px;
             margin: 20px auto;
             max-width: 600px;
-            border: 1px solid #333;
         }
-        .msgItem { border-bottom: 1px solid #222; padding: 15px; text-align: left; }
+        .msgItem { border-bottom: 1px solid #444; padding: 15px; text-align: left; }
     </style>
 </head>
 
@@ -178,17 +162,17 @@
     <h2>Our Memories</h2>
     <input id="username" placeholder="Username"><br>
     <input id="password" type="password" placeholder="Password"><br>
-    <button id="loginBtn" onclick="login()">Login</button>
+    <button id="loginBtn" onclick="login()">Unlock</button>
     <div id="hearts">❤️❤️❤️❤️❤️</div>
     <div id="hint"></div>
     <div id="error"></div>
 </div>
 
 <div id="adminView">
-    <h2 id="adminTitle">Admin Dashboard</h2>
+    <h2 id="adminTitle">Dashboard</h2>
     <div id="adminContent"></div>
     <br>
-    <button onclick="location.reload()" style="background:#444; color:white;">Logout</button>
+    <button onclick="location.reload()">Logout</button>
 </div>
 
 <button id="readBtn" onclick="openIntro()">Read me 🤍</button>
@@ -198,7 +182,7 @@
 </div>
 
 <div id="memoriesSection">
-    <div class="memoryBlock noteCard">
+    <div class="memoryBlock" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin: 20px; border: 1px solid rgba(255,255,255,0.2);">
         <h3>Leave a note for me 🤍</h3>
         <input id="userMsg" placeholder="Type something..." style="width:85%;"><br>
         <button onclick="saveMessage()">Send to her 🤍</button>
@@ -377,7 +361,7 @@
     let hearts = 5;
     let attempts = 0;
     let isLocked = false;
-    let isTester = false; 
+    let isTester = false;
 
     function login(){
         if(isLocked) return;
@@ -385,9 +369,6 @@
         const pass = document.getElementById("password").value.toLowerCase();
         const error = document.getElementById("error");
         const loginSection = document.getElementById("loginSection");
-        const readBtn = document.getElementById("readBtn");
-
-        error.style.display = "none";
 
         if(pass === "shreec") {
             loginSection.style.display = "none";
@@ -405,32 +386,23 @@
         if(user === "suraj"){
             if(pass === "autorides" || pass === "moonlight"){
                 if(pass === "moonlight") isTester = true;
-                else window.trackVisit(); 
+                else window.trackVisit();
                 loginSection.style.display = "none";
-                readBtn.style.display = "inline-block";
+                document.getElementById("readBtn").style.display = "inline-block";
                 return;
             }
-        } else if (user !== "" && user !== "suraj") {
-            showError("Wrong username 😤");
-            return;
         }
-
+        
         hearts--; attempts++; updateHearts(); showHint();
-        if(hearts > 0) startCountdown(15);
-        else startCountdown(120);
+        startCountdown(hearts > 0 ? 15 : 120);
     }
 
     function updateHearts(){ document.getElementById("hearts").innerText = "❤️".repeat(hearts) + "💔".repeat(5-hearts); }
     function showHint(){
-        const hints = ["9 letters", "we loved it", "Favourite memory", "My first fav photo", "Nothing beats that"];
+        const hints = ["9 letters", "we loved it so much", "Favourite memory fr", "My most fav pic of ours", "Nothing beats that"];
         const h = document.getElementById("hint");
         h.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
         h.style.display = "inline-block";
-    }
-
-    function showError(msg){
-        const e = document.getElementById("error");
-        e.innerText = msg; e.style.display = "inline-block";
     }
 
     function startCountdown(seconds){
@@ -438,11 +410,13 @@
         let sec = seconds;
         let interval = setInterval(()=>{
             sec--;
-            showError(hearts <= 0 ? "Ask Dhanu for help... 😭💔" : `Wait ${sec}s ⏳`);
+            const e = document.getElementById("error");
+            e.style.display = "inline-block";
+            e.innerText = hearts <= 0 ? "Ask ME for help... 😭💔" : `Wait ${sec}s ⏳`;
             if(sec <= 0){
                 clearInterval(interval); isLocked = false;
                 document.getElementById("loginBtn").disabled = false;
-                if(hearts > 0) showError("Try again… 💛");
+                e.innerText = "Try again...";
             }
         },1000);
     }
@@ -454,10 +428,10 @@
         window.dispatchEvent(new Event('scroll'));
     }
 
-    function toggleSection(contentId, btnId, openText, closeText){
-        const c = document.getElementById(contentId); const b = document.getElementById(btnId);
-        if(c.style.display === "none"){ c.style.display = "block"; b.innerText = closeText; }
-        else { c.style.display = "none"; b.innerText = openText; }
+    function toggleSection(cid, bid, ot, ct){
+        const c = document.getElementById(cid); const b = document.getElementById(bid);
+        if(c.style.display === "none"){ c.style.display = "block"; b.innerText = ct; }
+        else { c.style.display = "none"; b.innerText = ot; }
     }
     function toggleDraw(){ toggleSection("drawContent", "drawBtn", "Drawings 🤍", "Hide drawings 🤍"); }
     function openImg(src){ document.getElementById("imgPopup").style.display = "flex"; document.getElementById("popupImg").src = src; }
@@ -467,18 +441,18 @@
     function updateBirthdayUI() {
         let today = new Date();
         if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) {
-            document.getElementById("bdayText").innerText = "🎉 Open me!"; return; 
+            document.getElementById("bdayText").innerText = "🎉 OPEN!"; return; 
         }
         let bday = new Date(today.getFullYear(), bdayMonth, bdayDate);
         if (today > bday) bday.setFullYear(today.getFullYear() + 1);
         let diff = bday - today;
         let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("bdayText").innerText = `🎂 ${days} days left`;
+        document.getElementById("bdayText").innerText = `🎂 ${days}d left`;
     }
     function openGift() {
-        let today = new Date();
-        if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) window.location.href = "birthday.html";
-        else alert("Not yet… 🤍"); 
+        let t = new Date();
+        if (t.getMonth() === bdayMonth && t.getDate() === bdayDate) window.location.href = "birthday.html";
+        else alert("Patience... 🤍"); 
     }
     updateBirthdayUI();
 
@@ -513,14 +487,14 @@
 
     window.saveMessage = async function() {
         const input = document.getElementById("userMsg");
-        if(input.value.trim() === "") return alert("Write something! 😂");
+        if(!input.value.trim()) return alert("Write a note! ❤️");
         await push(ref(db, "messages"), { text: input.value, time: new Date().toLocaleString() });
         alert("Sent! ❤️"); input.value = "";
     }
 
     window.showVisits = function() {
         onValue(ref(db, "stats/visitCount"), (s) => {
-            document.getElementById("adminContent").innerHTML = `<h1 style='color:white; font-size: 50px;'>${s.val() || 0}</h1>`;
+            document.getElementById("adminContent").innerHTML = `<h1 style='color:white; font-size:60px;'>${s.val() || 0}</h1>`;
         });
     }
 
@@ -529,13 +503,12 @@
             let h = "";
             if(s.exists()){
                 Object.values(s.val()).reverse().forEach(m => {
-                    h += `<div class="msgItem"><strong>[${m.time}]</strong><br>${m.text}</div>`;
+                    h += `<div class="msgItem"><strong>${m.time}:</strong><br>${m.text}</div>`;
                 });
-            } else { h = "Empty."; }
+            } else { h = "No notes yet."; }
             document.getElementById("adminContent").innerHTML = h;
         });
     }
 </script>
-
 </body>
 </html>
