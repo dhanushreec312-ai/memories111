@@ -17,14 +17,14 @@
 
         /* Input styling - Dark and clean */
         input { 
-            padding: 12px; 
-            margin: 8px; 
+            padding: 10px; 
+            margin: 5px; 
             border-radius: 8px; 
             border: 1px solid rgba(255,255,255,0.2); 
-            background: rgba(0, 0, 0, 0.6); 
-            color: white; 
-            width: 80%;
-            max-width: 300px;
+            background: rgba(255, 255, 255, 0.9); 
+            color: black; 
+            width: 60%;
+            max-width: 250px;
         }
 
         /* Black buttons as requested */
@@ -399,7 +399,7 @@
 
     function updateHearts(){ document.getElementById("hearts").innerText = "❤️".repeat(hearts) + "💔".repeat(5-hearts); }
     function showHint(){
-        const hints = ["9 letters", "we loved it so much", "Favourite memory fr", "My most fav pic of ours", "Nothing beats that"];
+        const hints = ["9 letters", "we loved it", "Favourite memory", "My first fav photo", "Nothing beats that"];
         const h = document.getElementById("hint");
         h.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
         h.style.display = "inline-block";
@@ -412,7 +412,7 @@
             sec--;
             const e = document.getElementById("error");
             e.style.display = "inline-block";
-            e.innerText = hearts <= 0 ? "Ask ME for help... 😭💔" : `Wait ${sec}s ⏳`;
+            e.innerText = hearts <= 0 ? "Ask Dhanu for help... 😭💔" : `Wait ${sec}s ⏳`;
             if(sec <= 0){
                 clearInterval(interval); isLocked = false;
                 document.getElementById("loginBtn").disabled = false;
