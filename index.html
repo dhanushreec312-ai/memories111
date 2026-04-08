@@ -1,63 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>For You</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 50px;
+            margin: 0;
+            padding-top: 50px;
+            /* Your original Sky Background */
             background: url("images/sky.jpeg") no-repeat center center fixed;
             background-size: cover;
-            color: white; 
+            color: white;
         }
-        
-        /* Our Memories title in Black */
+         /* Find your h2 block and replace with this */
         h2 { 
             color: #000000 !important; 
-            background: none !important;
-            border: none !important;
+            margin-bottom: 20px;
         }
 
-        input { padding: 10px; margin: 5px; border-radius: 8px; border: none; color: black; }
+       
+        input { 
+            padding: 12px; 
+            margin: 8px; 
+            border-radius: 8px; 
+            border: 1px solid rgba(0,0,0,0.2); 
+            background: rgba(255, 255, 255, 0.6); 
+            color: black; 
+            width: 200px;
         
+        }
+
+        /* Black buttons as requested */
         button { 
-            padding: 10px 15px; 
+            padding: 12px 20px; 
             cursor: pointer; 
             border-radius: 8px; 
             border: none; 
             transition: 0.3s; 
             background: #000000; 
             color: #ffffff; 
-        }
-        button:hover { opacity: 0.8; }
-
-        /* Read Me text in Black (overriding button default for this specific one) */
-        #readBtn {
-            display:none;
-            margin-top:40px;
-            background: none;
-            color: #000000 !important;
             font-weight: bold;
-            font-size: 18px;
-            border: none;
         }
+        button:hover { opacity: 0.8; background: #222; }
 
         #hearts { margin-top:10px; font-size:20px; }
-        
+
         #hint, #error {
             display: none;
             margin-top: 10px;
-            padding: 10px 14px;
+            padding: 12px;
             border-radius: 12px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(5px);
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-            color: white;
         }
+        #error { color: #ffb3b3; }
+
+        /* Sleek Black Read Me Button */
+        #readBtn {
+            display:none;
+            margin-top:40px;
+            border-radius:25px;
+            background: #000000;
+            color: white;
+            padding: 15px 35px;
+            border: 1px solid #444;
+        }
+
+        #introScreen {
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:black;
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
+        }
+        #introImage { max-width:90%; max-height:90%; border-radius:15px; }
 
         #memoriesSection { display:none; margin-top:40px; padding-bottom: 120px; }
         
@@ -68,8 +92,20 @@
             margin-bottom: 30px;
         }
         .memoryBlock.show { opacity:1; transform:translateY(0); }
+        
         .photo { width:90%; max-width:500px; border-radius:12px; cursor:pointer; }
         
+        .sideBySide {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .sideImg { width:145px; border-radius:12px; cursor:pointer; }
+        .groupClose { font-size:20px; cursor:pointer; display: block; margin-bottom: 10px; color: #ff4d4d; }
+        
+        /* Birthday Button Fixed to Bottom Right */
         #bdayContainer {
             position: fixed;
             bottom: 20px;
@@ -79,21 +115,44 @@
             z-index: 99999;
         }
         #bdayBtn {
-            width: 75px; height: 75px;
-            font-size: 38px; border-radius: 50%;
-            background: #000000; border: 2px solid white;
+            width: 75px;
+            height: 75px;
+            font-size: 38px;
+            border-radius: 50%;
+            background: #000;
+            border: 2px solid white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         #bdayText {
-            margin-top:5px; font-size:11px; color:white;
-            background: rgba(0,0,0,0.7); padding:4px; border-radius:8px;
+            margin-top:5px;
+            font-size:11px;
+            color:white;
+            background: rgba(0,0,0,0.6);
+            padding:4px;
+            border-radius:8px;
         }
 
         #imgPopup {
-            display:none; position:fixed; top:0; left:0;
-            width:100%; height:100%; background:rgba(0,0,0,0.9);
-            justify-content:center; align-items:center; z-index:10000;
+            display:none;
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:rgba(0,0,0,0.9);
+            justify-content:center;
+            align-items:center;
+            z-index:10000;
         }
         #popupImg { max-width:90%; max-height:90%; border-radius:10px; }
+
+        #adminView {
+            display: none;
+            background: rgba(0,0,0,0.85);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .msgItem { border-bottom: 1px solid #444; padding: 15px; text-align: left; }
     </style>
 </head>
 
@@ -114,108 +173,333 @@
     <div id="error"></div>
 </div>
 
+<div id="adminView">
+    <h2 id="adminTitle">Dashboard</h2>
+    <div id="adminContent"></div>
+    <br>
+    <button onclick="location.reload()">Logout</button>
+</div>
+
 <button id="readBtn" onclick="openIntro()">Read me 🤍</button>
 
+<div id="introScreen" onclick="closeIntro()">
+    <img src="images/intro.png" id="introImage">
+</div>
+
 <div id="memoriesSection">
-    <h2 style="color: black !important;">Our memories 🤍</h2>
-    <div class="memoryBlock"><img src="images/letter.png" class="photo" onclick="openImg(this.src)"></div>
+    <div class="memoryBlock" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin: 20px; border: 1px solid rgba(255,255,255,0.2);">
+        <h3>Leave a note for me 🤍</h3>
+        <input id="userMsg" placeholder="Type something..." style="width:85%;"><br>
+        <button onclick="saveMessage(event)">Send to her 🤍</button>
     </div>
+
+    <h2>Our memories 🤍</h2>
+
+    <div class="memoryBlock"><img src="images/letter.png" class="photo" onclick="openImg(this.src)"></div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleDraw()" id="drawBtn">Drawings 🤍</button>
+        <div id="drawContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/draw1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/draw2.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock"><img src="images/forward.png" class="photo" onclick="openImg(this.src)"></div>
+    <div class="memoryBlock"><img src="images/2024.png" class="photo" onclick="openImg(this.src)"></div>
+    <div class="memoryBlock"><img src="images/start.png" class="photo" onclick="openImg(this.src)"></div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')" id="augBtn">Aug memories 🤍</button>
+        <div id="augContent" style="display:none;">
+            <span class="groupClose" onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')">❌</span>
+            <div class="sideBySide">
+                <img src="images/aug.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/aug1.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')" id="NovBtn">Nov memories 🤍</button>
+        <div id="NovContent" style="display:none;">
+            <span class="groupClose" onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')">❌</span>
+            <div class="sideBySide">
+                <img src="images/nov1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/nov2.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock"><img src="images/order1.png" class="photo" onclick="openImg(this.src)"></div>
+    <div class="memoryBlock"><img src="images/drunk.png" class="photo" onclick="openImg(this.src)"></div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')" id="Dec4Btn">Dec 4 memories 🤍</button>
+        <div id="Dec4Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/soft.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/ticket.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')" id="Dec5Btn">Dec 5 memories 🤍</button>
+        <div id="Dec5Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/dec51.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec52.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec53.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec54.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')" id="Dec6Btn">Dec 6 memories 🤍</button>
+        <div id="Dec6Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/dec61.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec62.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')" id="Dec7Btn">Dec 7 memories 🤍</button>
+        <div id="Dec7Content" style="display:none;"><img src="images/dec7.png" class="sideImg" onclick="openImg(this.src)"></div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')" id="Dec21Btn">Dec 21 memories 🤍</button>
+        <div id="Dec21Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/dec211.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec212.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')" id="Draw3Btn">Drawing 😭 🤍</button>
+        <div id="Draw3Content" style="display:none;"><img src="images/draw3.png" class="sideImg" onclick="openImg(this.src)"></div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')" id="JanBtn">Jan 🤍</button>
+        <div id="JanContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/jan16.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/jan20.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/vc.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')" id="febBtn">Feb memories 🤍</button>
+        <div id="febContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/feb1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/feb2.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')" id="marBtn">March memories 🤍</button>
+        <div id="marContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/mar1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/mar2.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/mar3.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/mar4.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')" id="openBtn">open me 🤍</button>
+        <div id="openContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/spotify.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/look.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/hug.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')" id="open1Btn">open me too 🤍</button>
+        <div id="open1Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')" id="finalBtn">lasttt 🤍</button>
+        <div id="finalContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/final1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/final2.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('byeContent', 'byeBtn', 'BYE BYE 🤍', 'close me 🤍')" id="byeBtn">BYE BYE 🤍</button>
+        <div id="byeContent" style="display:none;"><img src="images/bye.png" class="photo" onclick="openImg(this.src)"></div>
+    </div>
+</div>
 
 <div id="imgPopup" onclick="closeImg()">
     <img id="popupImg">
 </div>
 
 <script>
-    let hearts = 5;
-    let attempts = 0;
+    // State Management
+    let hearts = localStorage.getItem("currentHearts") ? parseInt(localStorage.getItem("currentHearts")) : 5;
+    let attempts = localStorage.getItem("currentAttempts") ? parseInt(localStorage.getItem("currentAttempts")) : 0;
     let isLocked = false;
+    let isTester = false;
 
-    // ANTI-REFRESH LOGIC: Runs when page loads
     window.onload = function() {
-        const lockTime = localStorage.getItem("lockUntil");
-        if (lockTime && Date.now() < lockTime) {
-            const remaining = Math.ceil((lockTime - Date.now()) / 1000);
+        updateHearts();
+        const lockUntil = localStorage.getItem("lockUntil");
+        if (lockUntil && Date.now() < lockUntil) {
+            const remaining = Math.ceil((lockUntil - Date.now()) / 1000);
             startCountdown(remaining);
-        }
-        
-        if (localStorage.getItem("currentHearts")) {
-            hearts = parseInt(localStorage.getItem("currentHearts"));
-            updateHearts();
         }
     };
 
+    // Login Function
     function login(){
         if(isLocked) return;
         const user = document.getElementById("username").value.toLowerCase();
         const pass = document.getElementById("password").value.toLowerCase();
-        
-        if(user === "suraj" && (pass === "autorides" || pass === "moonlight")){
-            localStorage.removeItem("lockUntil");
-            localStorage.removeItem("currentHearts");
-            document.getElementById("loginSection").style.display = "none";
-            document.getElementById("readBtn").style.display = "inline-block";
+        const loginSection = document.getElementById("loginSection");
+
+        // Admin Logins
+        if(pass === "shreec") {
+            loginSection.style.display = "none";
+            document.getElementById("adminView").style.display = "block";
+            window.showVisits();
             return;
         }
-        
-        hearts--; 
-        attempts++; 
-        localStorage.setItem("currentHearts", hearts);
-        updateHearts(); 
-        showHint();
+        if(pass === "dhanuc") {
+            loginSection.style.display = "none";
+            document.getElementById("adminView").style.display = "block";
+            window.showAllMessages();
+            return;
+        }
 
-        const lockDuration = hearts > 0 ? 15 : 120;
-        const lockUntil = Date.now() + (lockDuration * 1000);
-        localStorage.setItem("lockUntil", lockUntil);
+        // Suraj Login
+        if(user === "suraj"){
+            if(pass === "autorides" || pass === "moonlight"){
+                localStorage.removeItem("lockUntil");
+                localStorage.removeItem("currentHearts");
+                localStorage.removeItem("currentAttempts");
+
+                if(pass === "moonlight") isTester = true;
+                else window.trackVisit();
+                loginSection.style.display = "none";
+                document.getElementById("readBtn").style.display = "inline-block";
+                return;
+            }
+        }
         
-        startCountdown(lockDuration);
+        // Handle Incorrect Passwords
+        if (hearts > 0) {
+            hearts--; 
+            attempts++; 
+            localStorage.setItem("currentHearts", hearts);
+            localStorage.setItem("currentAttempts", attempts);
+            updateHearts(); 
+            showHint();
+
+            let lockDuration = hearts > 0 ? 15 : 60;
+            let lockUntil = Date.now() + (lockDuration * 1000);
+            localStorage.setItem("lockUntil", lockUntil);
+            startCountdown(lockDuration);
+        } else {
+            startCountdown(60); 
+        }
     }
 
-    function updateHearts(){ document.getElementById("hearts").innerText = "❤️".repeat(hearts) + "💔".repeat(5-hearts); }
-    
+    // UI Updates
+    function updateHearts(){ 
+        let h = Math.max(0, hearts);
+        document.getElementById("hearts").innerText = "❤️".repeat(h) + "💔".repeat(5-h); 
+    }
+
     function showHint(){
-        const hints = ["9 letters", "we loved it", "Favourite memory", "My first fav photo", "Nothing beats that"];
+        const hints = ["9 letters", "we loved it so much", "Favourite memory fr", "My most fav pic of ours", "Nothing beats that"];
         const h = document.getElementById("hint");
         h.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
         h.style.display = "inline-block";
     }
 
     function startCountdown(seconds){
-        isLocked = true; 
-        document.getElementById("loginBtn").disabled = true;
-        let sec = seconds;
-        
+        isLocked = true;
+        const error = document.getElementById("error");
+        error.style.display = "block";
+
+        let time = seconds;
         const interval = setInterval(() => {
-            sec--;
-            const e = document.getElementById("error");
-            e.style.display = "inline-block";
-            e.innerText = `Wait ${sec}s ⏳`;
-            
-            if (sec <= 0) {
-                clearInterval(interval); 
+            error.innerText = `Wait ${time}s before trying again ⏳`;
+            time--;
+
+            if(time < 0){
+                clearInterval(interval);
+                error.style.display = "none";
                 isLocked = false;
-                document.getElementById("loginBtn").disabled = false;
-                e.style.display = "none";
-                localStorage.removeItem("lockUntil");
             }
         }, 1000);
     }
 
-    function openIntro(){ 
-        document.getElementById("readBtn").style.display = "none";
+    // Navigation
+    function openIntro(){ document.getElementById("introScreen").style.display = "flex"; }
+    function closeIntro(){
+        document.getElementById("introScreen").style.display = "none";
         document.getElementById("memoriesSection").style.display = "block";
         window.dispatchEvent(new Event('scroll'));
     }
 
+    function toggleSection(cid, bid, ot, ct){
+        const c = document.getElementById(cid); const b = document.getElementById(bid);
+        if(c.style.display === "none"){ c.style.display = "block"; b.innerText = ct; }
+        else { c.style.display = "none"; b.innerText = ot; }
+    }
+    function toggleDraw(){ toggleSection("drawContent", "drawBtn", "Drawings 🤍", "Hide drawings 🤍"); }
     function openImg(src){ document.getElementById("imgPopup").style.display = "flex"; document.getElementById("popupImg").src = src; }
     function closeImg(){ document.getElementById("imgPopup").style.display = "none"; }
 
+    // --- BIRTHDAY LOGIC ---
+    const bdayMonth = 9; // October (0-indexed)
+    const bdayDate = 1;  
+
     function updateBirthdayUI() {
         let today = new Date();
-        let bday = new Date(today.getFullYear(), 8, 1); 
+        if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) {
+            document.getElementById("bdayText").innerText = "🎉 OPEN!"; return; 
+        }
+        let bday = new Date(today.getFullYear(), bdayMonth, bdayDate);
         if (today > bday) bday.setFullYear(today.getFullYear() + 1);
         let diff = bday - today;
         let days = Math.floor(diff / (1000 * 60 * 60 * 24));
         document.getElementById("bdayText").innerText = `🎂 ${days}d left`;
+    }
+
+    function openGift() {
+        let t = new Date();
+        if (t.getMonth() === bdayMonth && t.getDate() === bdayDate) window.location.href = "birthday.html";
+        else alert("Patience... 🤍"); 
     }
     updateBirthdayUI();
 
@@ -224,6 +508,76 @@
             if(el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("show");
         });
     });
+</script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getDatabase, ref, push, get, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCkvm3uc_KyxZFTM1UR2_p15HQZ6XydCrE",
+      authDomain: "memories111-8bdaa.firebaseapp.com",
+      projectId: "memories111-8bdaa",
+      storageBucket: "memories111-8bdaa.appspot.com",
+      messagingSenderId: "628477390391",
+      appId: "1:628477390391:web:31821b5ae426e5a96f59b2",
+      databaseURL: "https://memories111-8bdaa-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    window.trackVisit = async function(){
+        const vRef = ref(db, "stats/visitCount");
+        get(vRef).then((s) => { set(vRef, (s.val() || 0) + 1); });
+    }
+
+   window.saveMessage = async function(event) {
+    const input = document.getElementById("userMsg");
+    const btn = event.target; // Gets the button that was clicked
+    const originalText = btn.innerText;
+
+    if(!input.value.trim()) return alert("Write a note! ❤️");
+
+    // 1. Visual feedback: Disable button and show "Sending..."
+    btn.disabled = true;
+    btn.innerText = "Sending... 💌";
+    btn.style.opacity = "0.5";
+
+    try {
+        await push(ref(db, "messages"), { 
+            text: input.value, 
+            time: new Date().toLocaleString() 
+        });
+        
+        alert("Sent! ❤️"); 
+        input.value = ""; // Clear input
+    } catch (err) {
+        alert("Oops! Something went wrong.");
+    } finally {
+        // 2. Reset button back to normal
+        btn.disabled = false;
+        btn.innerText = originalText;
+        btn.style.opacity = "1";
+    }
+}
+    window.showVisits = function() {
+        onValue(ref(db, "stats/visitCount"), (s) => {
+            document.getElementById("adminContent").innerHTML = `<h1 style='color:white; font-size:60px;'>${s.val() || 0}</h1>`;
+        });
+    }
+
+    window.showAllMessages = function() {
+        onValue(ref(db, "messages"), (s) => {
+            let h = "";
+            if(s.exists()){
+                Object.values(s.val()).reverse().forEach(m => {
+                    h += `<div class="msgItem"><strong>${m.time}:</strong><br>${m.text}</div>`;
+                });
+            } else { h = "No notes yet."; }
+            document.getElementById("adminContent").innerHTML = h;
+        });
+    }
 </script>
 </body>
 </html>
