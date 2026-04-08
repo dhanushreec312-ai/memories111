@@ -1,115 +1,173 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>For You 🤍</title>
+    <title>For You</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #0a0a0a;
-            --maroon: #4a0404;
-            --gold: #d4af37;
-            --glass: rgba(20, 20, 20, 0.8);
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: Arial, sans-serif;
             text-align: center;
-            background: var(--bg-dark);
-            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url("images/sky.jpeg");
-            background-size: cover;
-            background-attachment: fixed;
-            color: #eee;
             margin: 0;
-            padding: 0;
-            overflow-x: hidden;
+            padding-top: 50px;
+            /* Back to your original Sky Background */
+            background: url("images/sky.jpeg") no-repeat center center fixed;
+            background-size: cover;
+            color: white;
         }
 
-        /* Animated Heart Background */
-        .heart-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; pointer-events: none;
-        }
-        .floating-heart {
-            position: absolute;
-            color: var(--maroon);
-            opacity: 0.4;
-            animation: float 12s infinite linear;
-        }
-        @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg); }
-            100% { transform: translateY(-10vh) rotate(360deg); }
+        /* Dark & Sleek Login/Message Elements */
+        input { 
+            padding: 12px; 
+            margin: 8px; 
+            border-radius: 8px; 
+            border: 1px solid #333; 
+            background: rgba(0, 0, 0, 0.7); 
+            color: white; 
+            width: 80%;
+            max-width: 300px;
         }
 
-        h2, h3 { font-family: 'Playfair Display', serif; color: var(--gold); }
-
-        input { padding: 12px; margin: 8px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: white; width: 80%; max-width: 300px; }
-        
+        /* Black Buttons with White Text */
         button { 
-            padding: 12px 20px; cursor: pointer; border-radius: 8px; border: none; 
-            transition: 0.3s; background: var(--maroon); color: var(--gold); 
-            font-weight: bold; text-transform: uppercase;
+            padding: 12px 20px; 
+            cursor: pointer; 
+            border-radius: 8px; 
+            border: none; 
+            transition: 0.3s; 
+            background: #000000; 
+            color: #ffffff; 
+            font-weight: bold;
         }
-        button:hover { background: #6b0606; transform: scale(1.05); }
+        button:hover { background: #333; opacity: 0.9; }
 
-        #loginSection { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        
+        #hearts { margin-top:10px; font-size:20px; }
+
+        /* Dark Hint/Error Boxes */
         #hint, #error {
-            display: none; margin: 15px auto; padding: 12px; border-radius: 12px;
-            background: rgba(74, 4, 4, 0.5); border: 1px solid var(--maroon); width: fit-content;
+            display: none;
+            margin-top: 10px;
+            padding: 12px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(5px);
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid #444;
         }
+        #hint { color: #fff; }
+        #error { color: #ff4d4d; }
 
+        /* Sleek Black Read Me Button */
         #readBtn {
-            display:none; margin: 40px auto; border-radius: 50px;
-            background: var(--maroon); color: var(--gold); padding: 15px 40px;
-            border: 1px solid var(--gold); font-size: 1.1rem;
+            display:none;
+            margin-top:40px;
+            border-radius:30px;
+            background: #000000;
+            color: white;
+            padding: 15px 40px;
+            border: 1px solid #444;
+            font-size: 1.1rem;
         }
 
         #introScreen {
-            position:fixed; top:0; left:0; width:100%; height:100%;
-            background:black; display:none; justify-content:center; align-items:center; z-index:9999;
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:black;
+            display:none;
+            justify-content:center;
+            align-items:center;
+            z-index:9999;
         }
+        #introImage { max-width:90%; max-height:90%; border-radius:15px; }
 
         #memoriesSection { display:none; margin-top:40px; padding-bottom: 120px; }
         
+        /* Dark Note Card */
+        .noteCard {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px auto;
+            border: 1px solid #333;
+            max-width: 500px;
+            width: 90%;
+        }
+
         .memoryBlock {
-            opacity:0; transform:translateY(30px); transition:0.8s;
-            margin: 0 auto 30px auto; padding: 20px; width: 90%; max-width: 550px;
-            background: var(--glass); border-radius: 15px; border: 1px solid #222;
+            opacity:0;
+            transform:translateY(30px);
+            transition:0.6s;
+            margin-bottom: 40px;
         }
         .memoryBlock.show { opacity:1; transform:translateY(0); }
-        .photo { width:100%; border-radius:10px; cursor:pointer; border: 1px solid #333; }
         
-        .sideBySide { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 10px; }
-        .sideImg { width: 140px; border-radius: 8px; cursor: pointer; }
-
-        /* FIXED BIRTHDAY BUTTON TO BOTTOM RIGHT */
+        .photo { width:90%; max-width:500px; border-radius:12px; cursor:pointer; border: 1px solid rgba(255,255,255,0.1); }
+        
+        .sideBySide {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        .sideImg { width:140px; border-radius:12px; cursor:pointer; }
+        .groupClose { font-size:20px; cursor:pointer; display: block; margin-bottom: 10px; color: #ff4d4d; }
+        
+        /* Birthday Button Fixed to Bottom Right so it doesn't cover titles */
         #bdayContainer {
-            position: fixed; bottom: 20px; right: 20px;
-            width: 100px; text-align: center; z-index: 100000;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 90px;
+            text-align: center;
+            z-index: 99999;
         }
         #bdayBtn {
-            width: 70px; height: 70px; font-size: 35px; border-radius: 50%;
-            background: var(--maroon); border: 2px solid var(--gold);
-            box-shadow: 0 0 20px rgba(74, 4, 4, 0.8);
+            width: 70px;
+            height: 70px;
+            font-size: 35px;
+            border-radius: 50%;
+            background: #000;
+            border: 2px solid white;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
         #bdayText {
-            margin-top: 5px; font-size: 10px; color: var(--gold);
-            background: rgba(0,0,0,0.8); padding: 4px; border-radius: 5px;
+            margin-top:5px;
+            font-size:10px;
+            color:white;
+            background: rgba(0,0,0,0.7);
+            padding:4px;
+            border-radius:5px;
         }
 
         #imgPopup {
-            display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-            background:rgba(0,0,0,0.95); justify-content:center; align-items:center; z-index:10000;
+            display:none;
+            position:fixed;
+            top:0; left:0;
+            width:100%; height:100%;
+            background:rgba(0,0,0,0.9);
+            justify-content:center;
+            align-items:center;
+            z-index:10000;
         }
-        #popupImg { max-width:90%; max-height:90%; border: 2px solid var(--gold); }
+        #popupImg { max-width:95%; max-height:90%; border-radius:10px; border: 1px solid white; }
+
+        #adminView {
+            display: none;
+            background: rgba(0,0,0,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border: 1px solid #333;
+        }
+        .msgItem { border-bottom: 1px solid #222; padding: 15px; text-align: left; }
     </style>
 </head>
 
 <body>
-
-<div class="heart-bg" id="heartContainer"></div>
 
 <div id="bdayContainer">
     <button id="bdayBtn" onclick="openGift()">🎂</button>
@@ -120,28 +178,29 @@
     <h2>Our Memories</h2>
     <input id="username" placeholder="Username"><br>
     <input id="password" type="password" placeholder="Password"><br>
-    <button id="loginBtn" onclick="login()">Unlock</button>
-    <div id="hearts" style="margin-top:15px;">❤️❤️❤️❤️❤️</div>
+    <button id="loginBtn" onclick="login()">Login</button>
+    <div id="hearts">❤️❤️❤️❤️❤️</div>
     <div id="hint"></div>
     <div id="error"></div>
 </div>
 
-<div id="adminView" style="display:none; background:rgba(0,0,0,0.9); padding:30px;">
-    <h2 id="adminTitle">Dashboard</h2>
+<div id="adminView">
+    <h2 id="adminTitle">Admin Dashboard</h2>
     <div id="adminContent"></div>
-    <br><button onclick="location.reload()">Logout</button>
+    <br>
+    <button onclick="location.reload()" style="background:#444; color:white;">Logout</button>
 </div>
 
 <button id="readBtn" onclick="openIntro()">Read me 🤍</button>
 
 <div id="introScreen" onclick="closeIntro()">
-    <img src="images/intro.png" id="introImage" style="max-width:90%; max-height:80%; border-radius:15px;">
+    <img src="images/intro.png" id="introImage">
 </div>
 
 <div id="memoriesSection">
-    <div class="memoryBlock" style="border: 1px solid var(--maroon);">
+    <div class="memoryBlock noteCard">
         <h3>Leave a note for me 🤍</h3>
-        <input id="userMsg" placeholder="Type something..." style="width:90%;"><br>
+        <input id="userMsg" placeholder="Type something..." style="width:85%;"><br>
         <button onclick="saveMessage()">Send to her 🤍</button>
     </div>
 
@@ -166,6 +225,7 @@
     <div class="memoryBlock">
         <button onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')" id="augBtn">Aug memories 🤍</button>
         <div id="augContent" style="display:none;">
+            <span class="groupClose" onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')">❌</span>
             <div class="sideBySide">
                 <img src="images/aug.png" class="sideImg" onclick="openImg(this.src)">
                 <img src="images/aug1.png" class="sideImg" onclick="openImg(this.src)">
@@ -176,6 +236,7 @@
     <div class="memoryBlock">
         <button onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')" id="NovBtn">Nov memories 🤍</button>
         <div id="NovContent" style="display:none;">
+            <span class="groupClose" onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')">❌</span>
             <div class="sideBySide">
                 <img src="images/nov1.png" class="sideImg" onclick="openImg(this.src)">
                 <img src="images/nov2.png" class="sideImg" onclick="openImg(this.src)">
@@ -241,9 +302,11 @@
     <div class="memoryBlock">
         <button onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')" id="JanBtn">Jan 🤍</button>
         <div id="JanContent" style="display:none;">
-            <img src="images/jan16.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/jan20.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/vc.png" class="sideImg" onclick="openImg(this.src)">
+            <div class="sideBySide">
+                <img src="images/jan16.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/jan20.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/vc.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
         </div>
     </div>
 
@@ -272,25 +335,31 @@
     <div class="memoryBlock">
         <button onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')" id="openBtn">open me 🤍</button>
         <div id="openContent" style="display:none;">
-            <img src="images/spotify.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/look.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/hug.png" class="sideImg" onclick="openImg(this.src)">
+            <div class="sideBySide">
+                <img src="images/spotify.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/look.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/hug.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
         </div>
     </div>
 
     <div class="memoryBlock">
         <button onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')" id="open1Btn">open me too 🤍</button>
         <div id="open1Content" style="display:none;">
-            <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
+            <div class="sideBySide">
+                <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
         </div>
     </div>
 
     <div class="memoryBlock">
         <button onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')" id="finalBtn">lasttt 🤍</button>
         <div id="finalContent" style="display:none;">
-            <img src="images/final1.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/final2.png" class="sideImg" onclick="openImg(this.src)">
+            <div class="sideBySide">
+                <img src="images/final1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/final2.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
         </div>
     </div>
 
@@ -308,19 +377,7 @@
     let hearts = 5;
     let attempts = 0;
     let isLocked = false;
-    let isTester = false;
-
-    // Background Hearts Script
-    const container = document.getElementById('heartContainer');
-    for (let i = 0; i < 15; i++) {
-        const h = document.createElement('div');
-        h.className = 'floating-heart';
-        h.innerHTML = '❤️';
-        h.style.left = Math.random() * 100 + '%';
-        h.style.animationDelay = Math.random() * 10 + 's';
-        h.style.fontSize = (Math.random() * 20 + 15) + 'px';
-        container.appendChild(h);
-    }
+    let isTester = false; 
 
     function login(){
         if(isLocked) return;
@@ -328,45 +385,65 @@
         const pass = document.getElementById("password").value.toLowerCase();
         const error = document.getElementById("error");
         const loginSection = document.getElementById("loginSection");
+        const readBtn = document.getElementById("readBtn");
 
-        if(pass === "shreec" || pass === "dhanuc") {
+        error.style.display = "none";
+
+        if(pass === "shreec") {
             loginSection.style.display = "none";
             document.getElementById("adminView").style.display = "block";
-            if(pass === "shreec") window.showVisits();
-            else window.showAllMessages();
+            window.showVisits();
+            return;
+        }
+        if(pass === "dhanuc") {
+            loginSection.style.display = "none";
+            document.getElementById("adminView").style.display = "block";
+            window.showAllMessages();
             return;
         }
 
         if(user === "suraj"){
             if(pass === "autorides" || pass === "moonlight"){
                 if(pass === "moonlight") isTester = true;
-                else window.trackVisit();
+                else window.trackVisit(); 
                 loginSection.style.display = "none";
-                document.getElementById("readBtn").style.display = "block";
+                readBtn.style.display = "inline-block";
                 return;
             }
+        } else if (user !== "" && user !== "suraj") {
+            showError("Wrong username 😤");
+            return;
         }
-        
+
         hearts--; attempts++; updateHearts(); showHint();
-        startCountdown(hearts > 0 ? 15 : 120);
+        if(hearts > 0) startCountdown(15);
+        else startCountdown(120);
     }
 
     function updateHearts(){ document.getElementById("hearts").innerText = "❤️".repeat(hearts) + "💔".repeat(5-hearts); }
     function showHint(){
         const hints = ["9 letters", "we loved it", "Favourite memory", "My first fav photo", "Nothing beats that"];
-        document.getElementById("hint").innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
-        document.getElementById("hint").style.display = "block";
+        const h = document.getElementById("hint");
+        h.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
+        h.style.display = "inline-block";
+    }
+
+    function showError(msg){
+        const e = document.getElementById("error");
+        e.innerText = msg; e.style.display = "inline-block";
     }
 
     function startCountdown(seconds){
         isLocked = true; document.getElementById("loginBtn").disabled = true;
         let sec = seconds;
-        let itv = setInterval(()=>{
+        let interval = setInterval(()=>{
             sec--;
-            const err = document.getElementById("error");
-            err.style.display = "block";
-            err.innerText = hearts <= 0 ? "Ask Dhanu... 💔" : `Wait ${sec}s ⏳`;
-            if(sec <= 0){ clearInterval(itv); isLocked = false; document.getElementById("loginBtn").disabled = false; err.innerText = "Try again..."; }
+            showError(hearts <= 0 ? "Ask Dhanu for help... 😭💔" : `Wait ${sec}s ⏳`);
+            if(sec <= 0){
+                clearInterval(interval); isLocked = false;
+                document.getElementById("loginBtn").disabled = false;
+                if(hearts > 0) showError("Try again… 💛");
+            }
         },1000);
     }
 
@@ -377,10 +454,10 @@
         window.dispatchEvent(new Event('scroll'));
     }
 
-    function toggleSection(cid, bid, ot, ct){
-        const c = document.getElementById(cid); const b = document.getElementById(bid);
-        if(c.style.display === "none") { c.style.display = "block"; b.innerText = ct; }
-        else { c.style.display = "none"; b.innerText = ot; }
+    function toggleSection(contentId, btnId, openText, closeText){
+        const c = document.getElementById(contentId); const b = document.getElementById(btnId);
+        if(c.style.display === "none"){ c.style.display = "block"; b.innerText = closeText; }
+        else { c.style.display = "none"; b.innerText = openText; }
     }
     function toggleDraw(){ toggleSection("drawContent", "drawBtn", "Drawings 🤍", "Hide drawings 🤍"); }
     function openImg(src){ document.getElementById("imgPopup").style.display = "flex"; document.getElementById("popupImg").src = src; }
@@ -389,16 +466,19 @@
     const bdayMonth = 9; const bdayDate = 1;  
     function updateBirthdayUI() {
         let today = new Date();
+        if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) {
+            document.getElementById("bdayText").innerText = "🎉 Open me!"; return; 
+        }
         let bday = new Date(today.getFullYear(), bdayMonth, bdayDate);
         if (today > bday) bday.setFullYear(today.getFullYear() + 1);
         let diff = bday - today;
-        let d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("bdayText").innerText = (today.getMonth() === bdayMonth && today.getDate() === bdayDate) ? "🎉 OPEN NOW!" : `🎂 ${d} days left`;
+        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        document.getElementById("bdayText").innerText = `🎂 ${days} days left`;
     }
     function openGift() {
-        let t = new Date();
-        if (t.getMonth() === bdayMonth && t.getDate() === bdayDate) window.location.href = "birthday.html";
-        else alert("Patience... 🤍"); 
+        let today = new Date();
+        if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) window.location.href = "birthday.html";
+        else alert("Not yet… 🤍"); 
     }
     updateBirthdayUI();
 
@@ -433,14 +513,14 @@
 
     window.saveMessage = async function() {
         const input = document.getElementById("userMsg");
-        if(!input.value.trim()) return alert("Say something! ❤️");
+        if(input.value.trim() === "") return alert("Write something! 😂");
         await push(ref(db, "messages"), { text: input.value, time: new Date().toLocaleString() });
         alert("Sent! ❤️"); input.value = "";
     }
 
     window.showVisits = function() {
         onValue(ref(db, "stats/visitCount"), (s) => {
-            document.getElementById("adminContent").innerHTML = `<h1 style='color:#d4af37; font-size:60px;'>${s.val() || 0}</h1>`;
+            document.getElementById("adminContent").innerHTML = `<h1 style='color:white; font-size: 50px;'>${s.val() || 0}</h1>`;
         });
     }
 
@@ -449,12 +529,13 @@
             let h = "";
             if(s.exists()){
                 Object.values(s.val()).reverse().forEach(m => {
-                    h += `<div style="border-bottom:1px solid #333; padding:10px; color:#eee;"><b>${m.time}:</b><br>${m.text}</div>`;
+                    h += `<div class="msgItem"><strong>[${m.time}]</strong><br>${m.text}</div>`;
                 });
-            }
-            document.getElementById("adminContent").innerHTML = h || "No notes yet.";
+            } else { h = "Empty."; }
+            document.getElementById("adminContent").innerHTML = h;
         });
     }
 </script>
+
 </body>
 </html>
