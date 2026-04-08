@@ -76,14 +76,30 @@
             text-align: center;
             z-index: 99999;
         }
-        #bdayBtn{
-            width:100%;
-            height:95px;
-            font-size:45px;
-            border-radius:18px;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            box-shadow: 0 0 25px rgba(255,150,150,0.9);
-        }
+       .birthday-btn {
+    position: fixed;
+    top: 20px;        /* Moves it to the top */
+    right: 15px;      /* Moves it to the side so it's not in the middle */
+    width: 65px;      /* Made it smaller (was likely 100px+) */
+    height: 65px;     /* Made it smaller */
+    padding: 5px;
+    font-size: 9px;   /* Shrinks the "Available in..." text */
+    z-index: 9999;    /* Keeps it on top */
+    
+    /* This makes it look like a small floating bubble */
+    background: rgba(255, 255, 255, 0.8); 
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.birthday-btn img {
+    width: 25px;      /* Makes the cake icon smaller */
+}
         #bdayText{
             margin-top:8px;
             font-size:13px;
