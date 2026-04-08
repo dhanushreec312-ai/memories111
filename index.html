@@ -4,119 +4,96 @@
     <title>For You</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        body{
+        body {
             font-family: Arial;
             text-align: center;
             margin-top: 50px;
             background: url("images/sky.jpeg") no-repeat center center fixed;
             background-size: cover;
-            color: white;
+            color: white; 
         }
-        input{ padding: 10px; margin: 5px; border-radius: 8px; border: none; }
-        button{ padding: 10px 15px; cursor: pointer; border-radius: 8px; border: none; transition: 0.3s; }
+        
+        /* Our Memories title in Black */
+        h2 { 
+            color: #000000 !important; 
+            background: none !important;
+            border: none !important;
+        }
+
+        input { padding: 10px; margin: 5px; border-radius: 8px; border: none; color: black; }
+        
+        button { 
+            padding: 10px 15px; 
+            cursor: pointer; 
+            border-radius: 8px; 
+            border: none; 
+            transition: 0.3s; 
+            background: #000000; 
+            color: #ffffff; 
+        }
         button:hover { opacity: 0.8; }
-        #hearts{ margin-top:10px; font-size:20px; }
-        #hint, #error{
+
+        /* Read Me text in Black (overriding button default for this specific one) */
+        #readBtn {
+            display:none;
+            margin-top:40px;
+            background: none;
+            color: #000000 !important;
+            font-weight: bold;
+            font-size: 18px;
+            border: none;
+        }
+
+        #hearts { margin-top:10px; font-size:20px; }
+        
+        #hint, #error {
             display: none;
             margin-top: 10px;
             padding: 10px 14px;
             border-radius: 12px;
-            background: rgba(0,0,0,0.35);
+            background: rgba(0,0,0,0.6);
             backdrop-filter: blur(5px);
             width: fit-content;
             margin-left: auto;
             margin-right: auto;
-        }
-        #hint{ color:#fff; }
-        #error{ color:#ffb3b3; }
-        #readBtn{
-            display:none;
-            margin-top:40px;
-            border-radius:25px;
-            background:rgba(255,255,255,0.2);
             color: white;
-            padding: 15px 30px;
         }
-        #introScreen{
-            position:fixed;
-            top:0; left:0;
-            width:100%; height:100%;
-            background:black;
-            display:none;
-            justify-content:center;
-            align-items:center;
-            z-index:9999;
-        }
-        #introImage{ max-width:90%; max-height:90%; border-radius:15px; }
-        #memoriesSection{ display:none; margin-top:40px; padding-bottom: 100px; }
+
+        #memoriesSection { display:none; margin-top:40px; padding-bottom: 120px; }
         
-        .memoryBlock{
+        .memoryBlock {
             opacity:0;
             transform:translateY(30px);
             transition:0.6s;
             margin-bottom: 30px;
         }
-        .memoryBlock.show{ opacity:1; transform:translateY(0); }
-        .photo{ width:90%; max-width:500px; border-radius:12px; cursor:pointer; }
-        .sideBySide{
-            display:grid;
-            justify-content:center;
-            gap:20px;
-            grid-template-columns:repeat(2,auto);
-            margin-top: 10px;
-        }
-        .sideImg{ width:150px; border-radius:12px; cursor:pointer; }
-        .groupClose{ font-size:20px; cursor:pointer; display: block; margin-bottom: 10px; }
+        .memoryBlock.show { opacity:1; transform:translateY(0); }
+        .photo { width:90%; max-width:500px; border-radius:12px; cursor:pointer; }
         
         #bdayContainer {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 140px;
+            width: 100px;
             text-align: center;
             z-index: 99999;
         }
-        #bdayBtn{
-            width: 70px;
-            height: 70px;
-            font-size: 35px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-            box-shadow: 0 0 20px rgba(255,150,150,0.7);
-            border: none;
-            color: white;
+        #bdayBtn {
+            width: 75px; height: 75px;
+            font-size: 38px; border-radius: 50%;
+            background: #000000; border: 2px solid white;
         }
-        #bdayText{
-            margin-top:8px;
-            font-size:12px;
-            color:white;
-            background: rgba(0,0,0,0.6);
-            padding:4px 8px;
-            border-radius:8px;
+        #bdayText {
+            margin-top:5px; font-size:11px; color:white;
+            background: rgba(0,0,0,0.7); padding:4px; border-radius:8px;
         }
-        #imgPopup{
-            display:none;
-            position:fixed;
-            top:0; left:0;
-            width:100%; height:100%;
-            background:rgba(0,0,0,0.9);
-            justify-content:center;
-            align-items:center;
-            z-index:10000;
-        }
-        #popupImg{ max-width:90%; max-height:90%; border-radius:10px; }
 
-        #adminView {
-            display: none;
-            background: rgba(0,0,0,0.85);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
+        #imgPopup {
+            display:none; position:fixed; top:0; left:0;
+            width:100%; height:100%; background:rgba(0,0,0,0.9);
+            justify-content:center; align-items:center; z-index:10000;
         }
-        .msgItem { border-bottom: 1px solid #444; padding: 15px; text-align: left; }
+        #popupImg { max-width:90%; max-height:90%; border-radius:10px; }
     </style>
 </head>
 
@@ -131,188 +108,18 @@
     <h2>Our Memories</h2>
     <input id="username" placeholder="Username"><br>
     <input id="password" type="password" placeholder="Password"><br>
-    <button id="loginBtn" onclick="login()">Login</button>
+    <button id="loginBtn" onclick="login()">Unlock</button>
     <div id="hearts">❤️❤️❤️❤️❤️</div>
     <div id="hint"></div>
     <div id="error"></div>
 </div>
 
-<div id="adminView">
-    <h2 id="adminTitle">Admin Dashboard</h2>
-    <div id="adminContent"></div>
-    <br>
-    <button onclick="location.reload()" style="background:#666; color:white;">Logout</button>
-</div>
-
 <button id="readBtn" onclick="openIntro()">Read me 🤍</button>
 
-<div id="introScreen" onclick="closeIntro()">
-    <img src="images/intro.png" id="introImage">
-</div>
-
 <div id="memoriesSection">
-    <div class="memoryBlock" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin: 20px; border: 1px solid rgba(255,255,255,0.2);">
-        <h3>Leave a note for me 🤍</h3>
-        <input id="userMsg" placeholder="Type something..." style="width:85%; padding:12px; margin-bottom:10px;"><br>
-        <button onclick="saveMessage()" style="background: #ff9a9e; color: white; width: 85%;">Send to her 🤍</button>
-    </div>
-
-    <h2>Our memories 🤍</h2>
-
+    <h2 style="color: black !important;">Our memories 🤍</h2>
     <div class="memoryBlock"><img src="images/letter.png" class="photo" onclick="openImg(this.src)"></div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleDraw()" id="drawBtn">Drawings 🤍</button>
-        <div id="drawContent" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/draw1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/draw2.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
     </div>
-
-    <div class="memoryBlock"><img src="images/forward.png" class="photo" onclick="openImg(this.src)"></div>
-    <div class="memoryBlock"><img src="images/2024.png" class="photo" onclick="openImg(this.src)"></div>
-    <div class="memoryBlock"><img src="images/start.png" class="photo" onclick="openImg(this.src)"></div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')" id="augBtn">Aug memories 🤍</button>
-        <div id="augContent" style="display:none;">
-            <span class="groupClose" onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')">❌</span>
-            <div class="sideBySide">
-                <img src="images/aug.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/aug1.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')" id="NovBtn">Nov memories 🤍</button>
-        <div id="NovContent" style="display:none;">
-            <span class="groupClose" onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')">❌</span>
-            <div class="sideBySide">
-                <img src="images/nov1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/nov2.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock"><img src="images/order1.png" class="photo" onclick="openImg(this.src)"></div>
-    <div class="memoryBlock"><img src="images/drunk.png" class="photo" onclick="openImg(this.src)"></div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')" id="Dec4Btn">Dec 4 memories 🤍</button>
-        <div id="Dec4Content" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/soft.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/ticket.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')" id="Dec5Btn">Dec 5 memories 🤍</button>
-        <div id="Dec5Content" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/dec51.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec52.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec53.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec54.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')" id="Dec6Btn">Dec 6 memories 🤍</button>
-        <div id="Dec6Content" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/dec61.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec62.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')" id="Dec7Btn">Dec 7 memories 🤍</button>
-        <div id="Dec7Content" style="display:none;"><img src="images/dec7.png" class="sideImg" onclick="openImg(this.src)"></div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')" id="Dec21Btn">Dec 21 memories 🤍</button>
-        <div id="Dec21Content" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/dec211.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec212.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')" id="Draw3Btn">Drawing 😭 🤍</button>
-        <div id="Draw3Content" style="display:none;"><img src="images/draw3.png" class="sideImg" onclick="openImg(this.src)"></div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')" id="JanBtn">Jan 🤍</button>
-        <div id="JanContent" style="display:none;">
-            <img src="images/jan16.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/jan20.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/vc.png" class="sideImg" onclick="openImg(this.src)">
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')" id="febBtn">Feb memories 🤍</button>
-        <div id="febContent" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/feb1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/feb2.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')" id="marBtn">March memories 🤍</button>
-        <div id="marContent" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/mar1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/mar2.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/mar3.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/mar4.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')" id="openBtn">open me 🤍</button>
-        <div id="openContent" style="display:none;">
-            <img src="images/spotify.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/look.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/hug.png" class="sideImg" onclick="openImg(this.src)">
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')" id="open1Btn">open me too 🤍</button>
-        <div id="open1Content" style="display:none;">
-            <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')" id="finalBtn">lasttt 🤍</button>
-        <div id="finalContent" style="display:none;">
-            <img src="images/final1.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/final2.png" class="sideImg" onclick="openImg(this.src)">
-        </div>
-    </div>
-
-    <div class="memoryBlock">
-        <button onclick="toggleSection('byeContent', 'byeBtn', 'BYE BYE 🤍', 'close me 🤍')" id="byeBtn">BYE BYE 🤍</button>
-        <div id="byeContent" style="display:none;"><img src="images/bye.png" class="sideImg" onclick="openImg(this.src)"></div>
-    </div>
-</div>
 
 <div id="imgPopup" onclick="closeImg()">
     <img id="popupImg">
@@ -322,206 +129,101 @@
     let hearts = 5;
     let attempts = 0;
     let isLocked = false;
-    let isTester = false; 
+
+    // ANTI-REFRESH LOGIC: Runs when page loads
+    window.onload = function() {
+        const lockTime = localStorage.getItem("lockUntil");
+        if (lockTime && Date.now() < lockTime) {
+            const remaining = Math.ceil((lockTime - Date.now()) / 1000);
+            startCountdown(remaining);
+        }
+        
+        if (localStorage.getItem("currentHearts")) {
+            hearts = parseInt(localStorage.getItem("currentHearts"));
+            updateHearts();
+        }
+    };
 
     function login(){
         if(isLocked) return;
         const user = document.getElementById("username").value.toLowerCase();
         const pass = document.getElementById("password").value.toLowerCase();
-        const error = document.getElementById("error");
-        const loginSection = document.getElementById("loginSection");
-        const readBtn = document.getElementById("readBtn");
-
-        error.style.display = "none";
-
-        // Separate Admin Logins
-        if(pass === "shreec") {
-            loginSection.style.display = "none";
-            document.getElementById("adminView").style.display = "block";
-            window.showVisits();
+        
+        if(user === "suraj" && (pass === "autorides" || pass === "moonlight")){
+            localStorage.removeItem("lockUntil");
+            localStorage.removeItem("currentHearts");
+            document.getElementById("loginSection").style.display = "none";
+            document.getElementById("readBtn").style.display = "inline-block";
             return;
         }
-        if(pass === "dhanuc") {
-            loginSection.style.display = "none";
-            document.getElementById("adminView").style.display = "block";
-            window.showAllMessages();
-            return;
-        }
-
-        // Suraj / Tester Logins
-        if(user === "suraj"){
-            if(pass === "autorides" || pass === "moonlight"){
-                if(pass === "moonlight") {
-                    isTester = true;
-                    alert("Tester mode: Visits won't count! 🌙");
-                } else {
-                    isTester = false;
-                    alert("...you remembered 🥹");
-                    window.trackVisit(); 
-                }
-                loginSection.style.display = "none";
-                readBtn.style.display = "inline-block";
-                return;
-            }
-        } else if (user !== "" && user !== "suraj") {
-            showError("Wrong username 😤");
-            return;
-        }
-
-        hearts--;
-        attempts++;
-        updateHearts();
+        
+        hearts--; 
+        attempts++; 
+        localStorage.setItem("currentHearts", hearts);
+        updateHearts(); 
         showHint();
-        if(hearts > 0) startCountdown(15);
-        else startCountdown(120);
+
+        const lockDuration = hearts > 0 ? 15 : 120;
+        const lockUntil = Date.now() + (lockDuration * 1000);
+        localStorage.setItem("lockUntil", lockUntil);
+        
+        startCountdown(lockDuration);
     }
 
-    function updateHearts(){
-        document.getElementById("hearts").innerText = "❤️".repeat(hearts) + "💔".repeat(5-hearts);
-    }
-
+    function updateHearts(){ document.getElementById("hearts").innerText = "❤️".repeat(hearts) + "💔".repeat(5-hearts); }
+    
     function showHint(){
-        const hints = ["9 letters!!", "we loved it so much", "Favourite memory fe", "My most fav photo of ours", "Nothing beats that"];
-        const hintDiv = document.getElementById("hint");
-        hintDiv.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
-        hintDiv.style.display = "inline-block";
-    }
-
-    function showError(msg){
-        const errorDiv = document.getElementById("error");
-        errorDiv.innerText = msg;
-        errorDiv.style.display = "inline-block";
+        const hints = ["9 letters", "we loved it", "Favourite memory", "My first fav photo", "Nothing beats that"];
+        const h = document.getElementById("hint");
+        h.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
+        h.style.display = "inline-block";
     }
 
     function startCountdown(seconds){
-        isLocked = true;
+        isLocked = true; 
         document.getElementById("loginBtn").disabled = true;
         let sec = seconds;
-        let interval = setInterval(()=>{
+        
+        const interval = setInterval(() => {
             sec--;
-            showError(hearts <= 0 ? "fuck u surajjjjjj ask me now 😭💔" : `Wait ${sec}s ⏳`);
-            if(sec <= 0){
-                clearInterval(interval);
+            const e = document.getElementById("error");
+            e.style.display = "inline-block";
+            e.innerText = `Wait ${sec}s ⏳`;
+            
+            if (sec <= 0) {
+                clearInterval(interval); 
                 isLocked = false;
                 document.getElementById("loginBtn").disabled = false;
-                if(hearts > 0) showError("Try again… 💛");
+                e.style.display = "none";
+                localStorage.removeItem("lockUntil");
             }
-        },1000);
+        }, 1000);
     }
 
-    function openIntro(){ document.getElementById("introScreen").style.display = "flex"; }
-    function closeIntro(){
-        document.getElementById("introScreen").style.display = "none";
+    function openIntro(){ 
+        document.getElementById("readBtn").style.display = "none";
         document.getElementById("memoriesSection").style.display = "block";
         window.dispatchEvent(new Event('scroll'));
     }
 
-    function toggleSection(contentId, btnId, openText, closeText){
-        const c = document.getElementById(contentId);
-        const b = document.getElementById(btnId);
-        if(c.style.display === "none"){
-            c.style.display = "block";
-            b.innerText = closeText;
-        } else {
-            c.style.display = "none";
-            b.innerText = openText;
-        }
-    }
-
-    function toggleDraw(){ toggleSection("drawContent", "drawBtn", "Drawings 🤍", "Hide drawings 🤍"); }
     function openImg(src){ document.getElementById("imgPopup").style.display = "flex"; document.getElementById("popupImg").src = src; }
     function closeImg(){ document.getElementById("imgPopup").style.display = "none"; }
 
-    const bdayMonth = 9; 
-    const bdayDate = 1;  
     function updateBirthdayUI() {
         let today = new Date();
-        if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) {
-            document.getElementById("bdayText").innerText = "🎉 Open me 😭❤️";
-            return; 
-        }
-        let bday = new Date(today.getFullYear(), bdayMonth, bdayDate);
+        let bday = new Date(today.getFullYear(), 8, 1); 
         if (today > bday) bday.setFullYear(today.getFullYear() + 1);
         let diff = bday - today;
         let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        let hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        document.getElementById("bdayText").innerText = `🎂 Available in ${days}d ${hours}h`;
+        document.getElementById("bdayText").innerText = `🎂 ${days}d left`;
     }
-    function openGift() {
-        let today = new Date();
-        if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) window.location.href = "birthday.html";
-        else alert("Not yet… 🤍"); 
-    }
-    updateBirthdayUI(); setInterval(updateBirthdayUI, 60000);
+    updateBirthdayUI();
 
     window.addEventListener("scroll", ()=>{
         document.querySelectorAll(".memoryBlock").forEach(el=>{
-            let rect = el.getBoundingClientRect();
-            if(rect.top < window.innerHeight - 50) el.classList.add("show");
+            if(el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("show");
         });
     });
 </script>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, push, get, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyCkvm3uc_KyxZFTM1UR2_p15HQZ6XydCrE",
-      authDomain: "memories111-8bdaa.firebaseapp.com",
-      projectId: "memories111-8bdaa",
-      storageBucket: "memories111-8bdaa.appspot.com",
-      messagingSenderId: "628477390391",
-      appId: "1:628477390391:web:31821b5ae426e5a96f59b2",
-      databaseURL: "https://memories111-8bdaa-default-rtdb.asia-southeast1.firebasedatabase.app"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    window.trackVisit = async function(){
-        const visitRef = ref(db, "stats/visitCount");
-        get(visitRef).then((snapshot) => {
-            let count = snapshot.exists() ? snapshot.val() : 0;
-            set(visitRef, count + 1);
-        });
-    }
-
-    window.saveMessage = async function() {
-        const msgInput = document.getElementById("userMsg");
-        let message = msgInput.value;
-        if(message.trim() === "") return alert("Write something first! 😂");
-        const finalMsg = isTester ? "[TEST] " + message : message;
-        try {
-            await push(ref(db, "messages"), { text: finalMsg, time: new Date().toLocaleString() });
-            alert("Message sent! ❤️");
-            msgInput.value = "";
-        } catch (e) { alert("Error sending."); }
-    }
-
-    window.showVisits = function() {
-        document.getElementById("adminTitle").innerText = "Suraj's Visit Count";
-        onValue(ref(db, "stats/visitCount"), (snapshot) => {
-            document.getElementById("adminContent").innerHTML = `<h1 style='color:#ffd700; font-size: 50px;'>${snapshot.val() || 0}</h1><p>Times opened (Real visits only)</p>`;
-        });
-    }
-
-    window.showAllMessages = function() {
-        document.getElementById("adminTitle").innerText = "Inbox (Notes from him)";
-        onValue(ref(db, "messages"), (snapshot) => {
-            let html = "";
-            if(snapshot.exists()){
-                const data = snapshot.val();
-                Object.keys(data).reverse().forEach(key => {
-                    const isTestMsg = data[key].text.includes("[TEST]");
-                    const style = isTestMsg ? "color: #888; font-style: italic; opacity: 0.7;" : "color: #fff; font-weight: bold; background: rgba(255,154,158,0.2); border-radius:10px; margin-bottom:10px; padding:10px;";
-                    html += `<div class="msgItem" style="${style}"><strong>[${data[key].time}]</strong><br>${data[key].text}</div>`;
-                });
-            } else { html = "No messages yet."; }
-            document.getElementById("adminContent").innerHTML = html;
-        });
-    }
-</script>
-
 </body>
 </html>
