@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Birthday 💖</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:center;
+            font-family: Arial;
+            color:white;
+            overflow:hidden;
+
+            background: linear-gradient(-45deg, #ff4d6d, #c77dff, #4cc9f0, #ff85a1);
+            background-size: 400% 400%;
+            animation: gradientMove 10s ease infinite;
+        }
+
+        @keyframes gradientMove{
+            0%{background-position:0% 50%;}
+            50%{background-position:100% 50%;}
+            100%{background-position:0% 50%;}
+        }
+
+        .container{
+            z-index:2;
+        }
+
+        h1{
+            font-size:40px;
+            animation: floatText 2s ease-in-out infinite;
+        }
+
+        @keyframes floatText{
+            0%{transform:translateY(0);}
+            50%{transform:translateY(-10px);}
+            100%{transform:translateY(0);}
+        }
+
+        p{
+            font-size:20px;
+            margin-top:20px;
+            line-height:1.6;
+        }
+
+        /* 🕯️ Candle */
+        .candle{
+            margin:30px auto;
+            width:20px;
+            height:60px;
+            background:#fff;
+            border-radius:5px;
+            position:relative;
+        }
+
+        .flame{
+            position:absolute;
+            top:-20px;
+            left:50%;
+            transform:translateX(-50%);
+            width:15px;
+            height:20px;
+            background: radial-gradient(circle, yellow 40%, orange 70%, transparent);
+            border-radius:50%;
+            animation: flicker 0.2s infinite alternate;
+            box-shadow:0 0 20px yellow;
+        }
+
+        @keyframes flicker{
+            from{transform:translateX(-50%) scale(1);}
+            to{transform:translateX(-50%) scale(1.2);}
+        }
+
+        /* 🎉 Confetti */
+        .confetti{
+            position:fixed;
+            width:8px;
+            height:8px;
+            top:-10px;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall{
+            to{
+                transform:translateY(100vh) rotate(360deg);
+            }
+        }
+
+        /* ❌ CLOSE BUTTON */
+        #closeBtn{
+            position:fixed;
+            top:20px;
+            left:20px;
+
+            font-size:18px;
+            padding:8px 12px;
+
+            border:none;
+            border-radius:10px;
+
+            background:rgba(0,0,0,0.5);
+            color:white;
+
+            cursor:pointer;
+            z-index:9999;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ❌ CLOSE BUTTON -->
+<button id="closeBtn" onclick="goBack()">← back</button>
+
+<div class="container">
+    <h1>🎂 Happiest bday Surajjjjj 😇😘❤️</h1>
+
+    <div class="candle">
+        <div class="flame"></div>
+    </div>
+
+    <p>
+        Happy 22!!!!!<br><br>
+        I love you sooooo muchhhhhh.<br><br>
+        I missssss youuuuuu moreeeeeeeeeee.<br><br>
+        HAPPIESTT BIRTHDAYYY KANO ❤️
+    </p>
+</div>
+
+<script>
+    // 🎉 confetti
+    setInterval(()=>{
+        for(let i=0;i<5;i++){
+            let c=document.createElement("div");
+            c.className="confetti";
+            c.style.left=Math.random()*100+"vw";
+            c.style.background=["#ff4d6d","#ffd166","#06d6a0","#118ab2","#c77dff"][Math.floor(Math.random()*5)];
+            c.style.animationDuration=(2+Math.random()*3)+"s";
+            document.body.appendChild(c);
+
+            setTimeout(()=>c.remove(),4000);
+        }
+    },300);
+
+    // ❌ GO BACK
+    function goBack(){
+        window.location.href = "index.html"; // safer
+    }
+</script>
+
+</body>
+</html>
