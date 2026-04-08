@@ -76,29 +76,34 @@
             text-align: center;
             z-index: 99999;
         }
-       .birthday-btn {
-    position: fixed;
-    top: 20px;        /* Moves it to the top */
-    right: 15px;      /* Moves it to the side so it's not in the middle */
-    width: 65px;      /* Made it smaller (was likely 100px+) */
-    height: 65px;     /* Made it smaller */
-    padding: 5px;
-    font-size: 9px;   /* Shrinks the "Available in..." text */
-    z-index: 9999;    /* Keeps it on top */
-    
-    /* This makes it look like a small floating bubble */
-    background: rgba(255, 255, 255, 0.8); 
-    backdrop-filter: blur(5px);
+      .birthday-btn {
+    position: fixed;   /* This keeps it stuck in one spot */
+    bottom: 20px;      /* Pins it to the bottom */
+    right: 20px;       /* Pins it to the right side */
+    width: 60px;       /* Nice and small */
+    height: 60px;      /* Nice and small */
+    z-index: 9999;     /* Makes sure it's on top of images */
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-decoration: none;
+    padding: 5px;
 }
 
 .birthday-btn img {
-    width: 25px;      /* Makes the cake icon smaller */
+    width: 25px;       /* Small cake icon */
+    margin-bottom: 2px;
+}
+
+.birthday-btn span {    /* This is for the "Available in" text */
+    font-size: 8px;
+    color: #333;
+    text-align: center;
+    line-height: 1;
 }
         #bdayText{
             margin-top:8px;
