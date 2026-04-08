@@ -1,197 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>For You 🤍</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS RE-DESIGN - DARK ROMANTIC THEME */
         :root {
-            --bg-dark: #0f0f0f;
-            --maroon-deep: #4a0404;
-            --maroon-bright: #800000;
+            --bg-dark: #0a0a0a;
+            --maroon: #4a0404;
             --gold: #d4af37;
-            --text-main: #e0e0e0;
+            --glass: rgba(20, 20, 20, 0.8);
         }
 
         body {
             font-family: 'Inter', sans-serif;
             text-align: center;
             background: var(--bg-dark);
-            background-image: linear-gradient(rgba(15, 15, 15, 0.8), rgba(15, 15, 15, 0.8)), url("images/sky.jpeg");
-            background-attachment: fixed;
+            background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url("images/sky.jpeg");
             background-size: cover;
-            color: var(--text-main);
+            background-attachment: fixed;
+            color: #eee;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
-        /* Animated Floating Background */
-        .bg-elements {
+        /* Animated Heart Background */
+        .heart-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; pointer-events: none;
         }
-        .bg-heart {
+        .floating-heart {
             position: absolute;
-            color: var(--maroon-bright);
-            opacity: 0.3;
-            animation: floatUp 10s infinite ease-in;
+            color: var(--maroon);
+            opacity: 0.4;
+            animation: float 12s infinite linear;
         }
-        @keyframes floatUp {
-            0% { transform: translateY(110vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.4; }
-            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
-        }
-
-        /* Headers */
-        h1, h2, h3 { 
-            font-family: 'Playfair Display', serif; 
-            color: var(--gold); 
-            letter-spacing: 1px;
+        @keyframes float {
+            0% { transform: translateY(110vh) rotate(0deg); }
+            100% { transform: translateY(-10vh) rotate(360deg); }
         }
 
-        /* Login Section Style */
-        #loginSection {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+        h2, h3 { font-family: 'Playfair Display', serif; color: var(--gold); }
 
-        .login-card {
-            background: rgba(20, 20, 20, 0.85);
-            backdrop-filter: blur(10px);
-            padding: 40px 30px;
-            border-radius: 20px;
-            border: 1px solid var(--maroon-deep);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            width: 85%;
-            max-width: 350px;
-        }
-
-        input { 
-            padding: 12px; 
-            margin: 8px 0; 
-            border-radius: 8px; 
-            border: 1px solid #333; 
-            background: #1a1a1a;
-            color: white;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
+        input { padding: 12px; margin: 8px; border-radius: 8px; border: 1px solid #333; background: #1a1a1a; color: white; width: 80%; max-width: 300px; }
+        
         button { 
-            padding: 12px 20px; 
-            cursor: pointer; 
-            border-radius: 8px; 
-            border: none; 
-            transition: 0.4s; 
-            background: var(--maroon-deep);
-            color: var(--gold);
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            width: 100%;
+            padding: 12px 20px; cursor: pointer; border-radius: 8px; border: none; 
+            transition: 0.3s; background: var(--maroon); color: var(--gold); 
+            font-weight: bold; text-transform: uppercase;
         }
-        button:hover { background: var(--maroon-bright); transform: scale(1.02); }
+        button:hover { background: #6b0606; transform: scale(1.05); }
 
-        #hearts { margin-top:15px; font-size:22px; filter: drop-shadow(0 0 5px var(--maroon-bright)); }
+        #loginSection { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         
         #hint, #error {
-            display: none; margin-top: 15px; padding: 12px;
-            border-radius: 10px; background: rgba(74, 4, 4, 0.4);
-            border: 1px solid var(--maroon-bright); font-size: 14px;
+            display: none; margin: 15px auto; padding: 12px; border-radius: 12px;
+            background: rgba(74, 4, 4, 0.5); border: 1px solid var(--maroon); width: fit-content;
         }
 
-        /* Read Me Button */
         #readBtn {
-            display:none;
-            margin: 40px auto;
-            border-radius: 50px;
-            background: var(--maroon-deep);
-            color: var(--gold);
-            padding: 18px 40px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            border: 1px solid var(--gold);
+            display:none; margin: 40px auto; border-radius: 50px;
+            background: var(--maroon); color: var(--gold); padding: 15px 40px;
+            border: 1px solid var(--gold); font-size: 1.1rem;
         }
 
-        /* Memories Section Styles */
-        #memoriesSection { display:none; padding: 20px; }
+        #introScreen {
+            position:fixed; top:0; left:0; width:100%; height:100%;
+            background:black; display:none; justify-content:center; align-items:center; z-index:9999;
+        }
+
+        #memoriesSection { display:none; margin-top:40px; padding-bottom: 120px; }
         
         .memoryBlock {
             opacity:0; transform:translateY(30px); transition:0.8s;
-            margin-bottom: 40px;
-            background: rgba(20, 20, 20, 0.6);
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(212, 175, 55, 0.1);
+            margin: 0 auto 30px auto; padding: 20px; width: 90%; max-width: 550px;
+            background: var(--glass); border-radius: 15px; border: 1px solid #222;
         }
         .memoryBlock.show { opacity:1; transform:translateY(0); }
-        .photo { width:100%; max-width:500px; border-radius:10px; border: 1px solid #333; }
+        .photo { width:100%; border-radius:10px; cursor:pointer; border: 1px solid #333; }
         
-        /* Interactive Buttons in Content */
-        .memoryBlock button {
-            background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            width: auto;
-            padding: 10px 25px;
-        }
+        .sideBySide { display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-top: 10px; }
+        .sideImg { width: 140px; border-radius: 8px; cursor: pointer; }
 
-        /* Note Section */
-        .note-card {
-            background: linear-gradient(145deg, #1a0202, #2a2a2a);
-            border: 1px solid var(--maroon-bright);
-            padding: 25px;
-            border-radius: 20px;
-            margin: 20px auto;
-        }
-
-        /* Birthday Button Fix - Bottom Right */
+        /* FIXED BIRTHDAY BUTTON TO BOTTOM RIGHT */
         #bdayContainer {
-            position: fixed;
-            bottom: 25px;
-            right: 20px;
-            width: 80px;
-            z-index: 99999;
+            position: fixed; bottom: 20px; right: 20px;
+            width: 100px; text-align: center; z-index: 100000;
         }
         #bdayBtn {
-            width: 65px; height: 65px; font-size: 30px;
-            border-radius: 50%;
-            background: var(--maroon-deep);
-            border: 2px solid var(--gold);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            display: flex; align-items: center; justify-content: center;
+            width: 70px; height: 70px; font-size: 35px; border-radius: 50%;
+            background: var(--maroon); border: 2px solid var(--gold);
+            box-shadow: 0 0 20px rgba(74, 4, 4, 0.8);
         }
         #bdayText {
-            margin-top: 5px; font-size: 9px; font-weight: bold;
-            color: var(--gold); background: rgba(0,0,0,0.8);
-            padding: 3px; border-radius: 5px;
+            margin-top: 5px; font-size: 10px; color: var(--gold);
+            background: rgba(0,0,0,0.8); padding: 4px; border-radius: 5px;
         }
 
-        /* Popups */
         #imgPopup {
             display:none; position:fixed; top:0; left:0; width:100%; height:100%;
             background:rgba(0,0,0,0.95); justify-content:center; align-items:center; z-index:10000;
         }
-        #popupImg { max-width:95%; max-height:90%; border: 2px solid var(--gold); }
-
-        #introScreen {
-            position:fixed; top:0; left:0; width:100%; height:100%;
-            background: black; display:none; justify-content:center; align-items:center; z-index:9999;
-        }
+        #popupImg { max-width:90%; max-height:90%; border: 2px solid var(--gold); }
     </style>
 </head>
 
 <body>
 
-<div class="bg-elements" id="bgHearts"></div>
+<div class="heart-bg" id="heartContainer"></div>
 
 <div id="bdayContainer">
     <button id="bdayBtn" onclick="openGift()">🎂</button>
@@ -199,47 +117,44 @@
 </div>
 
 <div id="loginSection">
-    <div class="login-card">
-        <h2>Our Memories</h2>
-        <input id="username" placeholder="Username"><br>
-        <input id="password" type="password" placeholder="Password"><br>
-        <button id="loginBtn" onclick="login()">Unlock Memories</button>
-        <div id="hearts">❤️❤️❤️❤️❤️</div>
-        <div id="hint"></div>
-        <div id="error"></div>
-    </div>
+    <h2>Our Memories</h2>
+    <input id="username" placeholder="Username"><br>
+    <input id="password" type="password" placeholder="Password"><br>
+    <button id="loginBtn" onclick="login()">Unlock</button>
+    <div id="hearts" style="margin-top:15px;">❤️❤️❤️❤️❤️</div>
+    <div id="hint"></div>
+    <div id="error"></div>
 </div>
 
-<div id="adminView" style="display:none; padding:20px; background:rgba(0,0,0,0.9);">
-    <h2 id="adminTitle">Admin Dashboard</h2>
+<div id="adminView" style="display:none; background:rgba(0,0,0,0.9); padding:30px;">
+    <h2 id="adminTitle">Dashboard</h2>
     <div id="adminContent"></div>
-    <br>
-    <button onclick="location.reload()" style="background:#444;">Logout</button>
+    <br><button onclick="location.reload()">Logout</button>
 </div>
 
 <button id="readBtn" onclick="openIntro()">Read me 🤍</button>
 
 <div id="introScreen" onclick="closeIntro()">
-    <img src="images/intro.png" id="introImage" style="max-width:90%; border-radius:15px;">
+    <img src="images/intro.png" id="introImage" style="max-width:90%; max-height:80%; border-radius:15px;">
 </div>
 
 <div id="memoriesSection">
-    <div class="memoryBlock note-card">
+    <div class="memoryBlock" style="border: 1px solid var(--maroon);">
         <h3>Leave a note for me 🤍</h3>
-        <input id="userMsg" placeholder="Type your heart out..." style="width:90%;"><br>
+        <input id="userMsg" placeholder="Type something..." style="width:90%;"><br>
         <button onclick="saveMessage()">Send to her 🤍</button>
     </div>
 
-    <h2>Our Journey 🤍</h2>
+    <h2>Our memories 🤍</h2>
 
     <div class="memoryBlock"><img src="images/letter.png" class="photo" onclick="openImg(this.src)"></div>
 
     <div class="memoryBlock">
         <button onclick="toggleDraw()" id="drawBtn">Drawings 🤍</button>
-        <div id="drawContent" style="display:none; margin-top:15px;">
-            <div style="display:flex; justify-content:center; gap:10px;">
-                <img src="images/draw1.png" style="width:140px; border-radius:8px;" onclick="openImg(this.src)">
-                <img src="images/draw2.png" style="width:140px; border-radius:8px;" onclick="openImg(this.src)">
+        <div id="drawContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/draw1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/draw2.png" class="sideImg" onclick="openImg(this.src)">
             </div>
         </div>
     </div>
@@ -250,20 +165,20 @@
 
     <div class="memoryBlock">
         <button onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')" id="augBtn">Aug memories 🤍</button>
-        <div id="augContent" style="display:none; margin-top:15px;">
-            <div style="display:flex; justify-content:center; gap:10px;">
-                <img src="images/aug.png" style="width:140px; border-radius:8px;" onclick="openImg(this.src)">
-                <img src="images/aug1.png" style="width:140px; border-radius:8px;" onclick="openImg(this.src)">
+        <div id="augContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/aug.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/aug1.png" class="sideImg" onclick="openImg(this.src)">
             </div>
         </div>
     </div>
 
     <div class="memoryBlock">
         <button onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')" id="NovBtn">Nov memories 🤍</button>
-        <div id="NovContent" style="display:none; margin-top:15px;">
-            <div style="display:flex; justify-content:center; gap:10px;">
-                <img src="images/nov1.png" style="width:140px; border-radius:8px;" onclick="openImg(this.src)">
-                <img src="images/nov2.png" style="width:140px; border-radius:8px;" onclick="openImg(this.src)">
+        <div id="NovContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/nov1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/nov2.png" class="sideImg" onclick="openImg(this.src)">
             </div>
         </div>
     </div>
@@ -273,27 +188,109 @@
 
     <div class="memoryBlock">
         <button onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')" id="Dec4Btn">Dec 4 memories 🤍</button>
-        <div id="Dec4Content" style="display:none; margin-top:15px;">
-            <img src="images/soft.png" style="width:140px;" onclick="openImg(this.src)">
-            <img src="images/ticket.png" style="width:140px;" onclick="openImg(this.src)">
+        <div id="Dec4Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/soft.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/ticket.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
         </div>
     </div>
 
     <div class="memoryBlock">
         <button onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')" id="Dec5Btn">Dec 5 memories 🤍</button>
-        <div id="Dec5Content" style="display:none; margin-top:15px;">
-            <img src="images/dec51.png" style="width:130px; margin:5px;" onclick="openImg(this.src)">
-            <img src="images/dec52.png" style="width:130px; margin:5px;" onclick="openImg(this.src)">
-            <img src="images/dec53.png" style="width:130px; margin:5px;" onclick="openImg(this.src)">
-            <img src="images/dec54.png" style="width:130px; margin:5px;" onclick="openImg(this.src)">
+        <div id="Dec5Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/dec51.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec52.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec53.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec54.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
         </div>
     </div>
 
     <div class="memoryBlock">
         <button onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')" id="Dec6Btn">Dec 6 memories 🤍</button>
-        <div id="Dec6Content" style="display:none; margin-top:15px;">
-            <img src="images/dec61.png" style="width:140px;" onclick="openImg(this.src)">
-            <img src="images/dec62.png" style="width:140px;" onclick="openImg(this.src)">
+        <div id="Dec6Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/dec61.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec62.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')" id="Dec7Btn">Dec 7 memories 🤍</button>
+        <div id="Dec7Content" style="display:none;"><img src="images/dec7.png" class="sideImg" onclick="openImg(this.src)"></div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')" id="Dec21Btn">Dec 21 memories 🤍</button>
+        <div id="Dec21Content" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/dec211.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/dec212.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')" id="Draw3Btn">Drawing 😭 🤍</button>
+        <div id="Draw3Content" style="display:none;"><img src="images/draw3.png" class="sideImg" onclick="openImg(this.src)"></div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')" id="JanBtn">Jan 🤍</button>
+        <div id="JanContent" style="display:none;">
+            <img src="images/jan16.png" class="sideImg" onclick="openImg(this.src)">
+            <img src="images/jan20.png" class="sideImg" onclick="openImg(this.src)">
+            <img src="images/vc.png" class="sideImg" onclick="openImg(this.src)">
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')" id="febBtn">Feb memories 🤍</button>
+        <div id="febContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/feb1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/feb2.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')" id="marBtn">March memories 🤍</button>
+        <div id="marContent" style="display:none;">
+            <div class="sideBySide">
+                <img src="images/mar1.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/mar2.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/mar3.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/mar4.png" class="sideImg" onclick="openImg(this.src)">
+            </div>
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')" id="openBtn">open me 🤍</button>
+        <div id="openContent" style="display:none;">
+            <img src="images/spotify.png" class="sideImg" onclick="openImg(this.src)">
+            <img src="images/look.png" class="sideImg" onclick="openImg(this.src)">
+            <img src="images/hug.png" class="sideImg" onclick="openImg(this.src)">
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')" id="open1Btn">open me too 🤍</button>
+        <div id="open1Content" style="display:none;">
+            <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
+            <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
+        </div>
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')" id="finalBtn">lasttt 🤍</button>
+        <div id="finalContent" style="display:none;">
+            <img src="images/final1.png" class="sideImg" onclick="openImg(this.src)">
+            <img src="images/final2.png" class="sideImg" onclick="openImg(this.src)">
         </div>
     </div>
 
@@ -308,22 +305,21 @@
 </div>
 
 <script>
-    /* ALL YOUR ORIGINAL LOGIC IS PRESERVED */
     let hearts = 5;
     let attempts = 0;
     let isLocked = false;
-    let isTester = false; 
+    let isTester = false;
 
-    // Create Background Hearts
-    const bgContainer = document.getElementById('bgHearts');
+    // Background Hearts Script
+    const container = document.getElementById('heartContainer');
     for (let i = 0; i < 15; i++) {
         const h = document.createElement('div');
-        h.className = 'bg-heart';
+        h.className = 'floating-heart';
         h.innerHTML = '❤️';
         h.style.left = Math.random() * 100 + '%';
         h.style.animationDelay = Math.random() * 10 + 's';
-        h.style.fontSize = (Math.random() * 20 + 10) + 'px';
-        bgContainer.appendChild(h);
+        h.style.fontSize = (Math.random() * 20 + 15) + 'px';
+        container.appendChild(h);
     }
 
     function login(){
@@ -331,9 +327,10 @@
         const user = document.getElementById("username").value.toLowerCase();
         const pass = document.getElementById("password").value.toLowerCase();
         const error = document.getElementById("error");
-        
+        const loginSection = document.getElementById("loginSection");
+
         if(pass === "shreec" || pass === "dhanuc") {
-            document.getElementById("loginSection").style.display = "none";
+            loginSection.style.display = "none";
             document.getElementById("adminView").style.display = "block";
             if(pass === "shreec") window.showVisits();
             else window.showAllMessages();
@@ -344,7 +341,7 @@
             if(pass === "autorides" || pass === "moonlight"){
                 if(pass === "moonlight") isTester = true;
                 else window.trackVisit();
-                document.getElementById("loginSection").style.display = "none";
+                loginSection.style.display = "none";
                 document.getElementById("readBtn").style.display = "block";
                 return;
             }
@@ -357,20 +354,19 @@
     function updateHearts(){ document.getElementById("hearts").innerText = "❤️".repeat(hearts) + "💔".repeat(5-hearts); }
     function showHint(){
         const hints = ["9 letters", "we loved it", "Favourite memory", "My first fav photo", "Nothing beats that"];
-        const h = document.getElementById("hint");
-        h.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
-        h.style.display = "block";
+        document.getElementById("hint").innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
+        document.getElementById("hint").style.display = "block";
     }
 
-    function startCountdown(s){
+    function startCountdown(seconds){
         isLocked = true; document.getElementById("loginBtn").disabled = true;
-        let sec = s;
-        let timer = setInterval(()=>{
+        let sec = seconds;
+        let itv = setInterval(()=>{
             sec--;
             const err = document.getElementById("error");
             err.style.display = "block";
-            err.innerText = hearts <= 0 ? "Ask Dhanu for help now... 💔" : `Wait ${sec}s ⏳`;
-            if(sec <= 0){ clearInterval(timer); isLocked = false; document.getElementById("loginBtn").disabled = false; err.innerText = "Try again..."; }
+            err.innerText = hearts <= 0 ? "Ask Dhanu... 💔" : `Wait ${sec}s ⏳`;
+            if(sec <= 0){ clearInterval(itv); isLocked = false; document.getElementById("loginBtn").disabled = false; err.innerText = "Try again..."; }
         },1000);
     }
 
@@ -402,7 +398,7 @@
     function openGift() {
         let t = new Date();
         if (t.getMonth() === bdayMonth && t.getDate() === bdayDate) window.location.href = "birthday.html";
-        else alert("Patience, my love... 🤍"); 
+        else alert("Patience... 🤍"); 
     }
     updateBirthdayUI();
 
@@ -453,13 +449,12 @@
             let h = "";
             if(s.exists()){
                 Object.values(s.val()).reverse().forEach(m => {
-                    h += `<div style="border-bottom:1px solid #333; padding:10px; color:#e0e0e0;"><b>${m.time}:</b><br>${m.text}</div>`;
+                    h += `<div style="border-bottom:1px solid #333; padding:10px; color:#eee;"><b>${m.time}:</b><br>${m.text}</div>`;
                 });
             }
             document.getElementById("adminContent").innerHTML = h || "No notes yet.";
         });
     }
 </script>
-
 </body>
 </html>
