@@ -25,7 +25,7 @@
             padding: 12px; 
             margin: 8px; 
             border-radius: 8px; 
-            border: 1px solid #f8bbd0;; 
+            border: 1px solid #f8bbd0;
             background: #fce4ec; 
             color: black; 
             width: 200px;
@@ -143,16 +143,26 @@
             z-index:10000;
         }
         #popupImg { max-width:90%; max-height:90%; border-radius:10px; }
-
         #adminView {
-            display: none;
-            background: rgba(0,0,0,0.65);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px auto;
-            max-width: 600px;
-        }
-        .msgItem { border-bottom: 1px solid #444; padding: 15px; text-align: left; }
+    display: none;
+    background: rgba(255, 255, 255, 0.9); /* Light background for the dashboard */
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 600px;
+    color: #333; /* Dark text for admin view */
+}
+
+.msgItem { 
+    background: #f0f0f0; /* Grey message bubbles */
+    border-bottom: 1px solid #ccc; 
+    padding: 15px; 
+    text-align: left; 
+    margin-bottom: 10px;
+    border-radius: 8px;
+    color: #000; /* Black text */
+}
+      
     </style>
 </head>
 
@@ -386,57 +396,58 @@
 
     // Login Function
     function login(){
-        if(isLocked) return;
-        const user = document.getElementById("username").value.toLowerCase();
-        const pass = document.getElementById("password").value.toLowerCase();
-        const loginSection = document.getElementById("loginSection");
+    if(isLocked) return;
+    const user = document.getElementById("username").value.toLowerCase();
+    const pass = document.getElementById("password").value.toLowerCase();
+    const loginSection = document.getElementById("loginSection");
 
-        // Admin Logins
-        if(pass === "shreec") {
+    // 1. Check Admin Passwords FIRST and return immediately
+    if(pass === "shreec") {
+        loginSection.style.display = "none";
+        document.getElementById("adminView").style.display = "block";
+        window.showVisits();
+        return; // Exits the function, no lockout possible
+    }
+    
+    if(pass === "dhanuc") {
+        loginSection.style.display = "none";
+        document.getElementById("adminView").style.display = "block";
+        window.showAllMessages();
+        return; // Exits the function, no lockout possible
+    }
+
+    // 2. Check Suraj Login
+    if(user === "suraj"){
+        if(pass === "autorides" || pass === "moonlight"){
+            localStorage.removeItem("lockUntil");
+            localStorage.removeItem("currentHearts");
+            localStorage.removeItem("currentAttempts");
+
+            if(pass === "moonlight") isTester = true;
+            else window.trackVisit();
             loginSection.style.display = "none";
-            document.getElementById("adminView").style.display = "block";
-            window.showVisits();
-            return;
-        }
-        if(pass === "dhanuc") {
-            loginSection.style.display = "none";
-            document.getElementById("adminView").style.display = "block";
-            window.showAllMessages();
-            return;
-        }
-
-        // Suraj Login
-        if(user === "suraj"){
-            if(pass === "autorides" || pass === "moonlight"){
-                localStorage.removeItem("lockUntil");
-                localStorage.removeItem("currentHearts");
-                localStorage.removeItem("currentAttempts");
-
-                if(pass === "moonlight") isTester = true;
-                else window.trackVisit();
-                loginSection.style.display = "none";
-                document.getElementById("readBtn").style.display = "inline-block";
-                return;
-            }
-        }
-        
-        // Handle Incorrect Passwords
-        if (hearts > 0) {
-            hearts--; 
-            attempts++; 
-            localStorage.setItem("currentHearts", hearts);
-            localStorage.setItem("currentAttempts", attempts);
-            updateHearts(); 
-            showHint();
-
-            let lockDuration = hearts > 0 ? 15 : 60;
-            let lockUntil = Date.now() + (lockDuration * 1000);
-            localStorage.setItem("lockUntil", lockUntil);
-            startCountdown(lockDuration);
-        } else {
-            startCountdown(60); 
+            document.getElementById("readBtn").style.display = "inline-block";
+            return; 
         }
     }
+    
+    // 3. ONLY if all above fail, handle hearts and lockout
+    if (hearts > 0) {
+        hearts--; 
+        attempts++; 
+        localStorage.setItem("currentHearts", hearts);
+        localStorage.setItem("currentAttempts", attempts);
+        updateHearts(); 
+        showHint();
+
+        let lockDuration = hearts > 0 ? 15 : 60;
+        let lockUntil = Date.now() + (lockDuration * 1000);
+        localStorage.setItem("lockUntil", lockUntil);
+        startCountdown(lockDuration);
+    } else {
+        startCountdown(60); 
+    }
+}
 
     // UI Updates
     function updateHearts(){ 
@@ -586,4 +597,4 @@
     }
 </script>
 </body>
-</html> this?
+</html> 
