@@ -25,8 +25,8 @@
             padding: 12px; 
             margin: 8px; 
             border-radius: 8px; 
-            border: 1px solid rgba(0,0,0,0.2); 
-            background: rgba(255, 255, 255, 0.6); 
+            border: 1px solid #f8bbd0;; 
+            background: #fce4ec; 
             color: black; 
             width: 200px;
         
@@ -146,7 +146,7 @@
 
         #adminView {
             display: none;
-            background: rgba(0,0,0,0.85);
+            background: rgba(0,0,0,0.65);
             padding: 20px;
             border-radius: 15px;
             margin: 20px auto;
@@ -338,6 +338,7 @@
             <div class="sideBySide">
                 <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
                 <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
+                 <img src="images/sad.png" class="sideImg" onclick="openImg(this.src)">
             </div>
         </div>
     </div>
@@ -357,6 +358,11 @@
         <div id="byeContent" style="display:none;"><img src="images/bye.png" class="photo" onclick="openImg(this.src)"></div>
     </div>
 </div>
+<div class="memoryBlock">
+        <button onclick="toggleSection('tqContent', 'tqBtn', 'thankyouuu 🤍', 'close me 🤍')" id="tqBtn">thankyouuu🤍</button>
+        <div id="tqContent" style="display:none;"><img src="images/thanks.png" class="photo" onclick="openImg(this.src)"></div>
+</div>
+
 
 <div id="imgPopup" onclick="closeImg()">
     <img id="popupImg">
@@ -580,4 +586,4 @@
     }
 </script>
 </body>
-</html>
+</html> this?
