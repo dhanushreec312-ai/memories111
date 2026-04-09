@@ -26,7 +26,7 @@
             margin: 8px; 
             border-radius: 8px; 
             border: 1px solid #f8bbd0;
-            background: #fce4ec; 
+            background: rgba(255,255,255,0.10);
             color: black; 
             width: 200px;
         
@@ -549,38 +549,37 @@
         get(vRef).then((s) => { set(vRef, (s.val() || 0) + 1); });
     }
 
-   window.saveMessage = async function(event) {
-    const input = document.getElementById("userMsg");
-    const btn = event.target; // Gets the button that was clicked
-    const originalText = btn.innerText;
+    window.saveMessage = async function(event) {
+        const input = document.getElementById("userMsg");
+        const btn = event.target; 
+        const originalText = btn.innerText;
 
-    if(!input.value.trim()) return alert("Write a note! ❤️");
+        if(!input.value.trim()) return alert("something to telll??😌");
 
-    // 1. Visual feedback: Disable button and show "Sending..."
-    btn.disabled = true;
-    btn.innerText = "Sending... 💌";
-    btn.style.opacity = "0.5";
+        btn.disabled = true;
+        btn.innerText = "Sending... 💌";
+        btn.style.opacity = "0.5";
 
-    try {
-        await push(ref(db, "messages"), { 
-            text: input.value, 
-            time: new Date().toLocaleString() 
-        });
-        
-        alert("Sent! ❤️"); 
-        input.value = ""; // Clear input
-    } catch (err) {
-        alert("Oops! Something went wrong.");
-    } finally {
-        // 2. Reset button back to normal
-        btn.disabled = false;
-        btn.innerText = originalText;
-        btn.style.opacity = "1";
+        try {
+            await push(ref(db, "messages"), { 
+                text: input.value, 
+                time: new Date().toLocaleString(),
+                sender: isTester ? "admin" : "user" 
+            });
+            alert("message sent! ❤️"); 
+            input.value = ""; 
+        } catch (err) {
+            alert("Oops! Something went wrong.");
+        } finally {
+            btn.disabled = false;
+            btn.innerText = originalText;
+            btn.style.opacity = "1";
+        }
     }
-}
+
     window.showVisits = function() {
         onValue(ref(db, "stats/visitCount"), (s) => {
-            document.getElementById("adminContent").innerHTML = `<h1 style='color:white; font-size:60px;'>${s.val() || 0}</h1>`;
+            document.getElementById("adminContent").innerHTML = `<h1 style='color:black; font-size:60px;'>${s.val() || 0}</h1>`;
         });
     }
 
@@ -589,12 +588,20 @@
             let h = "";
             if(s.exists()){
                 Object.values(s.val()).reverse().forEach(m => {
-                    h += `<div class="msgItem"><strong>${m.time}:</strong><br>${m.text}</div>`;
+                    // Gray for your tests, White for his real messages
+                    const bgColor = (m.sender === "admin") ? "#e0e0e0" : "#ffffff";
+                    const label = (m.sender === "admin") ? "🛠️ TEST:" : "💌 FROM HIM:";
+
+                    h += `<div class="msgItem" style="background: ${bgColor}; border: 1px solid #ccc; color: black; padding: 10px; margin-bottom: 5px; border-radius: 8px;">
+                            <small style="color: #666;">${label} ${m.time}</small><br>
+                            <strong>${m.text}</strong>
+                          </div>`;
                 });
             } else { h = "No notes yet."; }
             document.getElementById("adminContent").innerHTML = h;
         });
     }
 </script>
+
 </body>
 </html> 
