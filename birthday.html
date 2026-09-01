@@ -2,156 +2,700 @@
 <html>
 <head>
     <title>Happy Birthday 💖</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0,
+                   maximum-scale=1.0,
+                   user-scalable=no">
 
     <style>
-        body{
+
+        *{
+            box-sizing:border-box;
+        }
+
+        html, body{
             margin:0;
-            height:100vh;
-            display:flex;
-            justify-content:center;
-            align-items:center;
-            text-align:center;
-            font-family: Arial;
-            color:white;
+            padding:0;
+            width:100%;
+            height:100%;
+
             overflow:hidden;
 
-            background: linear-gradient(-45deg, #ff4d6d, #c77dff, #4cc9f0, #ff85a1);
-            background-size: 400% 400%;
-            animation: gradientMove 10s ease infinite;
+            font-family:Arial, sans-serif;
         }
+
+
+        /* =================================
+           MAIN BODY
+        ================================= */
+
+        body{
+
+            display:flex;
+
+            justify-content:center;
+            align-items:center;
+
+            text-align:center;
+
+            color:white;
+
+            background:
+                linear-gradient(
+                    -45deg,
+                    #ff4d6d,
+                    #c77dff,
+                    #4cc9f0,
+                    #ff85a1
+                );
+
+            background-size:400% 400%;
+
+            animation:gradientMove 10s ease infinite;
+        }
+
 
         @keyframes gradientMove{
-            0%{background-position:0% 50%;}
-            50%{background-position:100% 50%;}
-            100%{background-position:0% 50%;}
-        }
 
-        .container{
-            z-index:2;
-        }
+            0%{
+                background-position:0% 50%;
+            }
 
-        h1{
-            font-size:40px;
-            animation: floatText 2s ease-in-out infinite;
-        }
+            50%{
+                background-position:100% 50%;
+            }
 
-        @keyframes floatText{
-            0%{transform:translateY(0);}
-            50%{transform:translateY(-10px);}
-            100%{transform:translateY(0);}
-        }
-
-        p{
-            font-size:20px;
-            margin-top:20px;
-            line-height:1.6;
-        }
-
-        /* 🕯️ Candle */
-        .candle{
-            margin:30px auto;
-            width:20px;
-            height:60px;
-            background:#fff;
-            border-radius:5px;
-            position:relative;
-        }
-
-        .flame{
-            position:absolute;
-            top:-20px;
-            left:50%;
-            transform:translateX(-50%);
-            width:15px;
-            height:20px;
-            background: radial-gradient(circle, yellow 40%, orange 70%, transparent);
-            border-radius:50%;
-            animation: flicker 0.2s infinite alternate;
-            box-shadow:0 0 20px yellow;
-        }
-
-        @keyframes flicker{
-            from{transform:translateX(-50%) scale(1);}
-            to{transform:translateX(-50%) scale(1.2);}
-        }
-
-        /* 🎉 Confetti */
-        .confetti{
-            position:fixed;
-            width:8px;
-            height:8px;
-            top:-10px;
-            animation: fall linear forwards;
-        }
-
-        @keyframes fall{
-            to{
-                transform:translateY(100vh) rotate(360deg);
+            100%{
+                background-position:0% 50%;
             }
         }
 
-        /* ❌ CLOSE BUTTON */
-        #closeBtn{
+
+
+        /* =================================
+           VIDEO SCREEN
+        ================================= */
+
+        #videoScreen{
+
             position:fixed;
-            top:20px;
-            left:20px;
 
-            font-size:18px;
-            padding:8px 12px;
+            top:0;
+            left:0;
 
-            border:none;
-            border-radius:10px;
+            width:100vw;
+            height:100vh;
 
-            background:rgba(0,0,0,0.5);
+            height:100dvh;
+
+            background:black;
+
+            display:flex;
+
+            justify-content:center;
+            align-items:center;
+
+            z-index:10000;
+
+            overflow:hidden;
+        }
+
+
+
+        /* =================================
+           PORTRAIT VIDEO
+        ================================= */
+
+        #birthdayVideo{
+
+            display:block;
+
+            /*
+               Portrait video:
+               fills the phone width
+               while keeping its original ratio
+            */
+
+            width:100vw;
+
+            height:auto;
+
+            max-height:100dvh;
+
+            object-fit:contain;
+
+            background:black;
+
+            user-select:none;
+
+            -webkit-user-select:none;
+        }
+
+
+
+        /* =================================
+           TAP TO BEGIN
+        ================================= */
+
+        #startScreen{
+
+            position:fixed;
+
+            top:0;
+            left:0;
+
+            width:100vw;
+            height:100vh;
+
+            height:100dvh;
+
+            background:rgba(0,0,0,0.93);
+
+            display:flex;
+
+            flex-direction:column;
+
+            justify-content:center;
+            align-items:center;
+
+            z-index:10001;
+
             color:white;
 
             cursor:pointer;
-            z-index:9999;
+
+            padding:30px;
         }
+
+
+        #startScreen h2{
+
+            font-size:28px;
+
+            margin:0 0 12px 0;
+
+            animation:floatText 2s ease-in-out infinite;
+        }
+
+
+        #startScreen p{
+
+            font-size:18px;
+
+            margin:5px 0;
+
+            opacity:0.9;
+        }
+
+
+        .heart{
+
+            font-size:42px;
+
+            margin-top:15px;
+
+            animation:heartBeat 1s infinite;
+        }
+
+
+        @keyframes heartBeat{
+
+            0%{
+                transform:scale(1);
+            }
+
+            50%{
+                transform:scale(1.2);
+            }
+
+            100%{
+                transform:scale(1);
+            }
+        }
+
+
+
+        /* =================================
+           BIRTHDAY CONTENT
+        ================================= */
+
+        #birthdayContent{
+
+            display:none;
+
+            width:100%;
+
+            padding:20px;
+
+            z-index:2;
+
+            max-height:100vh;
+
+            overflow:hidden;
+        }
+
+
+        h1{
+
+            font-size:clamp(28px, 8vw, 40px);
+
+            line-height:1.2;
+
+            margin:0 0 20px 0;
+
+            animation:floatText 2s ease-in-out infinite;
+        }
+
+
+        @keyframes floatText{
+
+            0%{
+                transform:translateY(0);
+            }
+
+            50%{
+                transform:translateY(-8px);
+            }
+
+            100%{
+                transform:translateY(0);
+            }
+        }
+
+
+        #birthdayContent p{
+
+            font-size:clamp(17px, 5vw, 20px);
+
+            margin-top:20px;
+
+            line-height:1.6;
+        }
+
+
+
+        /* =================================
+           CANDLE
+        ================================= */
+
+        .candle{
+
+            margin:25px auto;
+
+            width:20px;
+
+            height:60px;
+
+            background:white;
+
+            border-radius:5px;
+
+            position:relative;
+        }
+
+
+        .flame{
+
+            position:absolute;
+
+            top:-20px;
+
+            left:50%;
+
+            transform:translateX(-50%);
+
+            width:15px;
+
+            height:20px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    yellow 40%,
+                    orange 70%,
+                    transparent
+                );
+
+            border-radius:50%;
+
+            animation:flicker 0.2s infinite alternate;
+
+            box-shadow:0 0 20px yellow;
+        }
+
+
+        @keyframes flicker{
+
+            from{
+                transform:
+                    translateX(-50%)
+                    scale(1);
+            }
+
+            to{
+                transform:
+                    translateX(-50%)
+                    scale(1.2);
+            }
+        }
+
+
+
+        /* =================================
+           BACK BUTTON
+           ONLY AFTER VIDEO
+        ================================= */
+
+        #closeBtn{
+
+            position:fixed;
+
+            top:15px;
+
+            left:15px;
+
+            font-size:16px;
+
+            padding:8px 12px;
+
+            border:none;
+
+            border-radius:10px;
+
+            background:rgba(0,0,0,0.5);
+
+            color:white;
+
+            cursor:pointer;
+
+            z-index:9999;
+
+            display:none;
+        }
+
+
+
+        /* =================================
+           CONFETTI
+        ================================= */
+
+        .confetti{
+
+            position:fixed;
+
+            width:8px;
+
+            height:8px;
+
+            top:-10px;
+
+            animation:fall linear forwards;
+
+            z-index:5000;
+        }
+
+
+        @keyframes fall{
+
+            to{
+
+                transform:
+                    translateY(100vh)
+                    rotate(360deg);
+            }
+        }
+
+
+
+        /* =================================
+           SMALL PHONE SCREEN
+        ================================= */
+
+        @media(max-height:700px){
+
+            #birthdayContent{
+
+                padding:15px;
+            }
+
+            #birthdayContent p{
+
+                font-size:16px;
+
+                line-height:1.45;
+            }
+
+            .candle{
+
+                margin:18px auto;
+            }
+        }
+
     </style>
 </head>
 
+
 <body>
 
-<!-- ❌ CLOSE BUTTON -->
-<button id="closeBtn" onclick="goBack()">← back</button>
 
-<div class="container">
-    <h1>🎂 Happiest bday Surajjjjj 😇😘❤️</h1>
+    <!-- =================================
+         VIDEO
+    ================================= -->
 
-    <div class="candle">
-        <div class="flame"></div>
+    <div id="videoScreen">
+
+        <video
+            id="birthdayVideo"
+
+            playsinline
+
+            preload="auto"
+
+            controls
+
+            controlsList="nodownload noremoteplayback"
+
+            disablePictureInPicture
+
+            oncontextmenu="return false;"
+        >
+
+            <source
+                src="birthday.mp4"
+                type="video/mp4">
+
+            Your browser does not support this video.
+
+        </video>
+
     </div>
 
-    <p>
-        Happy 22!!!!!<br><br>
-        I love you sooooo muchhhhhh.<br><br>
-        I missssss youuuuuu moreeeeeeeeeee.<br><br>
-        HAPPIESTT BIRTHDAYYY KANO ❤️
-    </p>
-</div>
 
-<script>
-    // 🎉 confetti
-    setInterval(()=>{
-        for(let i=0;i<5;i++){
-            let c=document.createElement("div");
-            c.className="confetti";
-            c.style.left=Math.random()*100+"vw";
-            c.style.background=["#ff4d6d","#ffd166","#06d6a0","#118ab2","#c77dff"][Math.floor(Math.random()*5)];
-            c.style.animationDuration=(2+Math.random()*3)+"s";
-            document.body.appendChild(c);
 
-            setTimeout(()=>c.remove(),4000);
+    <!-- =================================
+         TAP TO BEGIN
+    ================================= -->
+
+    <div
+        id="startScreen"
+        onclick="startVideo()"
+    >
+
+        <h2>
+            Something for you ❤️
+        </h2>
+
+        <p>
+            Tap to begin
+        </p>
+
+        <div class="heart">
+            ❤️
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         BIRTHDAY MESSAGE
+    ================================= -->
+
+    <div id="birthdayContent">
+
+        <h1>
+            🎂 Happiest bday Surajjjjj 😇😘❤️
+        </h1>
+
+
+        <div class="candle">
+
+            <div class="flame"></div>
+
+        </div>
+
+
+        <p>
+
+            Happy 22!!!!!<br><br>
+
+            I love you sooooo muchhhhhh.<br><br>
+
+            I missssss youuuuuu moreeeeeeeeeee.<br><br>
+
+            HAPPIESTT BIRTHDAYYY KANO ❤️
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================
+         BACK BUTTON
+    ================================= -->
+
+    <button
+        id="closeBtn"
+        onclick="goBack()"
+    >
+        ← back
+    </button>
+
+
+
+    <script>
+
+        const video =
+            document.getElementById("birthdayVideo");
+
+        const startScreen =
+            document.getElementById("startScreen");
+
+        const videoScreen =
+            document.getElementById("videoScreen");
+
+        const birthdayContent =
+            document.getElementById("birthdayContent");
+
+        const closeBtn =
+            document.getElementById("closeBtn");
+
+
+        /* =================================
+           START VIDEO
+        ================================= */
+
+        function startVideo(){
+
+            startScreen.style.display = "none";
+
+            video.play();
+
         }
-    },300);
 
-    // ❌ GO BACK
-    function goBack(){
-        window.location.href = "index.html"; // safer
-    }
-</script>
+
+
+        /* =================================
+           PREVENT SEEKING / SKIPPING
+        ================================= */
+
+        let lastTime = 0;
+
+
+        video.addEventListener(
+            "timeupdate",
+            function(){
+
+                if(video.currentTime > lastTime + 1){
+
+                    video.currentTime = lastTime;
+
+                }
+
+                lastTime = video.currentTime;
+
+            }
+        );
+
+
+
+        /* =================================
+           VIDEO FINISHED
+        ================================= */
+
+        video.addEventListener(
+            "ended",
+            function(){
+
+                videoScreen.style.display = "none";
+
+                birthdayContent.style.display = "block";
+
+                closeBtn.style.display = "block";
+
+                startConfetti();
+
+            }
+        );
+
+
+
+        /* =================================
+           BACK
+        ================================= */
+
+        function goBack(){
+
+            window.location.href = "index.html";
+
+        }
+
+
+
+        /* =================================
+           CONFETTI
+        ================================= */
+
+        function startConfetti(){
+
+            setInterval(
+                function(){
+
+                    for(
+                        let i = 0;
+                        i < 5;
+                        i++
+                    ){
+
+                        let c =
+                            document.createElement("div");
+
+                        c.className =
+                            "confetti";
+
+                        c.style.left =
+                            Math.random() * 100 + "vw";
+
+                        c.style.background =
+                            [
+                                "#ff4d6d",
+                                "#ffd166",
+                                "#06d6a0",
+                                "#118ab2",
+                                "#c77dff"
+                            ][
+                                Math.floor(
+                                    Math.random() * 5
+                                )
+                            ];
+
+                        c.style.animationDuration =
+                            (2 + Math.random() * 3) + "s";
+
+                        document.body.appendChild(c);
+
+
+                        setTimeout(
+                            function(){
+
+                                c.remove();
+
+                            },
+                            4000
+                        );
+
+                    }
+
+                },
+                300
+            );
+
+        }
+
+    </script>
 
 </body>
 </html>
