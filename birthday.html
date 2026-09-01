@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Happy Birthday 💖</title>
+
+    <title>Happy Birthday ❤️</title>
 
     <meta name="viewport"
           content="width=device-width,
@@ -19,28 +20,121 @@
             margin:0;
             padding:0;
             width:100%;
-            height:100%;
+            min-height:100%;
+            font-family:Arial,sans-serif;
+        }
 
-            overflow:hidden;
-
-            font-family:Arial, sans-serif;
+        body{
+            background:#000;
+            color:white;
+            text-align:center;
+            overflow-x:hidden;
         }
 
 
         /* =================================
-           MAIN BODY
+           START SCREEN
         ================================= */
 
-        body{
+        #startScreen{
+
+            position:fixed;
+            inset:0;
+
+            width:100vw;
+            height:100dvh;
+
+            background:#000;
 
             display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+
+            z-index:10001;
+
+            padding:25px;
+
+            cursor:pointer;
+        }
+
+        #startScreen h1{
+            font-size:30px;
+            margin:0 0 15px;
+        }
+
+        #startScreen p{
+            font-size:18px;
+            opacity:.9;
+        }
+
+        .heart{
+            font-size:45px;
+            margin-top:10px;
+            animation:heartbeat 1s infinite;
+        }
+
+        @keyframes heartbeat{
+
+            0%,100%{
+                transform:scale(1);
+            }
+
+            50%{
+                transform:scale(1.2);
+            }
+
+        }
+
+
+        /* =================================
+           VIDEO
+        ================================= */
+
+        #videoScreen{
+
+            position:fixed;
+            inset:0;
+
+            width:100vw;
+            height:100dvh;
+
+            background:#000;
+
+            display:none;
 
             justify-content:center;
             align-items:center;
 
-            text-align:center;
+            z-index:10000;
+        }
 
-            color:white;
+        #birthdayVideo{
+
+            width:100vw;
+            height:100dvh;
+
+            object-fit:contain;
+
+            background:#000;
+
+            display:block;
+        }
+
+
+        /* =================================
+           MAIN BIRTHDAY PAGE
+        ================================= */
+
+        #birthdayContent{
+
+            display:none;
+
+            min-height:100dvh;
+
+            width:100%;
+
+            padding:35px 20px 60px;
 
             background:
                 linear-gradient(
@@ -56,7 +150,6 @@
             animation:gradientMove 10s ease infinite;
         }
 
-
         @keyframes gradientMove{
 
             0%{
@@ -70,188 +163,24 @@
             100%{
                 background-position:0% 50%;
             }
-        }
 
-
-
-        /* =================================
-           VIDEO SCREEN
-        ================================= */
-
-        #videoScreen{
-
-            position:fixed;
-
-            top:0;
-            left:0;
-
-            width:100vw;
-            height:100vh;
-
-            height:100dvh;
-
-            background:black;
-
-            display:flex;
-
-            justify-content:center;
-            align-items:center;
-
-            z-index:10000;
-
-            overflow:hidden;
-        }
-
-
-
-        /* =================================
-           PORTRAIT VIDEO
-        ================================= */
-
-        #birthdayVideo{
-
-            display:block;
-
-            /*
-               Portrait video:
-               fills the phone width
-               while keeping its original ratio
-            */
-
-            width:100vw;
-
-            height:auto;
-
-            max-height:100dvh;
-
-            object-fit:contain;
-
-            background:black;
-
-            user-select:none;
-
-            -webkit-user-select:none;
-        }
-
-
-
-        /* =================================
-           TAP TO BEGIN
-        ================================= */
-
-        #startScreen{
-
-            position:fixed;
-
-            top:0;
-            left:0;
-
-            width:100vw;
-            height:100vh;
-
-            height:100dvh;
-
-            background:rgba(0,0,0,0.93);
-
-            display:flex;
-
-            flex-direction:column;
-
-            justify-content:center;
-            align-items:center;
-
-            z-index:10001;
-
-            color:white;
-
-            cursor:pointer;
-
-            padding:30px;
-        }
-
-
-        #startScreen h2{
-
-            font-size:28px;
-
-            margin:0 0 12px 0;
-
-            animation:floatText 2s ease-in-out infinite;
-        }
-
-
-        #startScreen p{
-
-            font-size:18px;
-
-            margin:5px 0;
-
-            opacity:0.9;
-        }
-
-
-        .heart{
-
-            font-size:42px;
-
-            margin-top:15px;
-
-            animation:heartBeat 1s infinite;
-        }
-
-
-        @keyframes heartBeat{
-
-            0%{
-                transform:scale(1);
-            }
-
-            50%{
-                transform:scale(1.2);
-            }
-
-            100%{
-                transform:scale(1);
-            }
-        }
-
-
-
-        /* =================================
-           BIRTHDAY CONTENT
-        ================================= */
-
-        #birthdayContent{
-
-            display:none;
-
-            width:100%;
-
-            padding:20px;
-
-            z-index:2;
-
-            max-height:100vh;
-
-            overflow:hidden;
         }
 
 
         h1{
 
-            font-size:clamp(28px, 8vw, 40px);
+            font-size:clamp(28px,8vw,40px);
 
-            line-height:1.2;
+            line-height:1.25;
 
-            margin:0 0 20px 0;
+            margin:0 0 25px;
 
             animation:floatText 2s ease-in-out infinite;
         }
 
-
         @keyframes floatText{
 
-            0%{
+            0%,100%{
                 transform:translateY(0);
             }
 
@@ -259,93 +188,147 @@
                 transform:translateY(-8px);
             }
 
-            100%{
-                transform:translateY(0);
-            }
         }
 
 
-        #birthdayContent p{
+        .message{
 
-            font-size:clamp(17px, 5vw, 20px);
+            font-size:19px;
 
-            margin-top:20px;
+            line-height:1.7;
 
-            line-height:1.6;
+            margin:20px auto;
+
+            max-width:600px;
         }
-
 
 
         /* =================================
-           CANDLE
+           DRAWING
         ================================= */
 
-        .candle{
+        #drawSection{
+
+            margin:40px auto 30px;
+
+            max-width:600px;
+        }
+
+        #drawus{
+
+            width:92%;
+
+            max-width:500px;
+
+            border-radius:15px;
+
+            display:block;
+
+            margin:20px auto;
+
+            box-shadow:
+                0 8px 30px rgba(0,0,0,.35);
+        }
+
+
+        .curseText{
+
+            font-size:18px;
+
+            line-height:1.75;
 
             margin:25px auto;
 
-            width:20px;
-
-            height:60px;
-
-            background:white;
-
-            border-radius:5px;
-
-            position:relative;
+            max-width:600px;
         }
 
 
-        .flame{
+        .curseText strong{
 
-            position:absolute;
-
-            top:-20px;
-
-            left:50%;
-
-            transform:translateX(-50%);
-
-            width:15px;
-
-            height:20px;
-
-            background:
-                radial-gradient(
-                    circle,
-                    yellow 40%,
-                    orange 70%,
-                    transparent
-                );
-
-            border-radius:50%;
-
-            animation:flicker 0.2s infinite alternate;
-
-            box-shadow:0 0 20px yellow;
+            font-size:22px;
         }
 
 
-        @keyframes flicker{
+        /* =================================
+           FINAL MESSAGE
+        ================================= */
 
-            from{
-                transform:
-                    translateX(-50%)
-                    scale(1);
-            }
+        #finalMessage{
 
-            to{
-                transform:
-                    translateX(-50%)
-                    scale(1.2);
-            }
+            margin:55px auto 30px;
+
+            max-width:650px;
         }
 
+
+        #finalMessage p{
+
+            font-size:18px;
+
+            line-height:1.8;
+
+            margin:0;
+        }
+
+
+        #finalMessage .big{
+
+            font-size:21px;
+
+            font-weight:bold;
+        }
+
+
+        /* =================================
+           DELETE SECTION
+        ================================= */
+
+        #deleteSection{
+
+            margin:60px auto 20px;
+
+            padding:25px 15px;
+
+            max-width:500px;
+
+            border-top:1px solid rgba(255,255,255,.35);
+        }
+
+
+        #deleteSection p{
+
+            font-size:15px;
+
+            line-height:1.6;
+
+            opacity:.85;
+        }
+
+
+        #deleteBtn{
+
+            margin-top:15px;
+
+            padding:13px 24px;
+
+            border:none;
+
+            border-radius:25px;
+
+            background:#000;
+
+            color:white;
+
+            font-size:16px;
+
+            font-weight:bold;
+
+            cursor:pointer;
+        }
 
 
         /* =================================
            BACK BUTTON
-           ONLY AFTER VIDEO
         ================================= */
 
         #closeBtn{
@@ -353,10 +336,7 @@
             position:fixed;
 
             top:15px;
-
             left:15px;
-
-            font-size:16px;
 
             padding:8px 12px;
 
@@ -364,17 +344,64 @@
 
             border-radius:10px;
 
-            background:rgba(0,0,0,0.5);
+            background:rgba(0,0,0,.55);
 
             color:white;
 
-            cursor:pointer;
+            font-size:15px;
 
             z-index:9999;
 
             display:none;
         }
 
+
+        /* =================================
+           DELETED SCREEN
+        ================================= */
+
+        #deletedScreen{
+
+            display:none;
+
+            position:fixed;
+
+            inset:0;
+
+            width:100vw;
+            height:100dvh;
+
+            background:#000;
+
+            color:white;
+
+            justify-content:center;
+            align-items:center;
+
+            text-align:center;
+
+            padding:30px;
+
+            z-index:20000;
+        }
+
+
+        #deletedScreen h2{
+
+            font-size:28px;
+
+            margin-bottom:15px;
+        }
+
+
+        #deletedScreen p{
+
+            font-size:17px;
+
+            line-height:1.7;
+
+            opacity:.85;
+        }
 
 
         /* =================================
@@ -386,316 +413,639 @@
             position:fixed;
 
             width:8px;
-
             height:8px;
 
             top:-10px;
 
-            animation:fall linear forwards;
-
             z-index:5000;
-        }
 
+            animation:fall linear forwards;
+        }
 
         @keyframes fall{
 
             to{
 
                 transform:
-                    translateY(100vh)
+                    translateY(110vh)
                     rotate(360deg);
             }
-        }
 
-
-
-        /* =================================
-           SMALL PHONE SCREEN
-        ================================= */
-
-        @media(max-height:700px){
-
-            #birthdayContent{
-
-                padding:15px;
-            }
-
-            #birthdayContent p{
-
-                font-size:16px;
-
-                line-height:1.45;
-            }
-
-            .candle{
-
-                margin:18px auto;
-            }
         }
 
     </style>
+
 </head>
 
 
 <body>
 
 
-    <!-- =================================
-         VIDEO
-    ================================= -->
+<!-- =================================
+     START SCREEN
+================================= -->
 
-    <div id="videoScreen">
+<div id="startScreen"
+     onclick="startVideo()">
 
-        <video
-            id="birthdayVideo"
+    <h1>
+        Watch this, idiot. ❤️
+    </h1>
 
-            playsinline
+    <p>
+        Hate me later!
+    </p>
 
-            preload="auto"
+    <div class="heart">
+        ❤️
+    </div>
 
-            controls
+</div>
 
-            controlsList="nodownload noremoteplayback"
 
-            disablePictureInPicture
 
-            oncontextmenu="return false;"
-        >
+<!-- =================================
+     VIDEO
+================================= -->
 
-            <source
-                src="birthday.mp4"
-                type="video/mp4">
+<div id="videoScreen">
 
-            Your browser does not support this video.
+    <video
+        id="birthdayVideo"
+        playsinline
+        preload="auto"
+        controls
+        controlsList="nodownload noremoteplayback"
+        disablePictureInPicture
+        oncontextmenu="return false;">
 
-        </video>
+        <source
+            src="birthday.mp4"
+            type="video/mp4">
+
+        Your browser does not support this video.
+
+    </video>
+
+</div>
+
+
+
+<!-- =================================
+     BIRTHDAY CONTENT
+================================= -->
+
+<div id="birthdayContent">
+
+
+    <h1>
+        🎂 Happiest bday Surajjjjj 😇😘❤️
+    </h1>
+
+
+    <div class="message">
+
+        Happy 22!!!!! ❤️
+
+        <br><br>
+
+        I love you sooooo muchhhhhh.
+
+        <br><br>
+
+        I missssss youuuuuu moreeeeeeeeeee.
 
     </div>
 
 
 
     <!-- =================================
-         TAP TO BEGIN
+         DRAWING
     ================================= -->
 
-    <div
-        id="startScreen"
-        onclick="startVideo()"
-    >
+    <div id="drawSection">
+
+        <img
+            id="drawus"
+            src="drawus.jpeg"
+            alt="A drawing of us">
+
+        <div class="curseText">
+
+            I would've given this to you as a gift.
+
+            <br><br>
+
+            But seems like I started to believe
+            in the curse just to not believe it later.
+
+            <br><br>
+
+            But yeah...
+
+            <br>
+
+            now I really do believeee.
+
+            <br><br>
+
+            The fucking part of being unable
+            to draw myself feels poetic enough.
+
+            <br><br>
+
+            <strong>
+                I'm never drawing again!!!!!!!!!
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================
+         FINAL GOODBYE
+    ================================= -->
+
+    <div id="finalMessage">
+
+        <p>
+
+            And at the end...
+
+            <br><br>
+
+            At last, and out of all people...
+
+            <br><br>
+
+            <span class="big">
+                You got the nerve to ask
+                "WHY DO YOU NEED ME?"
+            </span>
+
+            <br><br>
+
+            Why would I not want my Bestfriend
+            who'd make me that happy.........
+
+            <br><br>
+
+            Anyways.
+
+            <br><br>
+
+            Thanks for everythinggg.
+
+            <br><br>
+
+            <span class="big">
+                GOOD BYE. ❤️
+            </span>
+
+            <br><br>
+
+            I hope things go the way
+            youu pray for!!!
+
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================
+         DELETE
+    ================================= -->
+
+    <div id="deleteSection">
+
+        <p>
+            I know you hate it already.
+            So if you really want to,
+            you can delete it for yourself.
+        </p>
+
+        <button
+            id="deleteBtn"
+            onclick="startDeleteProcess()">
+
+            Delete this for me
+
+        </button>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =================================
+     BACK BUTTON
+================================= -->
+
+<button
+    id="closeBtn"
+    onclick="goBack()">
+
+    ← back
+
+</button>
+
+
+
+<!-- =================================
+     DELETED SCREEN
+================================= -->
+
+<div id="deletedScreen">
+
+    <div>
 
         <h2>
-            Something for you ❤️
+            It's gone. 🤍
         </h2>
 
         <p>
-            Tap to begin
-        </p>
-
-        <div class="heart">
-            ❤️
-        </div>
-
-    </div>
-
-
-
-    <!-- =================================
-         BIRTHDAY MESSAGE
-    ================================= -->
-
-    <div id="birthdayContent">
-
-        <h1>
-            🎂 Happiest bday Surajjjjj 😇😘❤️
-        </h1>
-
-
-        <div class="candle">
-
-            <div class="flame"></div>
-
-        </div>
-
-
-        <p>
-
-            Happy 22!!!!!<br><br>
-
-            I love you sooooo muchhhhhh.<br><br>
-
-            I missssss youuuuuu moreeeeeeeeeee.<br><br>
-
-            HAPPIESTT BIRTHDAYYY KANO ❤️
-
+            You asked for it.
+            <br>
+            So I let it go.
         </p>
 
     </div>
 
-
-
-    <!-- =================================
-         BACK BUTTON
-    ================================= -->
-
-    <button
-        id="closeBtn"
-        onclick="goBack()"
-    >
-        ← back
-    </button>
+</div>
 
 
 
-    <script>
-
-        const video =
-            document.getElementById("birthdayVideo");
-
-        const startScreen =
-            document.getElementById("startScreen");
-
-        const videoScreen =
-            document.getElementById("videoScreen");
-
-        const birthdayContent =
-            document.getElementById("birthdayContent");
-
-        const closeBtn =
-            document.getElementById("closeBtn");
+<script>
 
 
-        /* =================================
-           START VIDEO
-        ================================= */
+const video =
+    document.getElementById("birthdayVideo");
 
-        function startVideo(){
+const startScreen =
+    document.getElementById("startScreen");
 
-            startScreen.style.display = "none";
+const videoScreen =
+    document.getElementById("videoScreen");
 
-            video.play();
+const birthdayContent =
+    document.getElementById("birthdayContent");
+
+const closeBtn =
+    document.getElementById("closeBtn");
+
+const deletedScreen =
+    document.getElementById("deletedScreen");
+
+
+
+/* =================================
+   START VIDEO
+================================= */
+
+function startVideo(){
+
+    startScreen.style.display = "none";
+
+    videoScreen.style.display = "flex";
+
+    video.play().catch(function(error){
+
+        console.log(error);
+
+    });
+
+}
+
+
+
+/* =================================
+   PREVENT SEEKING
+================================= */
+
+let lastTime = 0;
+
+video.addEventListener(
+    "timeupdate",
+    function(){
+
+        if(video.currentTime > lastTime + 1){
+
+            video.currentTime = lastTime;
 
         }
 
+        lastTime = video.currentTime;
+
+    }
+);
 
 
-        /* =================================
-           PREVENT SEEKING / SKIPPING
-        ================================= */
 
-        let lastTime = 0;
+/* =================================
+   VIDEO FINISHED
+================================= */
+
+video.addEventListener(
+    "ended",
+    function(){
+
+        videoScreen.style.display = "none";
+
+        birthdayContent.style.display = "block";
+
+        closeBtn.style.display = "block";
+
+        startConfetti();
+
+        window.scrollTo(0,0);
+
+    }
+);
 
 
-        video.addEventListener(
-            "timeupdate",
-            function(){
 
-                if(video.currentTime > lastTime + 1){
+/* =================================
+   BACK
+================================= */
 
-                    video.currentTime = lastTime;
+function goBack(){
 
+    window.location.href = "index.html";
+
+}
+
+
+
+/* =================================
+   DELETE PROCESS
+================================= */
+
+let deleteStep = 0;
+
+
+function startDeleteProcess(){
+
+    deleteStep++;
+
+    if(deleteStep === 1){
+
+        let answer =
+            confirm(
+                "Are you sure you want to delete this? 🤨"
+            );
+
+        if(!answer){
+
+            deleteStep = 0;
+
+        }
+
+        return;
+    }
+
+
+    if(deleteStep === 2){
+
+        let answer =
+            confirm(
+                "Are you REALLY sure? 😭"
+            );
+
+        if(!answer){
+
+            deleteStep = 0;
+
+        }
+
+        return;
+    }
+
+
+    if(deleteStep === 3){
+
+        let answer =
+            confirm(
+                "Last chance. Are you absolutely sure? 🤍"
+            );
+
+        if(!answer){
+
+            deleteStep = 0;
+
+            return;
+
+        }
+
+        requestDeletion();
+
+    }
+
+}
+
+
+
+/* =================================
+   RECORD DELETE REQUEST
+================================= */
+
+function requestDeletion(){
+
+    /*
+       Firebase function is loaded
+       from the second script below.
+    */
+
+    if(window.recordDeleteRequest){
+
+        window.recordDeleteRequest();
+
+    }
+
+    document.body.innerHTML = "";
+
+    deletedScreen.style.display = "flex";
+
+    document.body.appendChild(deletedScreen);
+
+}
+
+
+
+/* =================================
+   CONFETTI
+================================= */
+
+function startConfetti(){
+
+    setInterval(
+
+        function(){
+
+            for(let i=0;i<5;i++){
+
+                let c =
+                    document.createElement("div");
+
+                c.className =
+                    "confetti";
+
+                c.style.left =
+                    Math.random()*100+"vw";
+
+                c.style.background =
+                    [
+                        "#ff4d6d",
+                        "#ffd166",
+                        "#06d6a0",
+                        "#118ab2",
+                        "#c77dff"
+                    ][
+                        Math.floor(Math.random()*5)
+                    ];
+
+                c.style.animationDuration =
+                    (2+Math.random()*3)+"s";
+
+                document.body.appendChild(c);
+
+                setTimeout(
+                    function(){
+                        c.remove();
+                    },
+                    4000
+                );
+
+            }
+
+        },
+        300
+    );
+
+}
+
+
+</script>
+
+
+
+<!-- =================================
+     FIREBASE
+================================= -->
+
+<script type="module">
+
+import {
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+
+import {
+    getDatabase,
+    ref,
+    push,
+    get,
+    set,
+    onValue
+}
+from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyCkvm3uc_KyxZFTM1UR2_p15HQZ6XydCrE",
+
+    authDomain:
+        "memories111-8bdaa.firebaseapp.com",
+
+    projectId:
+        "memories111-8bdaa",
+
+    storageBucket:
+        "memories111-8bdaa.appspot.com",
+
+    messagingSenderId:
+        "628477390391",
+
+    appId:
+        "1:628477390391:web:31821b5ae426e5a96f59b2",
+
+    databaseURL:
+        "https://memories111-8bdaa-default-rtdb.asia-southeast1.firebasedatabase.app"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getDatabase(app);
+
+
+
+/* =================================
+   RECORD BIRTHDAY PAGE VISIT
+================================= */
+
+const birthdayVisitsRef =
+    ref(db, "stats/birthdayPageVisits");
+
+
+get(birthdayVisitsRef).then(
+
+    (snapshot)=>{
+
+        set(
+            birthdayVisitsRef,
+            (snapshot.val() || 0) + 1
+        );
+
+    }
+
+);
+
+
+
+/* =================================
+   RECORD DELETE REQUEST
+================================= */
+
+window.recordDeleteRequest =
+    async function(){
+
+        try{
+
+            await push(
+                ref(db,"deleteRequests"),
+                {
+                    time:new Date().toLocaleString(),
+                    device:navigator.userAgent,
+                    action:"Birthday page delete requested"
                 }
-
-                lastTime = video.currentTime;
-
-            }
-        );
-
-
-
-        /* =================================
-           VIDEO FINISHED
-        ================================= */
-
-        video.addEventListener(
-            "ended",
-            function(){
-
-                videoScreen.style.display = "none";
-
-                birthdayContent.style.display = "block";
-
-                closeBtn.style.display = "block";
-
-                startConfetti();
-
-            }
-        );
-
-
-
-        /* =================================
-           BACK
-        ================================= */
-
-        function goBack(){
-
-            window.location.href = "index.html";
-
-        }
-
-
-
-        /* =================================
-           CONFETTI
-        ================================= */
-
-        function startConfetti(){
-
-            setInterval(
-                function(){
-
-                    for(
-                        let i = 0;
-                        i < 5;
-                        i++
-                    ){
-
-                        let c =
-                            document.createElement("div");
-
-                        c.className =
-                            "confetti";
-
-                        c.style.left =
-                            Math.random() * 100 + "vw";
-
-                        c.style.background =
-                            [
-                                "#ff4d6d",
-                                "#ffd166",
-                                "#06d6a0",
-                                "#118ab2",
-                                "#c77dff"
-                            ][
-                                Math.floor(
-                                    Math.random() * 5
-                                )
-                            ];
-
-                        c.style.animationDuration =
-                            (2 + Math.random() * 3) + "s";
-
-                        document.body.appendChild(c);
-
-
-                        setTimeout(
-                            function(){
-
-                                c.remove();
-
-                            },
-                            4000
-                        );
-
-                    }
-
-                },
-                300
             );
 
         }
 
-    </script>
+        catch(error){
+
+            console.log(
+                "Could not record delete request",
+                error
+            );
+
+        }
+
+    };
+
+</script>
+
 
 </body>
 </html>
