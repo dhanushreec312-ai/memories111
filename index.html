@@ -9,7 +9,6 @@
             text-align: center;
             margin: 0;
             padding-top: 50px;
-            /* Your original Sky Background */
             background: url("images/sky.jpeg") no-repeat center center fixed;
             background-size: cover;
             color: white;
@@ -896,28 +895,35 @@
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
+    /* =====================================================
+       NEW FIREBASE PROJECT
+    ===================================================== */
+
     const firebaseConfig = {
 
         apiKey:
-            "AIzaSyCkvm3uc_KyxZFTM1UR2_p15HQZ6XydCrE",
+            "AIzaSyBf-arlRCJG3jAr1RyLDeaeHEtm7E4iMto",
 
         authDomain:
-            "memories111-8bdaa.firebaseapp.com",
+            "memories111-new.firebaseapp.com",
 
         projectId:
-            "memories111-8bdaa",
+            "memories111-new",
 
         storageBucket:
-            "memories111-8bdaa.appspot.com",
+            "memories111-new.firebasestorage.app",
 
         messagingSenderId:
-            "628477390391",
+            "566341617812",
 
         appId:
-            "1:628477390391:web:31821b5ae426e5a96f59b2",
+            "1:566341617812:web:4234d805614d6e6fa08c81",
+
+        measurementId:
+            "G-K5D01LFJZR",
 
         databaseURL:
-            "https://memories111-8bdaa-default-rtdb.asia-southeast1.firebasedatabase.app"
+            "https://memories111-new-default-rtdb.asia-southeast1.firebasedatabase.app"
     };
 
 
@@ -926,6 +932,31 @@
 
     const db =
         getDatabase(app);
+
+
+    /* =====================================================
+       BIRTHDAY TEST DATA
+       
+       Keep this TRUE while testing.
+       
+       Birthday page uses:
+       TEST/stats/birthdayPageVisits
+       TEST/deleteRequests
+       ===================================================== */
+
+    const TEST_MODE = true;
+
+
+    const birthdayStatsPath =
+        TEST_MODE
+            ? "TEST/stats"
+            : "stats";
+
+
+    const birthdayDeletePath =
+        TEST_MODE
+            ? "TEST/deleteRequests"
+            : "deleteRequests";
 
 
     /* ==============================
@@ -1039,7 +1070,7 @@
 
     /* ==============================
        ADMIN:
-       MAIN VISITS + BIRTHDAY VIEWS
+       VISITS + BIRTHDAY VIEWS
        ============================== */
 
     window.showVisits = function() {
@@ -1061,7 +1092,8 @@
                 onValue(
                     ref(
                         db,
-                        "stats/birthdayPageVisits"
+                        birthdayStatsPath +
+                        "/birthdayPageVisits"
                     ),
                     (birthdaySnapshot) => {
 
@@ -1217,7 +1249,7 @@
                 onValue(
                     ref(
                         db,
-                        "deleteRequests"
+                        birthdayDeletePath
                     ),
                     (deleteSnapshot) => {
 
