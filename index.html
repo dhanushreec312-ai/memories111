@@ -14,13 +14,12 @@
             background-size: cover;
             color: white;
         }
-         /* Find your h2 block and replace with this */
+
         h2 { 
             color: #000000 !important; 
             margin-bottom: 20px;
         }
 
-       
         input { 
             padding: 12px; 
             margin: 8px; 
@@ -29,10 +28,8 @@
             background: rgba(255,255,255,0.5);
             color: black; 
             width: 200px;
-        
         }
 
-        /* Black buttons as requested */
         button { 
             padding: 12px 20px; 
             cursor: pointer; 
@@ -43,9 +40,16 @@
             color: #ffffff; 
             font-weight: bold;
         }
-        button:hover { opacity: 0.8; background: #222; }
 
-        #hearts { margin-top:10px; font-size:20px; }
+        button:hover { 
+            opacity: 0.8; 
+            background: #222; 
+        }
+
+        #hearts { 
+            margin-top:10px; 
+            font-size:20px; 
+        }
 
         #hint, #error {
             display: none;
@@ -58,9 +62,11 @@
             margin-left: auto;
             margin-right: auto;
         }
-        #error { color: #ffb3b3; }
 
-        /* Sleek Black Read Me Button */
+        #error { 
+            color: #ffb3b3; 
+        }
+
         #readBtn {
             display:none;
             margin-top:40px;
@@ -73,17 +79,28 @@
 
         #introScreen {
             position:fixed;
-            top:0; left:0;
-            width:100%; height:100%;
+            top:0; 
+            left:0;
+            width:100%; 
+            height:100%;
             background:black;
             display:none;
             justify-content:center;
             align-items:center;
             z-index:9999;
         }
-        #introImage { max-width:90%; max-height:90%; border-radius:15px; }
 
-        #memoriesSection { display:none; margin-top:40px; padding-bottom: 120px; }
+        #introImage { 
+            max-width:90%; 
+            max-height:90%; 
+            border-radius:15px; 
+        }
+
+        #memoriesSection { 
+            display:none; 
+            margin-top:40px; 
+            padding-bottom: 120px; 
+        }
         
         .memoryBlock {
             opacity:0;
@@ -91,9 +108,18 @@
             transition:0.6s;
             margin-bottom: 30px;
         }
-        .memoryBlock.show { opacity:1; transform:translateY(0); }
+
+        .memoryBlock.show { 
+            opacity:1; 
+            transform:translateY(0); 
+        }
         
-        .photo { width:90%; max-width:500px; border-radius:12px; cursor:pointer; }
+        .photo { 
+            width:90%; 
+            max-width:500px; 
+            border-radius:12px; 
+            cursor:pointer; 
+        }
         
         .sideBySide {
             display: flex;
@@ -102,10 +128,21 @@
             gap: 15px;
             margin-top: 10px;
         }
-        .sideImg { width:145px; border-radius:12px; cursor:pointer; }
-        .groupClose { font-size:20px; cursor:pointer; display: block; margin-bottom: 10px; color: #ff4d4d; }
+
+        .sideImg { 
+            width:145px; 
+            border-radius:12px; 
+            cursor:pointer; 
+        }
+
+        .groupClose { 
+            font-size:20px; 
+            cursor:pointer; 
+            display: block; 
+            margin-bottom: 10px; 
+            color: #ff4d4d; 
+        }
         
-        /* Birthday Button Fixed to Bottom Right */
         #bdayContainer {
             position: fixed;
             bottom: 20px;
@@ -114,6 +151,7 @@
             text-align: center;
             z-index: 99999;
         }
+
         #bdayBtn {
             width: 75px;
             height: 75px;
@@ -123,6 +161,7 @@
             border: 2px solid white;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
+
         #bdayText {
             margin-top:5px;
             font-size:11px;
@@ -135,33 +174,41 @@
         #imgPopup {
             display:none;
             position:fixed;
-            top:0; left:0;
-            width:100%; height:100%;
+            top:0; 
+            left:0;
+            width:100%; 
+            height:100%;
             background:rgba(0,0,0,0.9);
             justify-content:center;
             align-items:center;
             z-index:10000;
         }
-        #popupImg { max-width:90%; max-height:90%; border-radius:10px; }
-        #adminView {
-    display: none;
-    background: rgba(255, 255, 255, 0.9); /* Light background for the dashboard */
-    padding: 20px;
-    border-radius: 15px;
-    margin: 20px auto;
-    max-width: 600px;
-    color: #333; /* Dark text for admin view */
-}
 
-.msgItem { 
-    background: #f0f0f0; /* Grey message bubbles */
-    border-bottom: 1px solid #ccc; 
-    padding: 15px; 
-    text-align: left; 
-    margin-bottom: 10px;
-    border-radius: 8px;
-    color: #000; /* Black text */
-}
+        #popupImg { 
+            max-width:90%; 
+            max-height:90%; 
+            border-radius:10px; 
+        }
+
+        #adminView {
+            display: none;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            color: #333;
+        }
+
+        .msgItem { 
+            background: #f0f0f0;
+            border-bottom: 1px solid #ccc; 
+            padding: 15px; 
+            text-align: left; 
+            margin-bottom: 10px;
+            border-radius: 8px;
+            color: #000;
+        }
       
     </style>
 </head>
@@ -205,7 +252,9 @@
 
     <h2>Our memories 🤍</h2>
 
-    <div class="memoryBlock"><img src="images/letter.png" class="photo" onclick="openImg(this.src)"></div>
+    <div class="memoryBlock">
+        <img src="images/letter.png" class="photo" onclick="openImg(this.src)">
+    </div>
 
     <div class="memoryBlock">
         <button onclick="toggleDraw()" id="drawBtn">Drawings 🤍</button>
@@ -217,14 +266,28 @@
         </div>
     </div>
 
-    <div class="memoryBlock"><img src="images/forward.png" class="photo" onclick="openImg(this.src)"></div>
-    <div class="memoryBlock"><img src="images/2024.png" class="photo" onclick="openImg(this.src)"></div>
-    <div class="memoryBlock"><img src="images/start.png" class="photo" onclick="openImg(this.src)"></div>
+    <div class="memoryBlock">
+        <img src="images/forward.png" class="photo" onclick="openImg(this.src)">
+    </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')" id="augBtn">Aug memories 🤍</button>
+        <img src="images/2024.png" class="photo" onclick="openImg(this.src)">
+    </div>
+
+    <div class="memoryBlock">
+        <img src="images/start.png" class="photo" onclick="openImg(this.src)">
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')" id="augBtn">
+            Aug memories 🤍
+        </button>
+
         <div id="augContent" style="display:none;">
-            <span class="groupClose" onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')">❌</span>
+            <span class="groupClose" onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')">
+                ❌
+            </span>
+
             <div class="sideBySide">
                 <img src="images/aug.png" class="sideImg" onclick="openImg(this.src)">
                 <img src="images/aug1.png" class="sideImg" onclick="openImg(this.src)">
@@ -233,9 +296,15 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')" id="NovBtn">Nov memories 🤍</button>
+        <button onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')" id="NovBtn">
+            Nov memories 🤍
+        </button>
+
         <div id="NovContent" style="display:none;">
-            <span class="groupClose" onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')">❌</span>
+            <span class="groupClose" onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')">
+                ❌
+            </span>
+
             <div class="sideBySide">
                 <img src="images/nov1.png" class="sideImg" onclick="openImg(this.src)">
                 <img src="images/nov2.png" class="sideImg" onclick="openImg(this.src)">
@@ -243,11 +312,19 @@
         </div>
     </div>
 
-    <div class="memoryBlock"><img src="images/order1.png" class="photo" onclick="openImg(this.src)"></div>
-    <div class="memoryBlock"><img src="images/drunk.png" class="photo" onclick="openImg(this.src)"></div>
+    <div class="memoryBlock">
+        <img src="images/order1.png" class="photo" onclick="openImg(this.src)">
+    </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')" id="Dec4Btn">Dec 4 memories 🤍</button>
+        <img src="images/drunk.png" class="photo" onclick="openImg(this.src)">
+    </div>
+
+    <div class="memoryBlock">
+        <button onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')" id="Dec4Btn">
+            Dec 4 memories 🤍
+        </button>
+
         <div id="Dec4Content" style="display:none;">
             <div class="sideBySide">
                 <img src="images/soft.png" class="sideImg" onclick="openImg(this.src)">
@@ -257,7 +334,10 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')" id="Dec5Btn">Dec 5 memories 🤍</button>
+        <button onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')" id="Dec5Btn">
+            Dec 5 memories 🤍
+        </button>
+
         <div id="Dec5Content" style="display:none;">
             <div class="sideBySide">
                 <img src="images/dec51.png" class="sideImg" onclick="openImg(this.src)">
@@ -269,7 +349,10 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')" id="Dec6Btn">Dec 6 memories 🤍</button>
+        <button onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')" id="Dec6Btn">
+            Dec 6 memories 🤍
+        </button>
+
         <div id="Dec6Content" style="display:none;">
             <div class="sideBySide">
                 <img src="images/dec61.png" class="sideImg" onclick="openImg(this.src)">
@@ -279,12 +362,20 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')" id="Dec7Btn">Dec 7 memories 🤍</button>
-        <div id="Dec7Content" style="display:none;"><img src="images/dec7.png" class="sideImg" onclick="openImg(this.src)"></div>
+        <button onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')" id="Dec7Btn">
+            Dec 7 memories 🤍
+        </button>
+
+        <div id="Dec7Content" style="display:none;">
+            <img src="images/dec7.png" class="sideImg" onclick="openImg(this.src)">
+        </div>
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')" id="Dec21Btn">Dec 21 memories 🤍</button>
+        <button onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')" id="Dec21Btn">
+            Dec 21 memories 🤍
+        </button>
+
         <div id="Dec21Content" style="display:none;">
             <div class="sideBySide">
                 <img src="images/dec211.png" class="sideImg" onclick="openImg(this.src)">
@@ -294,12 +385,20 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')" id="Draw3Btn">Drawing 😭 🤍</button>
-        <div id="Draw3Content" style="display:none;"><img src="images/draw3.png" class="sideImg" onclick="openImg(this.src)"></div>
+        <button onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')" id="Draw3Btn">
+            Drawing 😭 🤍
+        </button>
+
+        <div id="Draw3Content" style="display:none;">
+            <img src="images/draw3.png" class="sideImg" onclick="openImg(this.src)">
+        </div>
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')" id="JanBtn">Jan 🤍</button>
+        <button onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')" id="JanBtn">
+            Jan 🤍
+        </button>
+
         <div id="JanContent" style="display:none;">
             <div class="sideBySide">
                 <img src="images/jan16.png" class="sideImg" onclick="openImg(this.src)">
@@ -310,7 +409,10 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')" id="febBtn">Feb memories 🤍</button>
+        <button onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')" id="febBtn">
+            Feb memories 🤍
+        </button>
+
         <div id="febContent" style="display:none;">
             <div class="sideBySide">
                 <img src="images/feb1.png" class="sideImg" onclick="openImg(this.src)">
@@ -320,7 +422,10 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')" id="marBtn">March memories 🤍</button>
+        <button onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')" id="marBtn">
+            March memories 🤍
+        </button>
+
         <div id="marContent" style="display:none;">
             <div class="sideBySide">
                 <img src="images/mar1.png" class="sideImg" onclick="openImg(this.src)">
@@ -332,7 +437,10 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')" id="openBtn">open me 🤍</button>
+        <button onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')" id="openBtn">
+            open me 🤍
+        </button>
+
         <div id="openContent" style="display:none;">
             <div class="sideBySide">
                 <img src="images/spotify.png" class="sideImg" onclick="openImg(this.src)">
@@ -343,18 +451,24 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')" id="open1Btn">open me too 🤍</button>
+        <button onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')" id="open1Btn">
+            open me too 🤍
+        </button>
+
         <div id="open1Content" style="display:none;">
             <div class="sideBySide">
                 <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
                 <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
-                 <img src="images/sad.png" class="sideImg" onclick="openImg(this.src)">
+                <img src="images/sad.png" class="sideImg" onclick="openImg(this.src)">
             </div>
         </div>
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')" id="finalBtn">lasttt 🤍</button>
+        <button onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')" id="finalBtn">
+            lasttt 🤍
+        </button>
+
         <div id="finalContent" style="display:none;">
             <div class="sideBySide">
                 <img src="images/final1.png" class="sideImg" onclick="openImg(this.src)">
@@ -364,255 +478,840 @@
     </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('byeContent', 'byeBtn', 'BYE BYE 🤍', 'close me 🤍')" id="byeBtn">BYE BYE 🤍</button>
-        <div id="byeContent" style="display:none;"><img src="images/bye.png" class="photo" onclick="openImg(this.src)"></div>
-    </div>
-</div>
-<div class="memoryBlock">
-        <button onclick="toggleSection('tqContent', 'tqBtn', 'thankyouuu 🤍', 'close me 🤍')" id="tqBtn">thankyouuu🤍</button>
-        <div id="tqContent" style="display:none;"><img src="images/thanks.png" class="photo" onclick="openImg(this.src)"></div>
-</div>
-    <div class="memoryBlock">
-        <button onclick="toggleSection('luffyContent', 'luffyBtn', 'FOR YOU🤍', 'close me 🤍')" id="luffysBtn">Hope u like it 🤍</button>
-        <div id="luffyContent" style="display:none;">
-            <div class="sideBySide">
-                <img src="images/luffy.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/luffy1.png" class="sideImg" onclick="openImg(this.src)">
-            </div>
+        <button onclick="toggleSection('byeContent', 'byeBtn', 'BYE BYE 🤍', 'close me 🤍')" id="byeBtn">
+            BYE BYE 🤍
+        </button>
+
+        <div id="byeContent" style="display:none;">
+            <img src="images/bye.png" class="photo" onclick="openImg(this.src)">
         </div>
     </div>
+</div>
+
+<div class="memoryBlock">
+    <button onclick="toggleSection('tqContent', 'tqBtn', 'thankyouuu 🤍', 'close me 🤍')" id="tqBtn">
+        thankyouuu🤍
+    </button>
+
+    <div id="tqContent" style="display:none;">
+        <img src="images/thanks.png" class="photo" onclick="openImg(this.src)">
+    </div>
+</div>
+
+<div class="memoryBlock">
+    <button onclick="toggleSection('luffyContent', 'luffyBtn', 'FOR YOU🤍', 'close me 🤍')" id="luffysBtn">
+        Hope u like it 🤍
+    </button>
+
+    <div id="luffyContent" style="display:none;">
+        <div class="sideBySide">
+            <img src="images/luffy.png" class="sideImg" onclick="openImg(this.src)">
+            <img src="images/luffy1.png" class="sideImg" onclick="openImg(this.src)">
+        </div>
+    </div>
+</div>
 
 
 <div id="imgPopup" onclick="closeImg()">
     <img id="popupImg">
 </div>
 
+
 <script>
+
     // State Management
-    let hearts = localStorage.getItem("currentHearts") ? parseInt(localStorage.getItem("currentHearts")) : 5;
-    let attempts = localStorage.getItem("currentAttempts") ? parseInt(localStorage.getItem("currentAttempts")) : 0;
+    let hearts = localStorage.getItem("currentHearts")
+        ? parseInt(localStorage.getItem("currentHearts"))
+        : 5;
+
+    let attempts = localStorage.getItem("currentAttempts")
+        ? parseInt(localStorage.getItem("currentAttempts"))
+        : 0;
+
     let isLocked = false;
     let isTester = false;
 
+
     window.onload = function() {
+
         updateHearts();
+
         const lockUntil = localStorage.getItem("lockUntil");
+
         if (lockUntil && Date.now() < lockUntil) {
-            const remaining = Math.ceil((lockUntil - Date.now()) / 1000);
+
+            const remaining =
+                Math.ceil((lockUntil - Date.now()) / 1000);
+
             startCountdown(remaining);
         }
     };
 
+
     // Login Function
     function login(){
-    if(isLocked) return;
-    const user = document.getElementById("username").value.toLowerCase();
-    const pass = document.getElementById("password").value.toLowerCase();
-    const loginSection = document.getElementById("loginSection");
 
-    // 1. Check Admin Passwords FIRST and return immediately
-    if(pass === "shreec") {
-        loginSection.style.display = "none";
-        document.getElementById("adminView").style.display = "block";
-        window.showVisits();
-        return; // Exits the function, no lockout possible
-    }
-    
-    if(pass === "dhanuc") {
-        loginSection.style.display = "none";
-        document.getElementById("adminView").style.display = "block";
-        window.showAllMessages();
-        return; // Exits the function, no lockout possible
-    }
+        if(isLocked) return;
 
-    // 2. Check Suraj Login
-    if(user === "suraj"){
-        if(pass === "autorides" || pass === "moonlight"){
-            localStorage.removeItem("lockUntil");
-            localStorage.removeItem("currentHearts");
-            localStorage.removeItem("currentAttempts");
+        const user =
+            document.getElementById("username").value.toLowerCase();
 
-            if(pass === "moonlight") isTester = true;
-            else window.trackVisit();
+        const pass =
+            document.getElementById("password").value.toLowerCase();
+
+        const loginSection =
+            document.getElementById("loginSection");
+
+
+        // 1. Check Admin Passwords FIRST
+        if(pass === "shreec") {
+
             loginSection.style.display = "none";
-            document.getElementById("readBtn").style.display = "inline-block";
-            return; 
+
+            document.getElementById("adminView").style.display = "block";
+
+            window.showVisits();
+
+            return;
+        }
+
+
+        if(pass === "dhanuc") {
+
+            loginSection.style.display = "none";
+
+            document.getElementById("adminView").style.display = "block";
+
+            window.showAllMessages();
+
+            return;
+        }
+
+
+        // 2. Check Suraj Login
+        if(user === "suraj"){
+
+            if(pass === "autorides" || pass === "moonlight"){
+
+                localStorage.removeItem("lockUntil");
+                localStorage.removeItem("currentHearts");
+                localStorage.removeItem("currentAttempts");
+
+                if(pass === "moonlight")
+                    isTester = true;
+                else
+                    window.trackVisit();
+
+                loginSection.style.display = "none";
+
+                document.getElementById("readBtn").style.display =
+                    "inline-block";
+
+                return;
+            }
+        }
+
+
+        // 3. ONLY if all above fail, handle hearts and lockout
+        if (hearts > 0) {
+
+            hearts--;
+            attempts++;
+
+            localStorage.setItem("currentHearts", hearts);
+            localStorage.setItem("currentAttempts", attempts);
+
+            updateHearts();
+            showHint();
+
+            let lockDuration =
+                hearts > 0 ? 15 : 60;
+
+            let lockUntil =
+                Date.now() + (lockDuration * 1000);
+
+            localStorage.setItem("lockUntil", lockUntil);
+
+            startCountdown(lockDuration);
+
+        } else {
+
+            document.getElementById("error").innerText =
+                "Fuckkkk youuuu Surajj😒. Ask me now.";
+
+            document.getElementById("error").style.display =
+                "block";
+
+            startCountdown(60);
         }
     }
-    
-    // 3. ONLY if all above fail, handle hearts and lockout
-    if (hearts > 0) {
-        hearts--; 
-        attempts++; 
-        localStorage.setItem("currentHearts", hearts);
-        localStorage.setItem("currentAttempts", attempts);
-        updateHearts(); 
-        showHint();
 
-        let lockDuration = hearts > 0 ? 15 : 60;
-        let lockUntil = Date.now() + (lockDuration * 1000);
-        localStorage.setItem("lockUntil", lockUntil);
-        startCountdown(lockDuration);
-    } else {
-    document.getElementById("error").innerText = "Fuckkkk youuuu Surajj😒. Ask me now.";
-    document.getElementById("error").style.display = "block";
-    startCountdown(60);
-}
-}
 
     // UI Updates
-    function updateHearts(){ 
+    function updateHearts(){
+
         let h = Math.max(0, hearts);
-        document.getElementById("hearts").innerText = "❤️".repeat(h) + "💔".repeat(5-h); 
+
+        document.getElementById("hearts").innerText =
+            "❤️".repeat(h) +
+            "💔".repeat(5-h);
     }
+
 
     function showHint(){
-        const hints = ["9 letters", "we loved it so much", "Favourite memory fr", "My most fav pic of ours", "Nothing beats that"];
-        const h = document.getElementById("hint");
-        h.innerText = "Hint: " + (hints[attempts-1] || "Think harder!");
-        h.style.display = "inline-block";
+
+        const hints = [
+            "9 letters",
+            "we loved it so much",
+            "Favourite memory fr",
+            "My most fav pic of ours",
+            "Nothing beats that"
+        ];
+
+        const h =
+            document.getElementById("hint");
+
+        h.innerText =
+            "Hint: " +
+            (hints[attempts-1] || "Think harder!");
+
+        h.style.display =
+            "inline-block";
     }
+
 
     function startCountdown(seconds){
+
         isLocked = true;
-        const error = document.getElementById("error");
-        error.style.display = "block";
+
+        const error =
+            document.getElementById("error");
+
+        error.style.display =
+            "block";
 
         let time = seconds;
-        const interval = setInterval(() => {
-            error.innerText = `Wait ${time}s before trying again ⏳`;
-            time--;
 
-            if(time < 0){
-                clearInterval(interval);
-                error.style.display = "none";
-                isLocked = false;
-            }
-        }, 1000);
+        const interval =
+            setInterval(() => {
+
+                error.innerText =
+                    `Wait ${time}s before trying again ⏳`;
+
+                time--;
+
+                if(time < 0){
+
+                    clearInterval(interval);
+
+                    error.style.display =
+                        "none";
+
+                    isLocked = false;
+                }
+
+            }, 1000);
     }
 
+
     // Navigation
-    function openIntro(){ document.getElementById("introScreen").style.display = "flex"; }
+    function openIntro(){
+
+        document.getElementById("introScreen").style.display =
+            "flex";
+    }
+
+
     function closeIntro(){
-        document.getElementById("introScreen").style.display = "none";
-        document.getElementById("memoriesSection").style.display = "block";
+
+        document.getElementById("introScreen").style.display =
+            "none";
+
+        document.getElementById("memoriesSection").style.display =
+            "block";
+
         window.dispatchEvent(new Event('scroll'));
     }
 
+
     function toggleSection(cid, bid, ot, ct){
-        const c = document.getElementById(cid); const b = document.getElementById(bid);
-        if(c.style.display === "none"){ c.style.display = "block"; b.innerText = ct; }
-        else { c.style.display = "none"; b.innerText = ot; }
+
+        const c =
+            document.getElementById(cid);
+
+        const b =
+            document.getElementById(bid);
+
+        if(c.style.display === "none"){
+
+            c.style.display = "block";
+
+            b.innerText = ct;
+
+        } else {
+
+            c.style.display = "none";
+
+            b.innerText = ot;
+        }
     }
-    function toggleDraw(){ toggleSection("drawContent", "drawBtn", "Drawings 🤍", "Hide drawings 🤍"); }
-    function openImg(src){ document.getElementById("imgPopup").style.display = "flex"; document.getElementById("popupImg").src = src; }
-    function closeImg(){ document.getElementById("imgPopup").style.display = "none"; }
+
+
+    function toggleDraw(){
+
+        toggleSection(
+            "drawContent",
+            "drawBtn",
+            "Drawings 🤍",
+            "Hide drawings 🤍"
+        );
+    }
+
+
+    function openImg(src){
+
+        document.getElementById("imgPopup").style.display =
+            "flex";
+
+        document.getElementById("popupImg").src =
+            src;
+    }
+
+
+    function closeImg(){
+
+        document.getElementById("imgPopup").style.display =
+            "none";
+    }
+
 
     // --- BIRTHDAY LOGIC ---
-    const bdayMonth = 8; // October (0-indexed)
-    const bdayDate = 2;  
+    // September 2 (JavaScript months are 0-indexed)
+    const bdayMonth = 8;
+    const bdayDate = 2;
+
 
     function updateBirthdayUI() {
+
         let today = new Date();
-        if (today.getMonth() === bdayMonth && today.getDate() === bdayDate) {
-            document.getElementById("bdayText").innerText = "🎉 OPEN!"; return; 
+
+        if (
+            today.getMonth() === bdayMonth &&
+            today.getDate() === bdayDate
+        ) {
+
+            document.getElementById("bdayText").innerText =
+                "🎉 OPEN!";
+
+            return;
         }
-        let bday = new Date(today.getFullYear(), bdayMonth, bdayDate);
-        if (today > bday) bday.setFullYear(today.getFullYear() + 1);
-        let diff = bday - today;
-        let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        document.getElementById("bdayText").innerText = `🎂 ${days}d left`;
+
+
+        let bday =
+            new Date(
+                today.getFullYear(),
+                bdayMonth,
+                bdayDate
+            );
+
+
+        if (today > bday)
+            bday.setFullYear(
+                today.getFullYear() + 1
+            );
+
+
+        let diff =
+            bday - today;
+
+
+        let days =
+            Math.floor(
+                diff / (1000 * 60 * 60 * 24)
+            );
+
+
+        document.getElementById("bdayText").innerText =
+            `🎂 ${days}d left`;
     }
+
 
     function openGift() {
+
         let t = new Date();
-        if (t.getMonth() === bdayMonth && t.getDate() === bdayDate) window.location.href = "birthday.html";
-        else alert("Patience... 🤍"); 
-    }
-    updateBirthdayUI();
 
-    window.addEventListener("scroll", ()=>{
-        document.querySelectorAll(".memoryBlock").forEach(el=>{
-            if(el.getBoundingClientRect().top < window.innerHeight - 50) el.classList.add("show");
-        });
-    });
-</script>
+        if (
+            t.getMonth() === bdayMonth &&
+            t.getDate() === bdayDate
+        ) {
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, push, get, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+            window.location.href =
+                "birthday.html";
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyCkvm3uc_KyxZFTM1UR2_p15HQZ6XydCrE",
-      authDomain: "memories111-8bdaa.firebaseapp.com",
-      projectId: "memories111-8bdaa",
-      storageBucket: "memories111-8bdaa.appspot.com",
-      messagingSenderId: "628477390391",
-      appId: "1:628477390391:web:31821b5ae426e5a96f59b2",
-      databaseURL: "https://memories111-8bdaa-default-rtdb.asia-southeast1.firebasedatabase.app"
-    };
+        } else {
 
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
-
-    window.trackVisit = async function(){
-        const vRef = ref(db, "stats/visitCount");
-        get(vRef).then((s) => { set(vRef, (s.val() || 0) + 1); });
-    }
-
-    window.saveMessage = async function(event) {
-        const input = document.getElementById("userMsg");
-        const btn = event.target; 
-        const originalText = btn.innerText;
-
-        if(!input.value.trim()) return alert("something to telll??😌");
-
-        btn.disabled = true;
-        btn.innerText = "Sending... 💌";
-        btn.style.opacity = "0.5";
-
-        try {
-            await push(ref(db, "messages"), { 
-                text: input.value, 
-                time: new Date().toLocaleString(),
-                sender: isTester ? "admin" : "user" 
-            });
-            alert("message sent! ❤️"); 
-            input.value = ""; 
-        } catch (err) {
-            alert("Oops! Something went wrong.");
-        } finally {
-            btn.disabled = false;
-            btn.innerText = originalText;
-            btn.style.opacity = "1";
+            alert("Patience... 🤍");
         }
     }
 
-    window.showVisits = function() {
-        onValue(ref(db, "stats/visitCount"), (s) => {
-            document.getElementById("adminContent").innerHTML = `<h1 style='color:black; font-size:60px;'>${s.val() || 0}</h1>`;
-        });
+
+    updateBirthdayUI();
+
+
+    window.addEventListener("scroll", ()=>{
+
+        document
+            .querySelectorAll(".memoryBlock")
+            .forEach(el=>{
+
+                if(
+                    el.getBoundingClientRect().top <
+                    window.innerHeight - 50
+                ){
+
+                    el.classList.add("show");
+                }
+            });
+    });
+
+</script>
+
+
+<script type="module">
+
+    import {
+        initializeApp
     }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+
+    import {
+        getDatabase,
+        ref,
+        push,
+        get,
+        set,
+        onValue
+    }
+    from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyCkvm3uc_KyxZFTM1UR2_p15HQZ6XydCrE",
+
+        authDomain:
+            "memories111-8bdaa.firebaseapp.com",
+
+        projectId:
+            "memories111-8bdaa",
+
+        storageBucket:
+            "memories111-8bdaa.appspot.com",
+
+        messagingSenderId:
+            "628477390391",
+
+        appId:
+            "1:628477390391:web:31821b5ae426e5a96f59b2",
+
+        databaseURL:
+            "https://memories111-8bdaa-default-rtdb.asia-southeast1.firebasedatabase.app"
+    };
+
+
+    const app =
+        initializeApp(firebaseConfig);
+
+    const db =
+        getDatabase(app);
+
+
+    /* ==============================
+       NORMAL VISIT COUNT
+       ============================== */
+
+    window.trackVisit = async function(){
+
+        const vRef =
+            ref(db, "stats/visitCount");
+
+        try {
+
+            const snapshot =
+                await get(vRef);
+
+            await set(
+                vRef,
+                (snapshot.val() || 0) + 1
+            );
+
+        } catch(error) {
+
+            console.log(
+                "Visit tracking error:",
+                error
+            );
+        }
+    };
+
+
+    /* ==============================
+       SAVE MESSAGE
+       ============================== */
+
+    window.saveMessage = async function(event) {
+
+        const input =
+            document.getElementById("userMsg");
+
+        const btn =
+            event.target;
+
+        const originalText =
+            btn.innerText;
+
+
+        if(!input.value.trim())
+            return alert(
+                "something to telll??😌"
+            );
+
+
+        btn.disabled = true;
+
+        btn.innerText =
+            "Sending... 💌";
+
+        btn.style.opacity =
+            "0.5";
+
+
+        try {
+
+            await push(
+                ref(db, "messages"),
+                {
+
+                    text:
+                        input.value,
+
+                    time:
+                        new Date().toLocaleString(),
+
+                    sender:
+                        isTester
+                            ? "admin"
+                            : "user"
+                }
+            );
+
+
+            alert(
+                "message sent! ❤️"
+            );
+
+            input.value = "";
+
+
+        } catch (err) {
+
+            console.log(err);
+
+            alert(
+                "Oops! Something went wrong."
+            );
+
+
+        } finally {
+
+            btn.disabled = false;
+
+            btn.innerText =
+                originalText;
+
+            btn.style.opacity =
+                "1";
+        }
+    };
+
+
+    /* ==============================
+       ADMIN:
+       MAIN VISITS + BIRTHDAY VIEWS
+       ============================== */
+
+    window.showVisits = function() {
+
+        const content =
+            document.getElementById(
+                "adminContent"
+            );
+
+
+        onValue(
+            ref(db, "stats/visitCount"),
+            (visitSnapshot) => {
+
+                const normalVisits =
+                    visitSnapshot.val() || 0;
+
+
+                onValue(
+                    ref(
+                        db,
+                        "stats/birthdayPageVisits"
+                    ),
+                    (birthdaySnapshot) => {
+
+                        const birthdayViews =
+                            birthdaySnapshot.val() || 0;
+
+
+                        content.innerHTML = `
+
+                            <div style="
+                                color:black;
+                                text-align:center;
+                            ">
+
+                                <h3 style="
+                                    color:#555;
+                                    margin-bottom:5px;
+                                ">
+                                    Main Page Visits
+                                </h3>
+
+                                <h1 style="
+                                    color:black;
+                                    font-size:60px;
+                                    margin:5px 0 25px;
+                                ">
+                                    ${normalVisits}
+                                </h1>
+
+
+                                <h3 style="
+                                    color:#555;
+                                    margin-bottom:5px;
+                                ">
+                                    Birthday Page Views
+                                </h3>
+
+                                <h1 style="
+                                    color:black;
+                                    font-size:60px;
+                                    margin:5px 0;
+                                ">
+                                    ${birthdayViews}
+                                </h1>
+
+                            </div>
+
+                        `;
+                    }
+                );
+            }
+        );
+    };
+
+
+    /* ==============================
+       ADMIN:
+       MESSAGES + DELETE REQUESTS
+       ============================== */
 
     window.showAllMessages = function() {
-        onValue(ref(db, "messages"), (s) => {
-            let h = "";
-            if(s.exists()){
-                Object.values(s.val()).reverse().forEach(m => {
-                    // Gray for your tests, White for his real messages
-                    const bgColor = (m.sender === "admin") ? "#e0e0e0" : "#ffffff";
-                    const label = (m.sender === "admin") ? "🛠️ TEST:" : "💌 FROM HIM:";
 
-                    h += `<div class="msgItem" style="background: ${bgColor}; border: 1px solid #ccc; color: black; padding: 10px; margin-bottom: 5px; border-radius: 8px;">
-                            <small style="color: #666;">${label} ${m.time}</small><br>
-                            <strong>${m.text}</strong>
-                          </div>`;
-                });
-            } else { h = "No notes yet."; }
-            document.getElementById("adminContent").innerHTML = h;
-        });
-    }
+        onValue(
+            ref(db, "messages"),
+            (messageSnapshot) => {
+
+                let h = "";
+
+
+                /* ---------- MESSAGES ---------- */
+
+                h += `
+
+                    <h3 style="
+                        color:black;
+                        margin-top:5px;
+                        margin-bottom:15px;
+                    ">
+                        💌 Messages
+                    </h3>
+
+                `;
+
+
+                if(messageSnapshot.exists()){
+
+                    Object
+                        .values(
+                            messageSnapshot.val()
+                        )
+                        .reverse()
+                        .forEach(m => {
+
+                            const bgColor =
+                                (m.sender === "admin")
+                                    ? "#e0e0e0"
+                                    : "#ffffff";
+
+                            const label =
+                                (m.sender === "admin")
+                                    ? "🛠️ TEST:"
+                                    : "💌 FROM HIM:";
+
+
+                            h += `
+
+                                <div
+                                    class="msgItem"
+                                    style="
+                                        background:${bgColor};
+                                        border:1px solid #ccc;
+                                        color:black;
+                                        padding:10px;
+                                        margin-bottom:5px;
+                                        border-radius:8px;
+                                    "
+                                >
+
+                                    <small style="
+                                        color:#666;
+                                    ">
+                                        ${label} ${m.time}
+                                    </small>
+
+                                    <br>
+
+                                    <strong>
+                                        ${m.text}
+                                    </strong>
+
+                                </div>
+
+                            `;
+                        });
+
+                } else {
+
+                    h += `
+
+                        <div style="
+                            color:#555;
+                            margin-bottom:25px;
+                        ">
+                            No notes yet.
+                        </div>
+
+                    `;
+                }
+
+
+                /* ---------- DELETE REQUESTS ---------- */
+
+                onValue(
+                    ref(
+                        db,
+                        "deleteRequests"
+                    ),
+                    (deleteSnapshot) => {
+
+
+                        h += `
+
+                            <hr style="
+                                margin:25px 0;
+                                border:none;
+                                border-top:1px solid #bbb;
+                            ">
+
+                            <h3 style="
+                                color:black;
+                                margin-bottom:15px;
+                            ">
+                                🗑️ Delete Requests
+                            </h3>
+
+                        `;
+
+
+                        if(deleteSnapshot.exists()){
+
+                            Object
+                                .values(
+                                    deleteSnapshot.val()
+                                )
+                                .reverse()
+                                .forEach(request => {
+
+                                    h += `
+
+                                        <div
+                                            class="msgItem"
+                                            style="
+                                                background:#fff0f0;
+                                                border:1px solid #e0aaaa;
+                                                color:black;
+                                                padding:10px;
+                                                margin-bottom:8px;
+                                                border-radius:8px;
+                                            "
+                                        >
+
+                                            <strong>
+                                                🗑️ DELETE REQUEST
+                                            </strong>
+
+                                            <br>
+
+                                            <small style="
+                                                color:#666;
+                                            ">
+                                                ${request.time || "Unknown time"}
+                                            </small>
+
+                                            <br><br>
+
+                                            <span>
+                                                ${request.action || "Birthday page deletion requested"}
+                                            </span>
+
+                                        </div>
+
+                                    `;
+                                });
+
+                        } else {
+
+                            h += `
+
+                                <div style="
+                                    color:#555;
+                                ">
+                                    No delete requests yet.
+                                </div>
+
+                            `;
+                        }
+
+
+                        document.getElementById(
+                            "adminContent"
+                        ).innerHTML = h;
+
+                    }
+                );
+
+            }
+        );
+    };
+
 </script>
 
 </body>
-</html> 
+</html>
