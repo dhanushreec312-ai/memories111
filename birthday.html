@@ -18,7 +18,6 @@
             box-sizing: border-box;
         }
 
-
         html,
         body {
 
@@ -34,11 +33,9 @@
 
         }
 
-
         body {
             overflow: hidden;
         }
-
 
         /* =========================
            START SCREEN
@@ -74,7 +71,6 @@
 
         }
 
-
         #startScreen h1 {
 
             font-size: 28px;
@@ -83,7 +79,6 @@
 
         }
 
-
         #startScreen p {
 
             font-size: 18px;
@@ -91,7 +86,6 @@
             margin: 0 0 30px 0;
 
         }
-
 
         #startBtn {
 
@@ -112,7 +106,6 @@
             cursor: pointer;
 
         }
-
 
         /* =========================
            VIDEO SCREEN
@@ -140,7 +133,6 @@
 
         }
 
-
         #birthdayVideo {
 
             width: 100vw;
@@ -152,7 +144,6 @@
             background: black;
 
         }
-
 
         /* =========================
            MAIN CONTENT
@@ -182,7 +173,6 @@
 
         }
 
-
         .section {
 
             max-width: 650px;
@@ -190,7 +180,6 @@
             margin: 0 auto 50px;
 
         }
-
 
         .section h1 {
 
@@ -200,7 +189,6 @@
 
         }
 
-
         .section h2 {
 
             font-size: 22px;
@@ -209,7 +197,6 @@
 
         }
 
-
         .section p {
 
             font-size: 18px;
@@ -217,7 +204,6 @@
             line-height: 1.7;
 
         }
-
 
         /* =========================
            DRAWING
@@ -235,7 +221,6 @@
 
         }
 
-
         /* =========================
            DELETE SECTION
         ========================= */
@@ -249,7 +234,6 @@
             border-top: 1px solid #333;
 
         }
-
 
         #deleteBtn {
 
@@ -270,7 +254,6 @@
             cursor: pointer;
 
         }
-
 
         /* =========================
            ACCESS DENIED SCREEN
@@ -304,7 +287,6 @@
 
         }
 
-
         #blockedScreen h1 {
 
             font-size: 28px;
@@ -312,7 +294,6 @@
             margin-bottom: 15px;
 
         }
-
 
         #blockedScreen p {
 
@@ -407,7 +388,7 @@
 
             <br>
 
-            I missssss youuuuuu moreeeeeeeeeee.
+            I missssss youuuuuu even moreeeeeeeeeee.
 
         </p>
 
@@ -428,6 +409,7 @@
 
             I would've given this to you as a gift.
             But I suck at drawing!.
+
             <br><br>
 
             But seems like I started to believe in the
@@ -462,6 +444,7 @@
             <br><br>
 
             At last, and out of all people...
+            FUCKER
 
             <br><br>
 
@@ -484,7 +467,7 @@
 
             <br><br>
 
-            GOOD BYE. ❤️
+            I loveeee youuuuu❤️
 
             <br><br>
 
@@ -546,7 +529,6 @@
 
 <script type="module">
 
-
     import {
         initializeApp
     }
@@ -574,7 +556,7 @@
 
 
     /* =====================================================
-       NEW FIREBASE CONFIG
+       FIREBASE CONFIG
     ===================================================== */
 
     const firebaseConfig = {
@@ -616,12 +598,7 @@
 
     /* =====================================================
        DATABASE PATHS
-
-       TEST MODE uses separate Firebase locations.
-
-       REAL MODE uses the actual locations.
     ===================================================== */
-
 
     const statsPath =
         TEST_MODE
@@ -646,7 +623,6 @@
     ===================================================== */
 
     function getBrowserToken() {
-
 
         let token =
             localStorage.getItem(
@@ -681,7 +657,6 @@
     ===================================================== */
 
     async function checkAccess() {
-
 
         try {
 
@@ -733,7 +708,6 @@
 
     function blockPage() {
 
-
         document.getElementById(
             "startScreen"
         ).style.display = "none";
@@ -761,17 +735,21 @@
 
 
     /* =====================================================
-       RECORD BIRTHDAY PAGE VIEW
+       RECORD PAGE VIEW
+       
+       Runs ONCE when the birthday page loads.
+       
+       Firebase:
+       stats/pageVisits
     ===================================================== */
 
-    async function recordBirthdayView() {
-
+    async function recordPageView() {
 
         const viewRef =
             ref(
                 db,
                 statsPath +
-                "/birthdayPageVisits"
+                "/pageVisits"
             );
 
 
@@ -792,14 +770,66 @@
 
 
             console.log(
-                "Birthday page view recorded."
+                "Page view recorded."
             );
 
 
         } catch(error) {
 
             console.error(
-                "Birthday view tracking failed:",
+                "Page view tracking failed:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       RECORD "TAP TO BEGIN" CLICK
+       
+       Runs ONLY when the button is clicked.
+       
+       Firebase:
+       stats/birthdayButtonClicks
+    ===================================================== */
+
+    async function recordBirthdayButtonClick() {
+
+        const clickRef =
+            ref(
+                db,
+                statsPath +
+                "/birthdayButtonClicks"
+            );
+
+
+        try {
+
+            const snapshot =
+                await get(clickRef);
+
+
+            const currentCount =
+                snapshot.val() || 0;
+
+
+            await set(
+                clickRef,
+                currentCount + 1
+            );
+
+
+            console.log(
+                "Birthday button click recorded."
+            );
+
+
+        } catch(error) {
+
+            console.error(
+                "Birthday button tracking failed:",
                 error
             );
 
@@ -814,7 +844,6 @@
 
     async function initializeBirthdayPage() {
 
-
         const allowed =
             await checkAccess();
 
@@ -823,7 +852,13 @@
             return;
 
 
-        await recordBirthdayView();
+        /*
+         * Count page opening here.
+         * This does NOT mean the birthday button
+         * was clicked.
+         */
+
+        await recordPageView();
 
 
         document.getElementById(
@@ -893,7 +928,13 @@
        START VIDEO
     ===================================================== */
 
-    window.startVideo = function() {
+    window.startVideo = async function() {
+
+        /*
+         * Record ONLY the button click.
+         */
+
+        await recordBirthdayButtonClick();
 
 
         document.getElementById(
@@ -927,7 +968,6 @@
     video.addEventListener(
         "ended",
         () => {
-
 
             document.getElementById(
                 "videoScreen"
