@@ -454,7 +454,7 @@
             <br><br>
 
             Why would I not want my Bestfriend
-            who'd make me so happy and with whom 
+            who'd make me so happy and with whom
             I have so many memories?
 
             <br><br>
@@ -540,7 +540,8 @@
         ref,
         get,
         set,
-        push
+        push,
+        runTransaction
     }
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
@@ -735,49 +736,48 @@
 
 
     /* =====================================================
-       RECORD PAGE VIEW
-       
-       Runs ONCE when the birthday page loads.
-       
-       Firebase:
-       stats/pageVisits
+       UNIVERSAL COUNTER
+
+       Uses Firebase transaction so simultaneous
+       visits/clicks don't overwrite each other.
     ===================================================== */
 
-    async function recordPageView() {
+    async function incrementCounter(counterName) {
 
-        const viewRef =
+        const counterRef =
             ref(
                 db,
                 statsPath +
-                "/pageVisits"
+                "/" +
+                counterName
             );
 
 
         try {
 
-            const snapshot =
-                await get(viewRef);
+            await runTransaction(
+                counterRef,
+                (currentValue) => {
 
+                    return (
+                        (currentValue || 0) + 1
+                    );
 
-            const currentCount =
-                snapshot.val() || 0;
-
-
-            await set(
-                viewRef,
-                currentCount + 1
+                }
             );
 
 
             console.log(
-                "Page view recorded."
+                counterName +
+                " recorded successfully."
             );
 
 
         } catch(error) {
 
             console.error(
-                "Page view tracking failed:",
+                counterName +
+                " tracking failed:",
                 error
             );
 
@@ -787,53 +787,38 @@
 
 
     /* =====================================================
-       RECORD "TAP TO BEGIN" CLICK
-       
-       Runs ONLY when the button is clicked.
-       
+       RECORD PAGE VIEW
+
+       Runs when birthday page loads.
+
+       Firebase:
+       stats/pageVisits
+    ===================================================== */
+
+    async function recordPageView() {
+
+        await incrementCounter(
+            "pageVisits"
+        );
+
+    }
+
+
+    /* =====================================================
+       RECORD BUTTON CLICK
+
+       Runs ONLY when "Tap to begin"
+       is clicked.
+
        Firebase:
        stats/birthdayButtonClicks
     ===================================================== */
 
     async function recordBirthdayButtonClick() {
 
-        const clickRef =
-            ref(
-                db,
-                statsPath +
-                "/birthdayButtonClicks"
-            );
-
-
-        try {
-
-            const snapshot =
-                await get(clickRef);
-
-
-            const currentCount =
-                snapshot.val() || 0;
-
-
-            await set(
-                clickRef,
-                currentCount + 1
-            );
-
-
-            console.log(
-                "Birthday button click recorded."
-            );
-
-
-        } catch(error) {
-
-            console.error(
-                "Birthday button tracking failed:",
-                error
-            );
-
-        }
+        await incrementCounter(
+            "birthdayButtonClicks"
+        );
 
     }
 
@@ -853,9 +838,7 @@
 
 
         /*
-         * Count page opening here.
-         * This does NOT mean the birthday button
-         * was clicked.
+         * Count page opening.
          */
 
         await recordPageView();
@@ -931,7 +914,10 @@
     window.startVideo = async function() {
 
         /*
-         * Record ONLY the button click.
+         * IMPORTANT:
+         * This counts the button click.
+         *
+         * The video does NOT need to finish.
          */
 
         await recordBirthdayButtonClick();
