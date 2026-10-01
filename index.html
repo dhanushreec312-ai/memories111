@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>For You</title>
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -14,43 +18,44 @@
             color: white;
         }
 
-        h2 { 
-            color: #000000 !important; 
+        h2 {
+            color: #000000 !important;
             margin-bottom: 20px;
         }
 
-        input { 
-            padding: 12px; 
-            margin: 8px; 
-            border-radius: 8px; 
+        input {
+            padding: 12px;
+            margin: 8px;
+            border-radius: 8px;
             border: 1px solid #f8bbd0;
             background: rgba(255,255,255,0.5);
-            color: black; 
+            color: black;
             width: 200px;
         }
 
-        button { 
-            padding: 12px 20px; 
-            cursor: pointer; 
-            border-radius: 8px; 
-            border: none; 
-            transition: 0.3s; 
-            background: #000000; 
-            color: #ffffff; 
+        button {
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            border: none;
+            transition: 0.3s;
+            background: #000000;
+            color: #ffffff;
             font-weight: bold;
         }
 
-        button:hover { 
-            opacity: 0.8; 
-            background: #222; 
+        button:hover {
+            opacity: 0.8;
+            background: #222;
         }
 
-        #hearts { 
-            margin-top:10px; 
-            font-size:20px; 
+        #hearts {
+            margin-top: 10px;
+            font-size: 20px;
         }
 
-        #hint, #error {
+        #hint,
+        #error {
             display: none;
             margin-top: 10px;
             padding: 12px;
@@ -62,14 +67,14 @@
             margin-right: auto;
         }
 
-        #error { 
-            color: #ffb3b3; 
+        #error {
+            color: #ffb3b3;
         }
 
         #readBtn {
-            display:none;
-            margin-top:40px;
-            border-radius:25px;
+            display: none;
+            margin-top: 40px;
+            border-radius: 25px;
             background: #000000;
             color: white;
             padding: 15px 35px;
@@ -77,49 +82,49 @@
         }
 
         #introScreen {
-            position:fixed;
-            top:0; 
-            left:0;
-            width:100%; 
-            height:100%;
-            background:black;
-            display:none;
-            justify-content:center;
-            align-items:center;
-            z-index:9999;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
 
-        #introImage { 
-            max-width:90%; 
-            max-height:90%; 
-            border-radius:15px; 
+        #introImage {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 15px;
         }
 
-        #memoriesSection { 
-            display:none; 
-            margin-top:40px; 
-            padding-bottom: 120px; 
+        #memoriesSection {
+            display: none;
+            margin-top: 40px;
+            padding-bottom: 120px;
         }
-        
+
         .memoryBlock {
-            opacity:0;
-            transform:translateY(30px);
-            transition:0.6s;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: 0.6s;
             margin-bottom: 30px;
         }
 
-        .memoryBlock.show { 
-            opacity:1; 
-            transform:translateY(0); 
+        .memoryBlock.show {
+            opacity: 1;
+            transform: translateY(0);
         }
-        
-        .photo { 
-            width:90%; 
-            max-width:500px; 
-            border-radius:12px; 
-            cursor:pointer; 
+
+        .photo {
+            width: 90%;
+            max-width: 500px;
+            border-radius: 12px;
+            cursor: pointer;
         }
-        
+
         .sideBySide {
             display: flex;
             flex-wrap: wrap;
@@ -128,20 +133,20 @@
             margin-top: 10px;
         }
 
-        .sideImg { 
-            width:145px; 
-            border-radius:12px; 
-            cursor:pointer; 
+        .sideImg {
+            width: 145px;
+            border-radius: 12px;
+            cursor: pointer;
         }
 
-        .groupClose { 
-            font-size:20px; 
-            cursor:pointer; 
-            display: block; 
-            margin-bottom: 10px; 
-            color: #ff4d4d; 
+        .groupClose {
+            font-size: 20px;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 10px;
+            color: #ff4d4d;
         }
-        
+
         #bdayContainer {
             position: fixed;
             bottom: 20px;
@@ -162,31 +167,31 @@
         }
 
         #bdayText {
-            margin-top:5px;
-            font-size:11px;
-            color:white;
+            margin-top: 5px;
+            font-size: 11px;
+            color: white;
             background: rgba(0,0,0,0.6);
-            padding:4px;
-            border-radius:8px;
+            padding: 4px;
+            border-radius: 8px;
         }
 
         #imgPopup {
-            display:none;
-            position:fixed;
-            top:0; 
-            left:0;
-            width:100%; 
-            height:100%;
-            background:rgba(0,0,0,0.9);
-            justify-content:center;
-            align-items:center;
-            z-index:10000;
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
         }
 
-        #popupImg { 
-            max-width:90%; 
-            max-height:90%; 
-            border-radius:10px; 
+        #popupImg {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
         }
 
         #adminView {
@@ -199,465 +204,1124 @@
             color: #333;
         }
 
-        .msgItem { 
+        .msgItem {
             background: #f0f0f0;
-            border-bottom: 1px solid #ccc; 
-            padding: 15px; 
-            text-align: left; 
+            border-bottom: 1px solid #ccc;
+            padding: 15px;
+            text-align: left;
             margin-bottom: 10px;
             border-radius: 8px;
             color: #000;
         }
-      
+
     </style>
 </head>
 
 <body>
 
 <div id="bdayContainer">
-    <button id="bdayBtn" onclick="openGift()">🎂</button>
+
+    <button
+        id="bdayBtn"
+        onclick="openGift()"
+    >
+        🎂
+    </button>
+
     <div id="bdayText"></div>
+
 </div>
+
 
 <div id="loginSection">
+
     <h2>Our Memories</h2>
-    <input id="username" placeholder="Username"><br>
-    <input id="password" type="password" placeholder="Password"><br>
-    <button id="loginBtn" onclick="login()">Unlock</button>
-    <div id="hearts">❤️❤️❤️❤️❤️</div>
+
+    <input
+        id="username"
+        placeholder="Username"
+    >
+
+    <br>
+
+    <input
+        id="password"
+        type="password"
+        placeholder="Password"
+    >
+
+    <br>
+
+    <button
+        id="loginBtn"
+        onclick="login()"
+    >
+        Unlock
+    </button>
+
+    <div id="hearts">
+        ❤️❤️❤️❤️❤️
+    </div>
+
     <div id="hint"></div>
+
     <div id="error"></div>
+
 </div>
+
 
 <div id="adminView">
-    <h2 id="adminTitle">Dashboard</h2>
+
+    <h2 id="adminTitle">
+        Dashboard
+    </h2>
+
     <div id="adminContent"></div>
+
     <br>
-    <button onclick="location.reload()">Logout</button>
+
+    <button onclick="location.reload()">
+        Logout
+    </button>
+
 </div>
 
-<button id="readBtn" onclick="openIntro()">Read me 🤍</button>
 
-<div id="introScreen" onclick="closeIntro()">
-    <img src="images/intro.png" id="introImage">
+<button
+    id="readBtn"
+    onclick="openIntro()"
+>
+    Read me 🤍
+</button>
+
+
+<div
+    id="introScreen"
+    onclick="closeIntro()"
+>
+
+    <img
+        src="images/intro.png"
+        id="introImage"
+    >
+
 </div>
+
 
 <div id="memoriesSection">
-    <div class="memoryBlock" style="background: rgba(255,255,255,0.1); padding: 25px; border-radius: 15px; margin: 20px; border: 1px solid rgba(255,255,255,0.2);">
-        <h3>Leave a note for me 🤍</h3>
-        <input id="userMsg" placeholder="Type something..." style="width:85%;"><br>
-        <button onclick="saveMessage(event)">Send to her 🤍</button>
+
+    <div
+        class="memoryBlock"
+        style="
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        "
+    >
+
+        <h3>
+            Leave a note for me 🤍
+        </h3>
+
+        <input
+            id="userMsg"
+            placeholder="Type something..."
+            style="width:85%;"
+        >
+
+        <br>
+
+        <button onclick="saveMessage(event)">
+            Send to her 🤍
+        </button>
+
     </div>
 
-    <h2>Our memories 🤍</h2>
+
+    <h2>
+        Our memories 🤍
+    </h2>
+
 
     <div class="memoryBlock">
-        <img src="images/letter.png" class="photo" onclick="openImg(this.src)">
+        <img
+            src="images/letter.png"
+            class="photo"
+            onclick="openImg(this.src)"
+        >
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleDraw()" id="drawBtn">Drawings 🤍</button>
-        <div id="drawContent" style="display:none;">
+
+        <button
+            onclick="toggleDraw()"
+            id="drawBtn"
+        >
+            Drawings 🤍
+        </button>
+
+        <div
+            id="drawContent"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/draw1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/draw2.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/draw1.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/draw2.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="memoryBlock">
-        <img src="images/forward.png" class="photo" onclick="openImg(this.src)">
-    </div>
 
     <div class="memoryBlock">
-        <img src="images/2024.png" class="photo" onclick="openImg(this.src)">
+        <img
+            src="images/forward.png"
+            class="photo"
+            onclick="openImg(this.src)"
+        >
     </div>
 
-    <div class="memoryBlock">
-        <img src="images/start.png" class="photo" onclick="openImg(this.src)">
-    </div>
 
     <div class="memoryBlock">
-        <button onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')" id="augBtn">
+        <img
+            src="images/2024.png"
+            class="photo"
+            onclick="openImg(this.src)"
+        >
+    </div>
+
+
+    <div class="memoryBlock">
+        <img
+            src="images/start.png"
+            class="photo"
+            onclick="openImg(this.src)"
+        >
+    </div>
+
+
+    <div class="memoryBlock">
+
+        <button
+            onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')"
+            id="augBtn"
+        >
             Aug memories 🤍
         </button>
 
-        <div id="augContent" style="display:none;">
-            <span class="groupClose" onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')">
+        <div
+            id="augContent"
+            style="display:none;"
+        >
+
+            <span
+                class="groupClose"
+                onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')"
+            >
                 ❌
             </span>
 
             <div class="sideBySide">
-                <img src="images/aug.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/aug1.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/aug.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/aug1.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')" id="NovBtn">
+
+        <button
+            onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')"
+            id="NovBtn"
+        >
             Nov memories 🤍
         </button>
 
-        <div id="NovContent" style="display:none;">
-            <span class="groupClose" onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')">
+        <div
+            id="NovContent"
+            style="display:none;"
+        >
+
+            <span
+                class="groupClose"
+                onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')"
+            >
                 ❌
             </span>
 
             <div class="sideBySide">
-                <img src="images/nov1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/nov2.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/nov1.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/nov2.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
-    <div class="memoryBlock">
-        <img src="images/order1.png" class="photo" onclick="openImg(this.src)">
-    </div>
 
     <div class="memoryBlock">
-        <img src="images/drunk.png" class="photo" onclick="openImg(this.src)">
+        <img
+            src="images/order1.png"
+            class="photo"
+            onclick="openImg(this.src)"
+        >
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')" id="Dec4Btn">
+        <img
+            src="images/drunk.png"
+            class="photo"
+            onclick="openImg(this.src)"
+        >
+    </div>
+
+
+    <div class="memoryBlock">
+
+        <button
+            onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')"
+            id="Dec4Btn"
+        >
             Dec 4 memories 🤍
         </button>
 
-        <div id="Dec4Content" style="display:none;">
+        <div
+            id="Dec4Content"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/soft.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/ticket.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/soft.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/ticket.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')" id="Dec5Btn">
+
+        <button
+            onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')"
+            id="Dec5Btn"
+        >
             Dec 5 memories 🤍
         </button>
 
-        <div id="Dec5Content" style="display:none;">
+        <div
+            id="Dec5Content"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/dec51.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec52.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec53.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec54.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/dec51.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/dec52.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/dec53.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/dec54.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')" id="Dec6Btn">
+
+        <button
+            onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')"
+            id="Dec6Btn"
+        >
             Dec 6 memories 🤍
         </button>
 
-        <div id="Dec6Content" style="display:none;">
+        <div
+            id="Dec6Content"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/dec61.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec62.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/dec61.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/dec62.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')" id="Dec7Btn">
+
+        <button
+            onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')"
+            id="Dec7Btn"
+        >
             Dec 7 memories 🤍
         </button>
 
-        <div id="Dec7Content" style="display:none;">
-            <img src="images/dec7.png" class="sideImg" onclick="openImg(this.src)">
+        <div
+            id="Dec7Content"
+            style="display:none;"
+        >
+
+            <img
+                src="images/dec7.png"
+                class="sideImg"
+                onclick="openImg(this.src)"
+            >
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')" id="Dec21Btn">
+
+        <button
+            onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')"
+            id="Dec21Btn"
+        >
             Dec 21 memories 🤍
         </button>
 
-        <div id="Dec21Content" style="display:none;">
+        <div
+            id="Dec21Content"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/dec211.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/dec212.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/dec211.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/dec212.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')" id="Draw3Btn">
+
+        <button
+            onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')"
+            id="Draw3Btn"
+        >
             Drawing 😭 🤍
         </button>
 
-        <div id="Draw3Content" style="display:none;">
-            <img src="images/draw3.png" class="sideImg" onclick="openImg(this.src)">
+        <div
+            id="Draw3Content"
+            style="display:none;"
+        >
+
+            <img
+                src="images/draw3.png"
+                class="sideImg"
+                onclick="openImg(this.src)"
+            >
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')" id="JanBtn">
+
+        <button
+            onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')"
+            id="JanBtn"
+        >
             Jan 🤍
         </button>
 
-        <div id="JanContent" style="display:none;">
+        <div
+            id="JanContent"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/jan16.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/jan20.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/vc.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/jan16.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/jan20.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/vc.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')" id="febBtn">
+
+        <button
+            onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')"
+            id="febBtn"
+        >
             Feb memories 🤍
         </button>
 
-        <div id="febContent" style="display:none;">
+        <div
+            id="febContent"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/feb1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/feb2.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/feb1.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/feb2.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')" id="marBtn">
+
+        <button
+            onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')"
+            id="marBtn"
+        >
             March memories 🤍
         </button>
 
-        <div id="marContent" style="display:none;">
+        <div
+            id="marContent"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/mar1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/mar2.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/mar3.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/mar4.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/mar1.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/mar2.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/mar3.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/mar4.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')" id="openBtn">
+
+        <button
+            onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')"
+            id="openBtn"
+        >
             open me 🤍
         </button>
 
-        <div id="openContent" style="display:none;">
+        <div
+            id="openContent"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/spotify.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/look.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/hug.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/spotify.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/look.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/hug.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')" id="open1Btn">
+
+        <button
+            onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')"
+            id="open1Btn"
+        >
             open me too 🤍
         </button>
 
-        <div id="open1Content" style="display:none;">
+        <div
+            id="open1Content"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/firsts.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/pink.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/sad.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/firsts.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/pink.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/sad.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')" id="finalBtn">
+
+        <button
+            onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')"
+            id="finalBtn"
+        >
             lasttt 🤍
         </button>
 
-        <div id="finalContent" style="display:none;">
+        <div
+            id="finalContent"
+            style="display:none;"
+        >
+
             <div class="sideBySide">
-                <img src="images/final1.png" class="sideImg" onclick="openImg(this.src)">
-                <img src="images/final2.png" class="sideImg" onclick="openImg(this.src)">
+
+                <img
+                    src="images/final1.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/final2.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
             </div>
+
         </div>
+
     </div>
 
+
     <div class="memoryBlock">
-        <button onclick="toggleSection('byeContent', 'byeBtn', 'BYE BYE 🤍', 'close me 🤍')" id="byeBtn">
+
+        <button
+            onclick="toggleSection('byeContent', 'byeBtn', 'BYE BYE 🤍', 'close me 🤍')"
+            id="byeBtn"
+        >
             BYE BYE 🤍
         </button>
 
-        <div id="byeContent" style="display:none;">
-            <img src="images/bye.png" class="photo" onclick="openImg(this.src)">
+        <div
+            id="byeContent"
+            style="display:none;"
+        >
+
+            <img
+                src="images/bye.png"
+                class="photo"
+                onclick="openImg(this.src)"
+            >
+
         </div>
+
     </div>
-</div>
 
-<div class="memoryBlock">
-    <button onclick="toggleSection('tqContent', 'tqBtn', 'thankyouuu 🤍', 'close me 🤍')" id="tqBtn">
-        thankyouuu🤍
-    </button>
 
-    <div id="tqContent" style="display:none;">
-        <img src="images/thanks.png" class="photo" onclick="openImg(this.src)">
-    </div>
-</div>
+    <div class="memoryBlock">
 
-<div class="memoryBlock">
-    <button onclick="toggleSection('luffyContent', 'luffyBtn', 'FOR YOU🤍', 'close me 🤍')" id="luffysBtn">
-        Hope u like it 🤍
-    </button>
+        <button
+            onclick="toggleSection('tqContent', 'tqBtn', 'thankyouuu 🤍', 'close me 🤍')"
+            id="tqBtn"
+        >
+            thankyouuu🤍
+        </button>
 
-    <div id="luffyContent" style="display:none;">
-        <div class="sideBySide">
-            <img src="images/luffy.png" class="sideImg" onclick="openImg(this.src)">
-            <img src="images/luffy1.png" class="sideImg" onclick="openImg(this.src)">
+        <div
+            id="tqContent"
+            style="display:none;"
+        >
+
+            <img
+                src="images/thanks.png"
+                class="photo"
+                onclick="openImg(this.src)"
+            >
+
         </div>
+
     </div>
+
+
+    <div class="memoryBlock">
+
+        <button
+            onclick="toggleSection('luffyContent', 'luffysBtn', 'FOR YOU🤍', 'close me 🤍')"
+            id="luffysBtn"
+        >
+            Hope u like it 🤍
+        </button>
+
+        <div
+            id="luffyContent"
+            style="display:none;"
+        >
+
+            <div class="sideBySide">
+
+                <img
+                    src="images/luffy.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+                <img
+                    src="images/luffy1.png"
+                    class="sideImg"
+                    onclick="openImg(this.src)"
+                >
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
 
-<div id="imgPopup" onclick="closeImg()">
+<div
+    id="imgPopup"
+    onclick="closeImg()"
+>
+
     <img id="popupImg">
+
 </div>
 
 
 <script>
 
-    // State Management
-    let hearts = localStorage.getItem("currentHearts")
-        ? parseInt(localStorage.getItem("currentHearts"))
-        : 5;
+    /* ==============================
+       STATE MANAGEMENT
+    ============================== */
 
-    let attempts = localStorage.getItem("currentAttempts")
-        ? parseInt(localStorage.getItem("currentAttempts"))
-        : 0;
+    let hearts =
+        localStorage.getItem("currentHearts")
+            ? parseInt(
+                localStorage.getItem("currentHearts")
+            )
+            : 5;
+
+
+    let attempts =
+        localStorage.getItem("currentAttempts")
+            ? parseInt(
+                localStorage.getItem("currentAttempts")
+            )
+            : 0;
+
 
     let isLocked = false;
+
     let isTester = false;
 
+
+    /* ==============================
+       PAGE LOAD
+    ============================== */
 
     window.onload = function() {
 
         updateHearts();
 
-        const lockUntil = localStorage.getItem("lockUntil");
+        const lockUntil =
+            localStorage.getItem("lockUntil");
 
-        if (lockUntil && Date.now() < lockUntil) {
+
+        if (
+            lockUntil &&
+            Date.now() < lockUntil
+        ) {
 
             const remaining =
-                Math.ceil((lockUntil - Date.now()) / 1000);
+                Math.ceil(
+                    (lockUntil - Date.now()) / 1000
+                );
 
             startCountdown(remaining);
+
         }
+
     };
 
 
-    // Login Function
-    function login(){
+    /* ==============================
+       LOGIN
+    ============================== */
 
-        if(isLocked) return;
+    function login() {
+
+        if (isLocked)
+            return;
+
 
         const user =
-            document.getElementById("username").value.toLowerCase();
+            document
+                .getElementById("username")
+                .value
+                .toLowerCase();
+
 
         const pass =
-            document.getElementById("password").value.toLowerCase();
+            document
+                .getElementById("password")
+                .value
+                .toLowerCase();
+
 
         const loginSection =
-            document.getElementById("loginSection");
+            document.getElementById(
+                "loginSection"
+            );
 
 
-        // 1. Check Admin Passwords FIRST
-        if(pass === "shreec") {
+        /* ADMIN */
 
-            loginSection.style.display = "none";
+        if (pass === "shreec") {
 
-            document.getElementById("adminView").style.display = "block";
+            loginSection.style.display =
+                "none";
+
+            document.getElementById(
+                "adminView"
+            ).style.display =
+                "block";
 
             window.showVisits();
 
             return;
+
         }
 
 
-        if(pass === "dhanuc") {
+        /* MESSAGE ADMIN */
 
-            loginSection.style.display = "none";
+        if (pass === "dhanuc") {
 
-            document.getElementById("adminView").style.display = "block";
+            loginSection.style.display =
+                "none";
+
+            document.getElementById(
+                "adminView"
+            ).style.display =
+                "block";
 
             window.showAllMessages();
 
             return;
+
         }
 
 
-        // 2. Check Suraj Login
-        if(user === "suraj"){
+        /* SURAJ */
 
-            if(pass === "autorides" || pass === "moonlight"){
+        if (user === "suraj") {
 
-                localStorage.removeItem("lockUntil");
-                localStorage.removeItem("currentHearts");
-                localStorage.removeItem("currentAttempts");
+            if (
+                pass === "autorides" ||
+                pass === "moonlight"
+            ) {
 
-                if(pass === "moonlight")
+                localStorage.removeItem(
+                    "lockUntil"
+                );
+
+                localStorage.removeItem(
+                    "currentHearts"
+                );
+
+                localStorage.removeItem(
+                    "currentAttempts"
+                );
+
+
+                if (pass === "moonlight") {
+
                     isTester = true;
-                else
+
+                } else {
+
                     window.trackVisit();
 
-                loginSection.style.display = "none";
+                }
 
-                document.getElementById("readBtn").style.display =
+
+                loginSection.style.display =
+                    "none";
+
+
+                document.getElementById(
+                    "readBtn"
+                ).style.display =
                     "inline-block";
 
+
                 return;
+
             }
+
         }
 
 
-        // 3. ONLY if all above fail, handle hearts and lockout
+        /* WRONG PASSWORD */
+
         if (hearts > 0) {
 
             hearts--;
+
             attempts++;
 
-            localStorage.setItem("currentHearts", hearts);
-            localStorage.setItem("currentAttempts", attempts);
+
+            localStorage.setItem(
+                "currentHearts",
+                hearts
+            );
+
+
+            localStorage.setItem(
+                "currentAttempts",
+                attempts
+            );
+
 
             updateHearts();
+
             showHint();
 
+
             let lockDuration =
-                hearts > 0 ? 15 : 60;
+                hearts > 0
+                    ? 15
+                    : 60;
+
 
             let lockUntil =
-                Date.now() + (lockDuration * 1000);
+                Date.now() +
+                (lockDuration * 1000);
 
-            localStorage.setItem("lockUntil", lockUntil);
 
-            startCountdown(lockDuration);
+            localStorage.setItem(
+                "lockUntil",
+                lockUntil
+            );
+
+
+            startCountdown(
+                lockDuration
+            );
 
         } else {
 
-            document.getElementById("error").innerText =
+            document.getElementById(
+                "error"
+            ).innerText =
                 "Fuckkkk youuuu Surajj😒. Ask me now.";
 
-            document.getElementById("error").style.display =
+
+            document.getElementById(
+                "error"
+            ).style.display =
                 "block";
 
+
             startCountdown(60);
+
         }
+
     }
 
 
-    // UI Updates
-    function updateHearts(){
+    /* ==============================
+       UI
+    ============================== */
 
-        let h = Math.max(0, hearts);
+    function updateHearts() {
 
-        document.getElementById("hearts").innerText =
+        let h =
+            Math.max(
+                0,
+                hearts
+            );
+
+
+        document.getElementById(
+            "hearts"
+        ).innerText =
             "❤️".repeat(h) +
-            "💔".repeat(5-h);
+            "💔".repeat(5 - h);
+
     }
 
 
-    function showHint(){
+    function showHint() {
 
         const hints = [
             "9 letters",
@@ -667,96 +1331,149 @@
             "Nothing beats that"
         ];
 
+
         const h =
-            document.getElementById("hint");
+            document.getElementById(
+                "hint"
+            );
+
 
         h.innerText =
             "Hint: " +
-            (hints[attempts-1] || "Think harder!");
+            (
+                hints[attempts - 1] ||
+                "Think harder!"
+            );
+
 
         h.style.display =
             "inline-block";
+
     }
 
 
-    function startCountdown(seconds){
+    function startCountdown(seconds) {
 
         isLocked = true;
 
+
         const error =
-            document.getElementById("error");
+            document.getElementById(
+                "error"
+            );
+
 
         error.style.display =
             "block";
 
+
         let time = seconds;
 
+
         const interval =
-            setInterval(() => {
+            setInterval(
+                () => {
 
-                error.innerText =
-                    `Wait ${time}s before trying again ⏳`;
+                    error.innerText =
+                        `Wait ${time}s before trying again ⏳`;
 
-                time--;
+                    time--;
 
-                if(time < 0){
 
-                    clearInterval(interval);
+                    if (time < 0) {
 
-                    error.style.display =
-                        "none";
+                        clearInterval(
+                            interval
+                        );
 
-                    isLocked = false;
-                }
+                        error.style.display =
+                            "none";
 
-            }, 1000);
+                        isLocked = false;
+
+                    }
+
+                },
+                1000
+            );
+
     }
 
 
-    // Navigation
-    function openIntro(){
+    /* ==============================
+       NAVIGATION
+    ============================== */
 
-        document.getElementById("introScreen").style.display =
+    function openIntro() {
+
+        document.getElementById(
+            "introScreen"
+        ).style.display =
             "flex";
+
     }
 
 
-    function closeIntro(){
+    function closeIntro() {
 
-        document.getElementById("introScreen").style.display =
+        document.getElementById(
+            "introScreen"
+        ).style.display =
             "none";
 
-        document.getElementById("memoriesSection").style.display =
+
+        document.getElementById(
+            "memoriesSection"
+        ).style.display =
             "block";
 
-        window.dispatchEvent(new Event('scroll'));
+
+        window.dispatchEvent(
+            new Event("scroll")
+        );
+
     }
 
 
-    function toggleSection(cid, bid, ot, ct){
+    function toggleSection(
+        cid,
+        bid,
+        ot,
+        ct
+    ) {
 
         const c =
             document.getElementById(cid);
 
+
         const b =
             document.getElementById(bid);
 
-        if(c.style.display === "none"){
 
-            c.style.display = "block";
+        if (
+            c.style.display === "none"
+        ) {
 
-            b.innerText = ct;
+            c.style.display =
+                "block";
+
+            b.innerText =
+                ct;
 
         } else {
 
-            c.style.display = "none";
+            c.style.display =
+                "none";
 
-            b.innerText = ot;
+            b.innerText =
+                ot;
+
         }
+
     }
 
 
-    function toggleDraw(){
+    function toggleDraw() {
 
         toggleSection(
             "drawContent",
@@ -764,45 +1481,66 @@
             "Drawings 🤍",
             "Hide drawings 🤍"
         );
+
     }
 
 
-    function openImg(src){
+    function openImg(src) {
 
-        document.getElementById("imgPopup").style.display =
+        document.getElementById(
+            "imgPopup"
+        ).style.display =
             "flex";
 
-        document.getElementById("popupImg").src =
+
+        document.getElementById(
+            "popupImg"
+        ).src =
             src;
+
     }
 
 
-    function closeImg(){
+    function closeImg() {
 
-        document.getElementById("imgPopup").style.display =
+        document.getElementById(
+            "imgPopup"
+        ).style.display =
             "none";
+
     }
 
 
-    // --- BIRTHDAY LOGIC ---
-    // September 2 (JavaScript months are 0-indexed)
+    /* ==============================
+       BIRTHDAY LOGIC
+
+       OCTOBER 1
+       JavaScript month 9 = October
+    ============================== */
+
     const bdayMonth = 9;
+
     const bdayDate = 1;
 
 
     function updateBirthdayUI() {
 
-        let today = new Date();
+        let today =
+            new Date();
+
 
         if (
             today.getMonth() === bdayMonth &&
             today.getDate() === bdayDate
         ) {
 
-            document.getElementById("bdayText").innerText =
+            document.getElementById(
+                "bdayText"
+            ).innerText =
                 "🎉 OPEN!";
 
             return;
+
         }
 
 
@@ -814,10 +1552,13 @@
             );
 
 
-        if (today > bday)
+        if (today > bday) {
+
             bday.setFullYear(
                 today.getFullYear() + 1
             );
+
+        }
 
 
         let diff =
@@ -826,18 +1567,24 @@
 
         let days =
             Math.floor(
-                diff / (1000 * 60 * 60 * 24)
+                diff /
+                (1000 * 60 * 60 * 24)
             );
 
 
-        document.getElementById("bdayText").innerText =
+        document.getElementById(
+            "bdayText"
+        ).innerText =
             `🎂 ${days}d left`;
+
     }
 
 
     function openGift() {
 
-        let t = new Date();
+        let t =
+            new Date();
+
 
         if (
             t.getMonth() === bdayMonth &&
@@ -849,29 +1596,51 @@
 
         } else {
 
-            alert("Patience... 🤍");
+            alert(
+                "Patience... 🤍"
+            );
+
         }
+
     }
 
 
     updateBirthdayUI();
 
 
-    window.addEventListener("scroll", ()=>{
+    /* ==============================
+       SCROLL ANIMATION
+    ============================== */
 
-        document
-            .querySelectorAll(".memoryBlock")
-            .forEach(el=>{
+    window.addEventListener(
+        "scroll",
+        () => {
 
-                if(
-                    el.getBoundingClientRect().top <
-                    window.innerHeight - 50
-                ){
+            document
+                .querySelectorAll(
+                    ".memoryBlock"
+                )
+                .forEach(
+                    el => {
 
-                    el.classList.add("show");
-                }
-            });
-    });
+                        if (
+                            el
+                                .getBoundingClientRect()
+                                .top <
+                            window.innerHeight - 50
+                        ) {
+
+                            el.classList.add(
+                                "show"
+                            );
+
+                        }
+
+                    }
+                );
+
+        }
+    );
 
 </script>
 
@@ -890,14 +1659,15 @@
         push,
         get,
         set,
-        onValue
+        onValue,
+        runTransaction
     }
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
-    /* =====================================================
-       NEW FIREBASE PROJECT
-    ===================================================== */
+    /* ==============================
+       FIREBASE CONFIG
+    ============================== */
 
     const firebaseConfig = {
 
@@ -924,25 +1694,27 @@
 
         databaseURL:
             "https://memories111-new-default-rtdb.asia-southeast1.firebasedatabase.app"
+
     };
 
 
     const app =
-        initializeApp(firebaseConfig);
+        initializeApp(
+            firebaseConfig
+        );
+
 
     const db =
         getDatabase(app);
 
 
-    /* =====================================================
-       BIRTHDAY TEST DATA
-       
-       Keep this TRUE while testing.
-       
-       Birthday page uses:
-       TEST/stats/birthdayPageVisits
-       TEST/deleteRequests
-       ===================================================== */
+    /* ==============================
+       EXISTING TEST MODE
+
+       This remains TRUE because it is
+       used by your existing messages/
+       delete-request system.
+    ============================== */
 
     const TEST_MODE = true;
 
@@ -960,390 +1732,500 @@
 
 
     /* ==============================
-       NORMAL VISIT COUNT
-       ============================== */
+       MAIN PAGE VISIT
+       
+       stats/visitCount
+    ============================== */
 
-    window.trackVisit = async function(){
+    window.trackVisit =
+        async function() {
 
-        const vRef =
-            ref(db, "stats/visitCount");
+            const vRef =
+                ref(
+                    db,
+                    "stats/visitCount"
+                );
 
-        try {
 
-            const snapshot =
-                await get(vRef);
+            try {
 
-            await set(
-                vRef,
-                (snapshot.val() || 0) + 1
-            );
+                await runTransaction(
+                    vRef,
+                    currentValue => {
 
-        } catch(error) {
+                        return (
+                            (currentValue || 0) + 1
+                        );
 
-            console.log(
-                "Visit tracking error:",
-                error
-            );
-        }
-    };
+                    }
+                );
+
+
+                console.log(
+                    "Main page visit recorded."
+                );
+
+
+            } catch(error) {
+
+                console.log(
+                    "Visit tracking error:",
+                    error
+                );
+
+            }
+
+        };
 
 
     /* ==============================
        SAVE MESSAGE
-       ============================== */
+    ============================== */
 
-    window.saveMessage = async function(event) {
+    window.saveMessage =
+        async function(event) {
 
-        const input =
-            document.getElementById("userMsg");
-
-        const btn =
-            event.target;
-
-        const originalText =
-            btn.innerText;
+            const input =
+                document.getElementById(
+                    "userMsg"
+                );
 
 
-        if(!input.value.trim())
-            return alert(
-                "something to telll??😌"
-            );
+            const btn =
+                event.target;
 
 
-        btn.disabled = true;
-
-        btn.innerText =
-            "Sending... 💌";
-
-        btn.style.opacity =
-            "0.5";
+            const originalText =
+                btn.innerText;
 
 
-        try {
+            if (
+                !input.value.trim()
+            ) {
 
-            await push(
-                ref(db, "messages"),
-                {
+                return alert(
+                    "something to telll??😌"
+                );
 
-                    text:
-                        input.value,
+            }
 
-                    time:
-                        new Date().toLocaleString(),
 
-                    sender:
-                        isTester
-                            ? "admin"
-                            : "user"
+            btn.disabled = true;
+
+            btn.innerText =
+                "Sending... 💌";
+
+            btn.style.opacity =
+                "0.5";
+
+
+            try {
+
+                await push(
+                    ref(
+                        db,
+                        "messages"
+                    ),
+                    {
+
+                        text:
+                            input.value,
+
+                        time:
+                            new Date()
+                                .toLocaleString(),
+
+                        sender:
+                            isTester
+                                ? "admin"
+                                : "user"
+
+                    }
+                );
+
+
+                alert(
+                    "message sent! ❤️"
+                );
+
+
+                input.value = "";
+
+
+            } catch(err) {
+
+                console.log(err);
+
+
+                alert(
+                    "Oops! Something went wrong."
+                );
+
+
+            } finally {
+
+                btn.disabled = false;
+
+                btn.innerText =
+                    originalText;
+
+                btn.style.opacity =
+                    "1";
+
+            }
+
+        };
+
+
+    /* ==============================
+       ADMIN VISITS
+       
+       READS:
+
+       stats/visitCount
+       stats/pageVisits
+       stats/birthdayButtonClicks
+    ============================== */
+
+    window.showVisits =
+        function() {
+
+            const content =
+                document.getElementById(
+                    "adminContent"
+                );
+
+
+            onValue(
+                ref(
+                    db,
+                    "stats/visitCount"
+                ),
+                visitSnapshot => {
+
+                    const normalVisits =
+                        visitSnapshot.val() || 0;
+
+
+                    onValue(
+                        ref(
+                            db,
+                            "stats/pageVisits"
+                        ),
+                        pageSnapshot => {
+
+                            const birthdayPageViews =
+                                pageSnapshot.val() || 0;
+
+
+                            onValue(
+                                ref(
+                                    db,
+                                    "stats/birthdayButtonClicks"
+                                ),
+                                clickSnapshot => {
+
+                                    const birthdayClicks =
+                                        clickSnapshot.val() || 0;
+
+
+                                    content.innerHTML = `
+
+                                        <div style="
+                                            color:black;
+                                            text-align:center;
+                                        ">
+
+
+                                            <h3 style="
+                                                color:#555;
+                                                margin-bottom:5px;
+                                            ">
+                                                Main Page Visits
+                                            </h3>
+
+
+                                            <h1 style="
+                                                color:black;
+                                                font-size:60px;
+                                                margin:5px 0 25px;
+                                            ">
+                                                ${normalVisits}
+                                            </h1>
+
+
+                                            <h3 style="
+                                                color:#555;
+                                                margin-bottom:5px;
+                                            ">
+                                                Birthday Page Opens
+                                            </h3>
+
+
+                                            <h1 style="
+                                                color:black;
+                                                font-size:60px;
+                                                margin:5px 0 25px;
+                                            ">
+                                                ${birthdayPageViews}
+                                            </h1>
+
+
+                                            <h3 style="
+                                                color:#555;
+                                                margin-bottom:5px;
+                                            ">
+                                                Birthday "Tap to Begin" Clicks
+                                            </h3>
+
+
+                                            <h1 style="
+                                                color:black;
+                                                font-size:60px;
+                                                margin:5px 0;
+                                            ">
+                                                ${birthdayClicks}
+                                            </h1>
+
+
+                                        </div>
+
+                                    `;
+
+                                }
+                            );
+
+                        }
+                    );
+
                 }
             );
 
-
-            alert(
-                "message sent! ❤️"
-            );
-
-            input.value = "";
-
-
-        } catch (err) {
-
-            console.log(err);
-
-            alert(
-                "Oops! Something went wrong."
-            );
-
-
-        } finally {
-
-            btn.disabled = false;
-
-            btn.innerText =
-                originalText;
-
-            btn.style.opacity =
-                "1";
-        }
-    };
+        };
 
 
     /* ==============================
-       ADMIN:
-       VISITS + BIRTHDAY VIEWS
-       ============================== */
+       ADMIN MESSAGES + DELETE REQUESTS
+    ============================== */
 
-    window.showVisits = function() {
+    window.showAllMessages =
+        function() {
 
-        const content =
-            document.getElementById(
-                "adminContent"
-            );
+            onValue(
+                ref(
+                    db,
+                    "messages"
+                ),
+                messageSnapshot => {
 
+                    let h = "";
 
-        onValue(
-            ref(db, "stats/visitCount"),
-            (visitSnapshot) => {
-
-                const normalVisits =
-                    visitSnapshot.val() || 0;
-
-
-                onValue(
-                    ref(
-                        db,
-                        birthdayStatsPath +
-                        "/birthdayPageVisits"
-                    ),
-                    (birthdaySnapshot) => {
-
-                        const birthdayViews =
-                            birthdaySnapshot.val() || 0;
-
-
-                        content.innerHTML = `
-
-                            <div style="
-                                color:black;
-                                text-align:center;
-                            ">
-
-                                <h3 style="
-                                    color:#555;
-                                    margin-bottom:5px;
-                                ">
-                                    Main Page Visits
-                                </h3>
-
-                                <h1 style="
-                                    color:black;
-                                    font-size:60px;
-                                    margin:5px 0 25px;
-                                ">
-                                    ${normalVisits}
-                                </h1>
-
-
-                                <h3 style="
-                                    color:#555;
-                                    margin-bottom:5px;
-                                ">
-                                    Birthday Page Views
-                                </h3>
-
-                                <h1 style="
-                                    color:black;
-                                    font-size:60px;
-                                    margin:5px 0;
-                                ">
-                                    ${birthdayViews}
-                                </h1>
-
-                            </div>
-
-                        `;
-                    }
-                );
-            }
-        );
-    };
-
-
-    /* ==============================
-       ADMIN:
-       MESSAGES + DELETE REQUESTS
-       ============================== */
-
-    window.showAllMessages = function() {
-
-        onValue(
-            ref(db, "messages"),
-            (messageSnapshot) => {
-
-                let h = "";
-
-
-                /* ---------- MESSAGES ---------- */
-
-                h += `
-
-                    <h3 style="
-                        color:black;
-                        margin-top:5px;
-                        margin-bottom:15px;
-                    ">
-                        💌 Messages
-                    </h3>
-
-                `;
-
-
-                if(messageSnapshot.exists()){
-
-                    Object
-                        .values(
-                            messageSnapshot.val()
-                        )
-                        .reverse()
-                        .forEach(m => {
-
-                            const bgColor =
-                                (m.sender === "admin")
-                                    ? "#e0e0e0"
-                                    : "#ffffff";
-
-                            const label =
-                                (m.sender === "admin")
-                                    ? "🛠️ TEST:"
-                                    : "💌 FROM HIM:";
-
-
-                            h += `
-
-                                <div
-                                    class="msgItem"
-                                    style="
-                                        background:${bgColor};
-                                        border:1px solid #ccc;
-                                        color:black;
-                                        padding:10px;
-                                        margin-bottom:5px;
-                                        border-radius:8px;
-                                    "
-                                >
-
-                                    <small style="
-                                        color:#666;
-                                    ">
-                                        ${label} ${m.time}
-                                    </small>
-
-                                    <br>
-
-                                    <strong>
-                                        ${m.text}
-                                    </strong>
-
-                                </div>
-
-                            `;
-                        });
-
-                } else {
 
                     h += `
 
-                        <div style="
-                            color:#555;
-                            margin-bottom:25px;
+                        <h3 style="
+                            color:black;
+                            margin-top:5px;
+                            margin-bottom:15px;
                         ">
-                            No notes yet.
-                        </div>
+                            💌 Messages
+                        </h3>
 
                     `;
-                }
 
 
-                /* ---------- DELETE REQUESTS ---------- */
+                    if (
+                        messageSnapshot.exists()
+                    ) {
 
-                onValue(
-                    ref(
-                        db,
-                        birthdayDeletePath
-                    ),
-                    (deleteSnapshot) => {
+                        Object
+                            .values(
+                                messageSnapshot.val()
+                            )
+                            .reverse()
+                            .forEach(
+                                m => {
 
-
-                        h += `
-
-                            <hr style="
-                                margin:25px 0;
-                                border:none;
-                                border-top:1px solid #bbb;
-                            ">
-
-                            <h3 style="
-                                color:black;
-                                margin-bottom:15px;
-                            ">
-                                🗑️ Delete Requests
-                            </h3>
-
-                        `;
+                                    const bgColor =
+                                        (
+                                            m.sender ===
+                                            "admin"
+                                        )
+                                            ? "#e0e0e0"
+                                            : "#ffffff";
 
 
-                        if(deleteSnapshot.exists()){
+                                    const label =
+                                        (
+                                            m.sender ===
+                                            "admin"
+                                        )
+                                            ? "🛠️ TEST:"
+                                            : "💌 FROM HIM:";
 
-                            Object
-                                .values(
-                                    deleteSnapshot.val()
-                                )
-                                .reverse()
-                                .forEach(request => {
 
                                     h += `
 
                                         <div
                                             class="msgItem"
                                             style="
-                                                background:#fff0f0;
-                                                border:1px solid #e0aaaa;
+                                                background:${bgColor};
+                                                border:1px solid #ccc;
                                                 color:black;
                                                 padding:10px;
-                                                margin-bottom:8px;
+                                                margin-bottom:5px;
                                                 border-radius:8px;
                                             "
                                         >
 
-                                            <strong>
-                                                🗑️ DELETE REQUEST
-                                            </strong>
-
-                                            <br>
-
                                             <small style="
                                                 color:#666;
                                             ">
-                                                ${request.time || "Unknown time"}
+                                                ${label}
+                                                ${m.time}
                                             </small>
 
-                                            <br><br>
+                                            <br>
 
-                                            <span>
-                                                ${request.action || "Birthday page deletion requested"}
-                                            </span>
+                                            <strong>
+                                                ${m.text}
+                                            </strong>
 
                                         </div>
 
                                     `;
-                                });
 
-                        } else {
+                                }
+                            );
+
+                    } else {
+
+                        h += `
+
+                            <div style="
+                                color:#555;
+                                margin-bottom:25px;
+                            ">
+                                No notes yet.
+                            </div>
+
+                        `;
+
+                    }
+
+
+                    onValue(
+                        ref(
+                            db,
+                            birthdayDeletePath
+                        ),
+                        deleteSnapshot => {
 
                             h += `
 
-                                <div style="
-                                    color:#555;
+                                <hr style="
+                                    margin:25px 0;
+                                    border:none;
+                                    border-top:1px solid #bbb;
                                 ">
-                                    No delete requests yet.
-                                </div>
+
+
+                                <h3 style="
+                                    color:black;
+                                    margin-bottom:15px;
+                                ">
+                                    🗑️ Delete Requests
+                                </h3>
 
                             `;
+
+
+                            if (
+                                deleteSnapshot.exists()
+                            ) {
+
+                                Object
+                                    .values(
+                                        deleteSnapshot.val()
+                                    )
+                                    .reverse()
+                                    .forEach(
+                                        request => {
+
+                                            h += `
+
+                                                <div
+                                                    class="msgItem"
+                                                    style="
+                                                        background:#fff0f0;
+                                                        border:1px solid #e0aaaa;
+                                                        color:black;
+                                                        padding:10px;
+                                                        margin-bottom:8px;
+                                                        border-radius:8px;
+                                                    "
+                                                >
+
+                                                    <strong>
+                                                        🗑️ DELETE REQUEST
+                                                    </strong>
+
+                                                    <br>
+
+                                                    <small style="
+                                                        color:#666;
+                                                    ">
+                                                        ${
+                                                            request.time ||
+                                                            "Unknown time"
+                                                        }
+                                                    </small>
+
+                                                    <br><br>
+
+                                                    <span>
+                                                        ${
+                                                            request.action ||
+                                                            "Birthday page deletion requested"
+                                                        }
+                                                    </span>
+
+                                                </div>
+
+                                            `;
+
+                                        }
+                                    );
+
+                            } else {
+
+                                h += `
+
+                                    <div style="
+                                        color:#555;
+                                    ">
+                                        No delete requests yet.
+                                    </div>
+
+                                `;
+
+                            }
+
+
+                            document.getElementById(
+                                "adminContent"
+                            ).innerHTML = h;
+
                         }
+                    );
 
+                }
+            );
 
-                        document.getElementById(
-                            "adminContent"
-                        ).innerHTML = h;
-
-                    }
-                );
-
-            }
-        );
-    };
+        };
 
 </script>
 
 </body>
+
 </html>
