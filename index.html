@@ -2,222 +2,495 @@
 <html lang="en">
 
 <head>
+
     <title>For You</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <style>
 
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding-top: 50px;
-            background: url("images/sky.jpeg") no-repeat center center fixed;
-            background-size: cover;
-            color: white;
+        * {
+            box-sizing: border-box;
         }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            text-align: center;
+
+            margin: 0;
+
+            padding-top: 50px;
+
+            background:
+                url("images/sky.jpeg")
+                no-repeat
+                center center
+                fixed;
+
+            background-size: cover;
+
+            color: white;
+
+        }
+
 
         h2 {
+
             color: #000000 !important;
+
             margin-bottom: 20px;
+
         }
+
 
         input {
+
             padding: 12px;
+
             margin: 8px;
+
             border-radius: 8px;
+
             border: 1px solid #f8bbd0;
-            background: rgba(255,255,255,0.5);
+
+            background:
+                rgba(255,255,255,0.5);
+
             color: black;
+
             width: 200px;
+
         }
+
 
         button {
+
             padding: 12px 20px;
+
             cursor: pointer;
+
             border-radius: 8px;
+
             border: none;
+
             transition: 0.3s;
+
             background: #000000;
+
             color: #ffffff;
+
             font-weight: bold;
+
         }
+
 
         button:hover {
+
             opacity: 0.8;
+
             background: #222;
+
         }
 
+
         #hearts {
+
             margin-top: 10px;
+
             font-size: 20px;
+
         }
+
 
         #hint,
         #error {
+
             display: none;
+
             margin-top: 10px;
+
             padding: 12px;
+
             border-radius: 12px;
-            background: rgba(0,0,0,0.5);
+
+            background:
+                rgba(0,0,0,0.5);
+
             backdrop-filter: blur(5px);
+
             width: fit-content;
+
             margin-left: auto;
+
             margin-right: auto;
+
         }
+
 
         #error {
+
             color: #ffb3b3;
+
         }
+
 
         #readBtn {
+
             display: none;
+
             margin-top: 40px;
+
             border-radius: 25px;
+
             background: #000000;
+
             color: white;
+
             padding: 15px 35px;
+
             border: 1px solid #444;
+
         }
+
 
         #introScreen {
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
+
             background: black;
+
             display: none;
+
             justify-content: center;
+
             align-items: center;
+
             z-index: 9999;
+
         }
+
 
         #introImage {
+
             max-width: 90%;
+
             max-height: 90%;
+
             border-radius: 15px;
+
         }
+
 
         #memoriesSection {
+
             display: none;
+
             margin-top: 40px;
+
             padding-bottom: 120px;
+
         }
+
 
         .memoryBlock {
+
             opacity: 0;
+
             transform: translateY(30px);
+
             transition: 0.6s;
+
             margin-bottom: 30px;
+
         }
+
 
         .memoryBlock.show {
+
             opacity: 1;
+
             transform: translateY(0);
+
         }
+
 
         .photo {
+
             width: 90%;
+
             max-width: 500px;
+
             border-radius: 12px;
+
             cursor: pointer;
+
         }
+
 
         .sideBySide {
+
             display: flex;
+
             flex-wrap: wrap;
+
             justify-content: center;
+
             gap: 15px;
+
             margin-top: 10px;
+
         }
+
 
         .sideImg {
+
             width: 145px;
+
             border-radius: 12px;
+
             cursor: pointer;
+
         }
+
 
         .groupClose {
+
             font-size: 20px;
+
             cursor: pointer;
+
             display: block;
+
             margin-bottom: 10px;
+
             color: #ff4d4d;
+
         }
+
 
         #bdayContainer {
+
             position: fixed;
+
             bottom: 20px;
+
             right: 20px;
+
             width: 100px;
+
             text-align: center;
+
             z-index: 99999;
+
         }
+
 
         #bdayBtn {
+
             width: 75px;
+
             height: 75px;
+
             font-size: 38px;
+
             border-radius: 50%;
+
             background: #000;
+
             border: 2px solid white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+
+            box-shadow:
+                0 0 20px
+                rgba(0,0,0,0.5);
+
         }
+
 
         #bdayText {
+
             margin-top: 5px;
+
             font-size: 11px;
+
             color: white;
-            background: rgba(0,0,0,0.6);
+
+            background:
+                rgba(0,0,0,0.6);
+
             padding: 4px;
+
             border-radius: 8px;
+
         }
+
 
         #imgPopup {
+
             display: none;
+
             position: fixed;
+
             top: 0;
+
             left: 0;
+
             width: 100%;
+
             height: 100%;
-            background: rgba(0,0,0,0.9);
+
+            background:
+                rgba(0,0,0,0.9);
+
             justify-content: center;
+
             align-items: center;
+
             z-index: 10000;
+
         }
+
 
         #popupImg {
+
             max-width: 90%;
+
             max-height: 90%;
+
             border-radius: 10px;
+
         }
+
 
         #adminView {
+
             display: none;
-            background: rgba(255, 255, 255, 0.9);
+
+            background:
+                rgba(255,255,255,0.9);
+
             padding: 20px;
+
             border-radius: 15px;
+
             margin: 20px auto;
+
             max-width: 600px;
+
             color: #333;
+
         }
 
+
         .msgItem {
+
             background: #f0f0f0;
-            border-bottom: 1px solid #ccc;
+
+            border-bottom:
+                1px solid #ccc;
+
             padding: 15px;
+
             text-align: left;
+
             margin-bottom: 10px;
+
             border-radius: 8px;
+
             color: #000;
+
+        }
+
+
+        /* ==============================
+           PERMANENT DELETE BUTTON
+        ============================== */
+
+        #permanentDeleteBox {
+
+            position: fixed;
+
+            top: 15px;
+
+            right: 15px;
+
+            z-index: 999999;
+
+        }
+
+
+        #permanentDeleteBtn {
+
+            background: #8b0000;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 10px;
+
+            padding: 10px 15px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0,0,0,0.4);
+
+        }
+
+
+        #permanentDeleteBtn:hover {
+
+            background: #b00000;
+
+            opacity: 1;
+
         }
 
     </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     PERMANENT DELETE BUTTON
+===================================================== -->
+
+<div id="permanentDeleteBox">
+
+    <button
+        id="permanentDeleteBtn"
+        onclick="startDeleteProcess()"
+    >
+        🗑️ Delete this website
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     BIRTHDAY BUTTON
+===================================================== -->
 
 <div id="bdayContainer">
 
@@ -233,9 +506,16 @@
 </div>
 
 
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
 <div id="loginSection">
 
-    <h2>Our Memories</h2>
+    <h2>
+        Our Memories
+    </h2>
+
 
     <input
         id="username"
@@ -243,6 +523,7 @@
     >
 
     <br>
+
 
     <input
         id="password"
@@ -252,6 +533,7 @@
 
     <br>
 
+
     <button
         id="loginBtn"
         onclick="login()"
@@ -259,9 +541,11 @@
         Unlock
     </button>
 
+
     <div id="hearts">
         ❤️❤️❤️❤️❤️
     </div>
+
 
     <div id="hint"></div>
 
@@ -269,6 +553,10 @@
 
 </div>
 
+
+<!-- =====================================================
+     ADMIN DASHBOARD
+===================================================== -->
 
 <div id="adminView">
 
@@ -287,6 +575,10 @@
 </div>
 
 
+<!-- =====================================================
+     READ BUTTON
+===================================================== -->
+
 <button
     id="readBtn"
     onclick="openIntro()"
@@ -294,6 +586,10 @@
     Read me 🤍
 </button>
 
+
+<!-- =====================================================
+     INTRO
+===================================================== -->
 
 <div
     id="introScreen"
@@ -308,7 +604,12 @@
 </div>
 
 
+<!-- =====================================================
+     MEMORIES
+===================================================== -->
+
 <div id="memoriesSection">
+
 
     <div
         class="memoryBlock"
@@ -325,6 +626,7 @@
             Leave a note for me 🤍
         </h3>
 
+
         <input
             id="userMsg"
             placeholder="Type something..."
@@ -332,6 +634,7 @@
         >
 
         <br>
+
 
         <button onclick="saveMessage(event)">
             Send to her 🤍
@@ -346,11 +649,13 @@
 
 
     <div class="memoryBlock">
+
         <img
             src="images/letter.png"
             class="photo"
             onclick="openImg(this.src)"
         >
+
     </div>
 
 
@@ -362,6 +667,7 @@
         >
             Drawings 🤍
         </button>
+
 
         <div
             id="drawContent"
@@ -390,40 +696,52 @@
 
 
     <div class="memoryBlock">
+
         <img
             src="images/forward.png"
             class="photo"
             onclick="openImg(this.src)"
         >
+
     </div>
 
 
     <div class="memoryBlock">
+
         <img
             src="images/2024.png"
             class="photo"
             onclick="openImg(this.src)"
         >
+
     </div>
 
 
     <div class="memoryBlock">
+
         <img
             src="images/start.png"
             class="photo"
             onclick="openImg(this.src)"
         >
+
     </div>
 
 
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')"
+            onclick="toggleSection(
+                'augContent',
+                'augBtn',
+                'Aug memories 🤍',
+                'Hide Aug 🤍'
+            )"
             id="augBtn"
         >
             Aug memories 🤍
         </button>
+
 
         <div
             id="augContent"
@@ -432,10 +750,16 @@
 
             <span
                 class="groupClose"
-                onclick="toggleSection('augContent', 'augBtn', 'Aug memories 🤍', 'Hide Aug 🤍')"
+                onclick="toggleSection(
+                    'augContent',
+                    'augBtn',
+                    'Aug memories 🤍',
+                    'Hide Aug 🤍'
+                )"
             >
                 ❌
             </span>
+
 
             <div class="sideBySide">
 
@@ -461,11 +785,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')"
+            onclick="toggleSection(
+                'NovContent',
+                'NovBtn',
+                'Nov memories 🤍',
+                'Hide Nov 🤍'
+            )"
             id="NovBtn"
         >
             Nov memories 🤍
         </button>
+
 
         <div
             id="NovContent"
@@ -474,10 +804,16 @@
 
             <span
                 class="groupClose"
-                onclick="toggleSection('NovContent', 'NovBtn', 'Nov memories 🤍', 'Hide Nov 🤍')"
+                onclick="toggleSection(
+                    'NovContent',
+                    'NovBtn',
+                    'Nov memories 🤍',
+                    'Hide Nov 🤍'
+                )"
             >
                 ❌
             </span>
+
 
             <div class="sideBySide">
 
@@ -501,31 +837,41 @@
 
 
     <div class="memoryBlock">
+
         <img
             src="images/order1.png"
             class="photo"
             onclick="openImg(this.src)"
         >
+
     </div>
 
 
     <div class="memoryBlock">
+
         <img
             src="images/drunk.png"
             class="photo"
             onclick="openImg(this.src)"
         >
+
     </div>
 
 
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('Dec4Content', 'Dec4Btn', 'Dec 4 memories 🤍', 'Hide Dec4 🤍')"
+            onclick="toggleSection(
+                'Dec4Content',
+                'Dec4Btn',
+                'Dec 4 memories 🤍',
+                'Hide Dec4 🤍'
+            )"
             id="Dec4Btn"
         >
             Dec 4 memories 🤍
         </button>
+
 
         <div
             id="Dec4Content"
@@ -556,11 +902,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('Dec5Content', 'Dec5Btn', 'Dec 5 memories 🤍', 'Hide Dec5 🤍')"
+            onclick="toggleSection(
+                'Dec5Content',
+                'Dec5Btn',
+                'Dec 5 memories 🤍',
+                'Hide Dec5 🤍'
+            )"
             id="Dec5Btn"
         >
             Dec 5 memories 🤍
         </button>
+
 
         <div
             id="Dec5Content"
@@ -603,11 +955,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('Dec6Content', 'Dec6Btn', 'Dec 6 memories 🤍', 'Hide Dec6 🤍')"
+            onclick="toggleSection(
+                'Dec6Content',
+                'Dec6Btn',
+                'Dec 6 memories 🤍',
+                'Hide Dec6 🤍'
+            )"
             id="Dec6Btn"
         >
             Dec 6 memories 🤍
         </button>
+
 
         <div
             id="Dec6Content"
@@ -638,11 +996,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('Dec7Content', 'Dec7Btn', 'Dec 7 memories 🤍', 'Hide Dec7 🤍')"
+            onclick="toggleSection(
+                'Dec7Content',
+                'Dec7Btn',
+                'Dec 7 memories 🤍',
+                'Hide Dec7 🤍'
+            )"
             id="Dec7Btn"
         >
             Dec 7 memories 🤍
         </button>
+
 
         <div
             id="Dec7Content"
@@ -663,11 +1027,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('Dec21Content', 'Dec21Btn', 'Dec 21 memories 🤍', 'Hide Dec21 🤍')"
+            onclick="toggleSection(
+                'Dec21Content',
+                'Dec21Btn',
+                'Dec 21 memories 🤍',
+                'Hide Dec21 🤍'
+            )"
             id="Dec21Btn"
         >
             Dec 21 memories 🤍
         </button>
+
 
         <div
             id="Dec21Content"
@@ -698,11 +1068,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('Draw3Content', 'Draw3Btn', 'Drawing 😭 🤍', 'Hide this 🤍')"
+            onclick="toggleSection(
+                'Draw3Content',
+                'Draw3Btn',
+                'Drawing 😭 🤍',
+                'Hide this 🤍'
+            )"
             id="Draw3Btn"
         >
             Drawing 😭 🤍
         </button>
+
 
         <div
             id="Draw3Content"
@@ -723,11 +1099,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('JanContent', 'JanBtn', 'Jan 🤍', 'Hide Jan 🤍')"
+            onclick="toggleSection(
+                'JanContent',
+                'JanBtn',
+                'Jan 🤍',
+                'Hide Jan 🤍'
+            )"
             id="JanBtn"
         >
             Jan 🤍
         </button>
+
 
         <div
             id="JanContent"
@@ -764,11 +1146,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('febContent', 'febBtn', 'Feb memories 🤍', 'Hide feb 🤍')"
+            onclick="toggleSection(
+                'febContent',
+                'febBtn',
+                'Feb memories 🤍',
+                'Hide feb 🤍'
+            )"
             id="febBtn"
         >
             Feb memories 🤍
         </button>
+
 
         <div
             id="febContent"
@@ -799,11 +1187,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('marContent', 'marBtn', 'March memories 🤍', 'Hide mar 🤍')"
+            onclick="toggleSection(
+                'marContent',
+                'marBtn',
+                'March memories 🤍',
+                'Hide mar 🤍'
+            )"
             id="marBtn"
         >
             March memories 🤍
         </button>
+
 
         <div
             id="marContent"
@@ -846,11 +1240,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('openContent', 'openBtn', 'open me 🤍', 'close me 🤍')"
+            onclick="toggleSection(
+                'openContent',
+                'openBtn',
+                'open me 🤍',
+                'close me 🤍'
+            )"
             id="openBtn"
         >
             open me 🤍
         </button>
+
 
         <div
             id="openContent"
@@ -887,11 +1287,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('open1Content', 'open1Btn', 'open me too 🤍', 'close me 🤍')"
+            onclick="toggleSection(
+                'open1Content',
+                'open1Btn',
+                'open me too 🤍',
+                'close me 🤍'
+            )"
             id="open1Btn"
         >
             open me too 🤍
         </button>
+
 
         <div
             id="open1Content"
@@ -928,11 +1334,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('finalContent', 'finalBtn', 'lasttt 🤍', 'close me 🤍')"
+            onclick="toggleSection(
+                'finalContent',
+                'finalBtn',
+                'lasttt 🤍',
+                'close me 🤍'
+            )"
             id="finalBtn"
         >
             lasttt 🤍
         </button>
+
 
         <div
             id="finalContent"
@@ -963,11 +1375,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('byeContent', 'byeBtn', 'BYE BYE 🤍', 'close me 🤍')"
+            onclick="toggleSection(
+                'byeContent',
+                'byeBtn',
+                'BYE BYE 🤍',
+                'close me 🤍'
+            )"
             id="byeBtn"
         >
             BYE BYE 🤍
         </button>
+
 
         <div
             id="byeContent"
@@ -988,11 +1406,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('tqContent', 'tqBtn', 'thankyouuu 🤍', 'close me 🤍')"
+            onclick="toggleSection(
+                'tqContent',
+                'tqBtn',
+                'thankyouuu 🤍',
+                'close me 🤍'
+            )"
             id="tqBtn"
         >
             thankyouuu🤍
         </button>
+
 
         <div
             id="tqContent"
@@ -1013,11 +1437,17 @@
     <div class="memoryBlock">
 
         <button
-            onclick="toggleSection('luffyContent', 'luffysBtn', 'FOR YOU🤍', 'close me 🤍')"
+            onclick="toggleSection(
+                'luffyContent',
+                'luffysBtn',
+                'FOR YOU🤍',
+                'close me 🤍'
+            )"
             id="luffysBtn"
         >
             Hope u like it 🤍
         </button>
+
 
         <div
             id="luffyContent"
@@ -1047,6 +1477,10 @@
 </div>
 
 
+<!-- =====================================================
+     IMAGE POPUP
+===================================================== -->
+
 <div
     id="imgPopup"
     onclick="closeImg()"
@@ -1057,16 +1491,22 @@
 </div>
 
 
+<!-- =====================================================
+     MAIN JAVASCRIPT
+===================================================== -->
+
 <script>
 
     /* ==============================
-       STATE MANAGEMENT
+       STATE
     ============================== */
 
     let hearts =
         localStorage.getItem("currentHearts")
             ? parseInt(
-                localStorage.getItem("currentHearts")
+                localStorage.getItem(
+                    "currentHearts"
+                )
             )
             : 5;
 
@@ -1074,7 +1514,9 @@
     let attempts =
         localStorage.getItem("currentAttempts")
             ? parseInt(
-                localStorage.getItem("currentAttempts")
+                localStorage.getItem(
+                    "currentAttempts"
+                )
             )
             : 0;
 
@@ -1092,8 +1534,11 @@
 
         updateHearts();
 
+
         const lockUntil =
-            localStorage.getItem("lockUntil");
+            localStorage.getItem(
+                "lockUntil"
+            );
 
 
         if (
@@ -1103,10 +1548,16 @@
 
             const remaining =
                 Math.ceil(
-                    (lockUntil - Date.now()) / 1000
+                    (
+                        lockUntil -
+                        Date.now()
+                    ) / 1000
                 );
 
-            startCountdown(remaining);
+
+            startCountdown(
+                remaining
+            );
 
         }
 
@@ -1125,14 +1576,18 @@
 
         const user =
             document
-                .getElementById("username")
+                .getElementById(
+                    "username"
+                )
                 .value
                 .toLowerCase();
 
 
         const pass =
             document
-                .getElementById("password")
+                .getElementById(
+                    "password"
+                )
                 .value
                 .toLowerCase();
 
@@ -1143,17 +1598,21 @@
             );
 
 
-        /* ADMIN */
+        /* ==========================
+           ADMIN VISITS
+        ========================== */
 
         if (pass === "shreec") {
 
             loginSection.style.display =
                 "none";
 
+
             document.getElementById(
                 "adminView"
             ).style.display =
                 "block";
+
 
             window.showVisits();
 
@@ -1162,17 +1621,21 @@
         }
 
 
-        /* MESSAGE ADMIN */
+        /* ==========================
+           MESSAGE ADMIN
+        ========================== */
 
         if (pass === "dhanuc") {
 
             loginSection.style.display =
                 "none";
 
+
             document.getElementById(
                 "adminView"
             ).style.display =
                 "block";
+
 
             window.showAllMessages();
 
@@ -1181,7 +1644,9 @@
         }
 
 
-        /* SURAJ */
+        /* ==========================
+           SURAJ
+        ========================== */
 
         if (user === "suraj") {
 
@@ -1194,9 +1659,11 @@
                     "lockUntil"
                 );
 
+
                 localStorage.removeItem(
                     "currentHearts"
                 );
+
 
                 localStorage.removeItem(
                     "currentAttempts"
@@ -1231,7 +1698,9 @@
         }
 
 
-        /* WRONG PASSWORD */
+        /* ==========================
+           WRONG PASSWORD
+        ========================== */
 
         if (hearts > 0) {
 
@@ -1265,7 +1734,10 @@
 
             let lockUntil =
                 Date.now() +
-                (lockDuration * 1000);
+                (
+                    lockDuration *
+                    1000
+                );
 
 
             localStorage.setItem(
@@ -1316,7 +1788,9 @@
             "hearts"
         ).innerText =
             "❤️".repeat(h) +
-            "💔".repeat(5 - h);
+            "💔".repeat(
+                5 - h
+            );
 
     }
 
@@ -1324,11 +1798,17 @@
     function showHint() {
 
         const hints = [
+
             "9 letters",
+
             "we loved it so much",
+
             "Favourite memory fr",
+
             "My most fav pic of ours",
+
             "Nothing beats that"
+
         ];
 
 
@@ -1377,6 +1857,7 @@
                     error.innerText =
                         `Wait ${time}s before trying again ⏳`;
 
+
                     time--;
 
 
@@ -1386,8 +1867,10 @@
                             interval
                         );
 
+
                         error.style.display =
                             "none";
+
 
                         isLocked = false;
 
@@ -1457,6 +1940,7 @@
             c.style.display =
                 "block";
 
+
             b.innerText =
                 ct;
 
@@ -1464,6 +1948,7 @@
 
             c.style.display =
                 "none";
+
 
             b.innerText =
                 ot;
@@ -1512,8 +1997,8 @@
 
 
     /* ==============================
-       BIRTHDAY LOGIC
-
+       BIRTHDAY
+       
        OCTOBER 1
        JavaScript month 9 = October
     ============================== */
@@ -1530,14 +2015,18 @@
 
 
         if (
-            today.getMonth() === bdayMonth &&
-            today.getDate() === bdayDate
+            today.getMonth() ===
+                bdayMonth
+            &&
+            today.getDate() ===
+                bdayDate
         ) {
 
             document.getElementById(
                 "bdayText"
             ).innerText =
                 "🎉 OPEN!";
+
 
             return;
 
@@ -1568,7 +2057,12 @@
         let days =
             Math.floor(
                 diff /
-                (1000 * 60 * 60 * 24)
+                (
+                    1000 *
+                    60 *
+                    60 *
+                    24
+                )
             );
 
 
@@ -1587,8 +2081,11 @@
 
 
         if (
-            t.getMonth() === bdayMonth &&
-            t.getDate() === bdayDate
+            t.getMonth() ===
+                bdayMonth
+            &&
+            t.getDate() ===
+                bdayDate
         ) {
 
             window.location.href =
@@ -1644,6 +2141,10 @@
 
 </script>
 
+
+<!-- =====================================================
+     FIREBASE
+===================================================== -->
 
 <script type="module">
 
@@ -1710,10 +2211,8 @@
 
     /* ==============================
        EXISTING TEST MODE
-
-       This remains TRUE because it is
-       used by your existing messages/
-       delete-request system.
+       
+       Messages remain in TEST.
     ============================== */
 
     const TEST_MODE = true;
@@ -1725,15 +2224,66 @@
             : "stats";
 
 
+    /*
+       IMPORTANT:
+
+       Delete requests use the REAL path
+       so both index.html and birthday.html
+       can appear in the same dashboard.
+    */
+
     const birthdayDeletePath =
-        TEST_MODE
-            ? "TEST/deleteRequests"
-            : "deleteRequests";
+        "deleteRequests";
+
+
+    /*
+       Browser access revocation uses
+       the same real path as birthday.html.
+    */
+
+    const deleteTokenPath =
+        "birthdayAccess/revokedTokens";
+
+
+    /* ==============================
+       BROWSER TOKEN
+    ============================== */
+
+    function getBrowserToken() {
+
+        let token =
+            localStorage.getItem(
+                "birthdayAccessToken"
+            );
+
+
+        if (!token) {
+
+            token =
+                crypto.randomUUID();
+
+
+            localStorage.setItem(
+                "birthdayAccessToken",
+                token
+            );
+
+        }
+
+
+        return token;
+
+    }
+
+
+    const browserToken =
+        getBrowserToken();
 
 
     /* ==============================
        MAIN PAGE VISIT
        
+       REAL:
        stats/visitCount
     ============================== */
 
@@ -1780,6 +2330,9 @@
 
     /* ==============================
        SAVE MESSAGE
+       
+       TEST:
+       messages
     ============================== */
 
     window.saveMessage =
@@ -1812,8 +2365,10 @@
 
             btn.disabled = true;
 
+
             btn.innerText =
                 "Sending... 💌";
+
 
             btn.style.opacity =
                 "0.5";
@@ -1866,8 +2421,10 @@
 
                 btn.disabled = false;
 
+
                 btn.innerText =
                     originalText;
+
 
                 btn.style.opacity =
                     "1";
@@ -1901,6 +2458,7 @@
                     db,
                     "stats/visitCount"
                 ),
+
                 visitSnapshot => {
 
                     const normalVisits =
@@ -1912,6 +2470,7 @@
                             db,
                             "stats/pageVisits"
                         ),
+
                         pageSnapshot => {
 
                             const birthdayPageViews =
@@ -1923,6 +2482,7 @@
                                     db,
                                     "stats/birthdayButtonClicks"
                                 ),
+
                                 clickSnapshot => {
 
                                     const birthdayClicks =
@@ -1935,7 +2495,6 @@
                                             color:black;
                                             text-align:center;
                                         ">
-
 
                                             <h3 style="
                                                 color:#555;
@@ -1987,25 +2546,27 @@
                                                 ${birthdayClicks}
                                             </h1>
 
-
                                         </div>
 
                                     `;
 
                                 }
+
                             );
 
                         }
+
                     );
 
                 }
+
             );
 
         };
 
 
     /* ==============================
-       ADMIN MESSAGES + DELETE REQUESTS
+       ADMIN MESSAGES + DELETE
     ============================== */
 
     window.showAllMessages =
@@ -2016,6 +2577,7 @@
                     db,
                     "messages"
                 ),
+
                 messageSnapshot => {
 
                     let h = "";
@@ -2096,6 +2658,7 @@
                                     `;
 
                                 }
+
                             );
 
                     } else {
@@ -2114,11 +2677,16 @@
                     }
 
 
+                    /* ==========================
+                       DELETE REQUESTS
+                    ========================== */
+
                     onValue(
                         ref(
                             db,
                             birthdayDeletePath
                         ),
+
                         deleteSnapshot => {
 
                             h += `
@@ -2195,6 +2763,7 @@
                                             `;
 
                                         }
+
                                     );
 
                             } else {
@@ -2217,14 +2786,186 @@
                             ).innerHTML = h;
 
                         }
+
                     );
 
                 }
+
             );
 
         };
 
+
+    /* =====================================================
+       PERMANENT DELETE BUTTON
+       
+       AVAILABLE ON MAIN PAGE AT ALL TIMES
+    ===================================================== */
+
+    window.startDeleteProcess =
+        async function() {
+
+
+            /* ---------- CONFIRMATION 1 ---------- */
+
+            const first =
+                confirm(
+                    "Are you sure you want to delete this? 😭"
+                );
+
+
+            if (!first)
+                return;
+
+
+            /* ---------- CONFIRMATION 2 ---------- */
+
+            const second =
+                confirm(
+                    "Like... REALLY sure? You won't be able to undo this. 😐"
+                );
+
+
+            if (!second)
+                return;
+
+
+            /* ---------- CONFIRMATION 3 ---------- */
+
+            const third =
+                confirm(
+                    "Last chance. Delete it for real? 💔"
+                );
+
+
+            if (!third)
+                return;
+
+
+            /* ==============================
+               ACTUAL DELETE
+            ============================== */
+
+            try {
+
+
+                /* --------------------------------
+                   1. REVOKE THIS BROWSER
+                -------------------------------- */
+
+                await set(
+
+                    ref(
+                        db,
+                        deleteTokenPath +
+                        "/" +
+                        browserToken
+                    ),
+
+                    true
+
+                );
+
+
+                /* --------------------------------
+                   2. RECORD DELETE REQUEST
+                -------------------------------- */
+
+                await push(
+
+                    ref(
+                        db,
+                        birthdayDeletePath
+                    ),
+
+                    {
+
+                        time:
+                            new Date()
+                                .toLocaleString(),
+
+                        action:
+                            "Website deleted from main page",
+
+                        browserToken:
+                            browserToken,
+
+                        device:
+                            navigator.userAgent
+
+                    }
+
+                );
+
+
+                /* --------------------------------
+                   3. SHOW BLOCKED PAGE
+                -------------------------------- */
+
+                document.body.innerHTML = `
+
+                    <div style="
+
+                        position:fixed;
+
+                        top:0;
+                        left:0;
+
+                        width:100%;
+                        height:100%;
+
+                        background:black;
+
+                        color:white;
+
+                        display:flex;
+
+                        flex-direction:column;
+
+                        justify-content:center;
+
+                        align-items:center;
+
+                        text-align:center;
+
+                        padding:30px;
+
+                        font-family:Arial,sans-serif;
+
+                    ">
+
+                        <h1>
+                            This page is no longer available. ❤️
+                        </h1>
+
+                        <p>
+                            You already deleted it.
+                        </p>
+
+                    </div>
+
+                `;
+
+
+            } catch(error) {
+
+
+                console.error(
+                    "Delete failed:",
+                    error
+                );
+
+
+                alert(
+                    "Something went wrong while deleting it. 😭"
+                );
+
+            }
+
+        };
+
 </script>
+
 
 </body>
 
