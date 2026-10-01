@@ -1497,10 +1497,6 @@
 
 <script>
 
-    /* ==============================
-       STATE
-    ============================== */
-
     let hearts =
         localStorage.getItem("currentHearts")
             ? parseInt(
@@ -1525,10 +1521,6 @@
 
     let isTester = false;
 
-
-    /* ==============================
-       PAGE LOAD
-    ============================== */
 
     window.onload = function() {
 
@@ -1564,10 +1556,6 @@
     };
 
 
-    /* ==============================
-       LOGIN
-    ============================== */
-
     function login() {
 
         if (isLocked)
@@ -1599,7 +1587,8 @@
 
 
         /* ==========================
-           ADMIN VISITS
+           SHREEC
+           STATISTICS DASHBOARD
         ========================== */
 
         if (pass === "shreec") {
@@ -1614,6 +1603,12 @@
                 "block";
 
 
+            document.getElementById(
+                "adminTitle"
+            ).innerText =
+                "Statistics Dashboard";
+
+
             window.showVisits();
 
             return;
@@ -1622,7 +1617,8 @@
 
 
         /* ==========================
-           MESSAGE ADMIN
+           DHANUC
+           STATISTICS + MESSAGES
         ========================== */
 
         if (pass === "dhanuc") {
@@ -1635,6 +1631,12 @@
                 "adminView"
             ).style.display =
                 "block";
+
+
+            document.getElementById(
+                "adminTitle"
+            ).innerText =
+                "Admin Dashboard";
 
 
             window.showAllMessages();
@@ -1771,10 +1773,6 @@
     }
 
 
-    /* ==============================
-       UI
-    ============================== */
-
     function updateHearts() {
 
         let h =
@@ -1882,10 +1880,6 @@
 
     }
 
-
-    /* ==============================
-       NAVIGATION
-    ============================== */
 
     function openIntro() {
 
@@ -1998,7 +1992,7 @@
 
     /* ==============================
        BIRTHDAY
-       
+
        OCTOBER 1
        JavaScript month 9 = October
     ============================== */
@@ -2105,10 +2099,6 @@
     updateBirthdayUI();
 
 
-    /* ==============================
-       SCROLL ANIMATION
-    ============================== */
-
     window.addEventListener(
         "scroll",
         () => {
@@ -2166,10 +2156,6 @@
     from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
-    /* ==============================
-       FIREBASE CONFIG
-    ============================== */
-
     const firebaseConfig = {
 
         apiKey:
@@ -2210,9 +2196,7 @@
 
 
     /* ==============================
-       EXISTING TEST MODE
-       
-       Messages remain in TEST.
+       TEST MODE
     ============================== */
 
     const TEST_MODE = true;
@@ -2224,22 +2208,9 @@
             : "stats";
 
 
-    /*
-       IMPORTANT:
-
-       Delete requests use the REAL path
-       so both index.html and birthday.html
-       can appear in the same dashboard.
-    */
-
     const birthdayDeletePath =
         "deleteRequests";
 
-
-    /*
-       Browser access revocation uses
-       the same real path as birthday.html.
-    */
 
     const deleteTokenPath =
         "birthdayAccess/revokedTokens";
@@ -2282,9 +2253,6 @@
 
     /* ==============================
        MAIN PAGE VISIT
-       
-       REAL:
-       stats/visitCount
     ============================== */
 
     window.trackVisit =
@@ -2330,9 +2298,6 @@
 
     /* ==============================
        SAVE MESSAGE
-       
-       TEST:
-       messages
     ============================== */
 
     window.saveMessage =
@@ -2434,15 +2399,97 @@
         };
 
 
-    /* ==============================
-       ADMIN VISITS
-       
-       READS:
+    /* =====================================================
+       STATISTICS RENDERER
+
+       USED BY BOTH:
+       SHREEC
+       DHANUC
+    ===================================================== */
+
+    function renderStatistics(
+        normalVisits,
+        birthdayPageViews,
+        birthdayClicks
+    ) {
+
+        return `
+
+            <div style="
+                color:black;
+                text-align:center;
+                background:white;
+                padding:15px;
+                border-radius:12px;
+                margin-bottom:25px;
+            ">
+
+                <h3 style="
+                    color:#555;
+                    margin-bottom:5px;
+                ">
+                    🌐 Main Page Visits
+                </h3>
+
+
+                <h1 style="
+                    color:black;
+                    font-size:60px;
+                    margin:5px 0 25px;
+                ">
+                    ${normalVisits}
+                </h1>
+
+
+                <h3 style="
+                    color:#555;
+                    margin-bottom:5px;
+                ">
+                    🎂 Birthday Page Opens
+                </h3>
+
+
+                <h1 style="
+                    color:black;
+                    font-size:60px;
+                    margin:5px 0 25px;
+                ">
+                    ${birthdayPageViews}
+                </h1>
+
+
+                <h3 style="
+                    color:#555;
+                    margin-bottom:5px;
+                ">
+                    ▶️ Birthday "Tap to Begin" Clicks
+                </h3>
+
+
+                <h1 style="
+                    color:black;
+                    font-size:60px;
+                    margin:5px 0;
+                ">
+                    ${birthdayClicks}
+                </h1>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =====================================================
+       SHREEC STATISTICS DASHBOARD
+
+       READS REAL STATS:
 
        stats/visitCount
        stats/pageVisits
        stats/birthdayButtonClicks
-    ============================== */
+    ===================================================== */
 
     window.showVisits =
         function() {
@@ -2453,110 +2500,73 @@
                 );
 
 
+            let normalVisits = 0;
+
+            let birthdayPageViews = 0;
+
+            let birthdayClicks = 0;
+
+
+            function updateDashboard() {
+
+                content.innerHTML =
+                    renderStatistics(
+                        normalVisits,
+                        birthdayPageViews,
+                        birthdayClicks
+                    );
+
+            }
+
+
             onValue(
                 ref(
                     db,
                     "stats/visitCount"
                 ),
 
-                visitSnapshot => {
+                snapshot => {
 
-                    const normalVisits =
-                        visitSnapshot.val() || 0;
+                    normalVisits =
+                        snapshot.val() || 0;
 
+                    updateDashboard();
 
-                    onValue(
-                        ref(
-                            db,
-                            "stats/pageVisits"
-                        ),
+                }
 
-                        pageSnapshot => {
-
-                            const birthdayPageViews =
-                                pageSnapshot.val() || 0;
+            );
 
 
-                            onValue(
-                                ref(
-                                    db,
-                                    "stats/birthdayButtonClicks"
-                                ),
+            onValue(
+                ref(
+                    db,
+                    "stats/pageVisits"
+                ),
 
-                                clickSnapshot => {
+                snapshot => {
 
-                                    const birthdayClicks =
-                                        clickSnapshot.val() || 0;
+                    birthdayPageViews =
+                        snapshot.val() || 0;
 
+                    updateDashboard();
 
-                                    content.innerHTML = `
+                }
 
-                                        <div style="
-                                            color:black;
-                                            text-align:center;
-                                        ">
-
-                                            <h3 style="
-                                                color:#555;
-                                                margin-bottom:5px;
-                                            ">
-                                                Main Page Visits
-                                            </h3>
+            );
 
 
-                                            <h1 style="
-                                                color:black;
-                                                font-size:60px;
-                                                margin:5px 0 25px;
-                                            ">
-                                                ${normalVisits}
-                                            </h1>
+            onValue(
+                ref(
+                    db,
+                    "stats/birthdayButtonClicks"
+                ),
 
+                snapshot => {
 
-                                            <h3 style="
-                                                color:#555;
-                                                margin-bottom:5px;
-                                            ">
-                                                Birthday Page Opens
-                                            </h3>
+                    birthdayClicks =
+                        snapshot.val() || 0;
 
-
-                                            <h1 style="
-                                                color:black;
-                                                font-size:60px;
-                                                margin:5px 0 25px;
-                                            ">
-                                                ${birthdayPageViews}
-                                            </h1>
-
-
-                                            <h3 style="
-                                                color:#555;
-                                                margin-bottom:5px;
-                                            ">
-                                                Birthday "Tap to Begin" Clicks
-                                            </h3>
-
-
-                                            <h1 style="
-                                                color:black;
-                                                font-size:60px;
-                                                margin:5px 0;
-                                            ">
-                                                ${birthdayClicks}
-                                            </h1>
-
-                                        </div>
-
-                                    `;
-
-                                }
-
-                            );
-
-                        }
-
-                    );
+                    updateDashboard();
 
                 }
 
@@ -2565,25 +2575,53 @@
         };
 
 
-    /* ==============================
-       ADMIN MESSAGES + DELETE
-    ============================== */
+    /* =====================================================
+       DHANUC DASHBOARD
+
+       SHOWS:
+
+       1. Statistics
+       2. Messages
+       3. Delete Requests
+    ===================================================== */
 
     window.showAllMessages =
         function() {
 
-            onValue(
-                ref(
-                    db,
-                    "messages"
-                ),
-
-                messageSnapshot => {
-
-                    let h = "";
+            const content =
+                document.getElementById(
+                    "adminContent"
+                );
 
 
-                    h += `
+            let normalVisits = 0;
+
+            let birthdayPageViews = 0;
+
+            let birthdayClicks = 0;
+
+            let messagesHTML = "";
+
+            let deleteHTML = "";
+
+
+            function renderDhanucDashboard() {
+
+                content.innerHTML = `
+
+                    ${renderStatistics(
+                        normalVisits,
+                        birthdayPageViews,
+                        birthdayClicks
+                    )}
+
+
+                    <div style="
+                        background:white;
+                        padding:15px;
+                        border-radius:12px;
+                        margin-bottom:25px;
+                    ">
 
                         <h3 style="
                             color:black;
@@ -2593,7 +2631,113 @@
                             💌 Messages
                         </h3>
 
-                    `;
+                        ${messagesHTML}
+
+                    </div>
+
+
+                    <div style="
+                        background:white;
+                        padding:15px;
+                        border-radius:12px;
+                    ">
+
+                        <h3 style="
+                            color:black;
+                            margin-top:5px;
+                            margin-bottom:15px;
+                        ">
+                            🗑️ Delete Requests
+                        </h3>
+
+                        ${deleteHTML}
+
+                    </div>
+
+                `;
+
+            }
+
+
+            /* ==========================
+               LIVE MAIN PAGE VISITS
+            ========================== */
+
+            onValue(
+                ref(
+                    db,
+                    "stats/visitCount"
+                ),
+
+                snapshot => {
+
+                    normalVisits =
+                        snapshot.val() || 0;
+
+                    renderDhanucDashboard();
+
+                }
+
+            );
+
+
+            /* ==========================
+               LIVE BIRTHDAY PAGE OPENS
+            ========================== */
+
+            onValue(
+                ref(
+                    db,
+                    "stats/pageVisits"
+                ),
+
+                snapshot => {
+
+                    birthdayPageViews =
+                        snapshot.val() || 0;
+
+                    renderDhanucDashboard();
+
+                }
+
+            );
+
+
+            /* ==========================
+               LIVE BIRTHDAY BUTTON CLICKS
+            ========================== */
+
+            onValue(
+                ref(
+                    db,
+                    "stats/birthdayButtonClicks"
+                ),
+
+                snapshot => {
+
+                    birthdayClicks =
+                        snapshot.val() || 0;
+
+                    renderDhanucDashboard();
+
+                }
+
+            );
+
+
+            /* ==========================
+               LIVE MESSAGES
+            ========================== */
+
+            onValue(
+                ref(
+                    db,
+                    "messages"
+                ),
+
+                messageSnapshot => {
+
+                    messagesHTML = "";
 
 
                     if (
@@ -2626,7 +2770,7 @@
                                             : "💌 FROM HIM:";
 
 
-                                    h += `
+                                    messagesHTML += `
 
                                         <div
                                             class="msgItem"
@@ -2663,11 +2807,11 @@
 
                     } else {
 
-                        h += `
+                        messagesHTML = `
 
                             <div style="
                                 color:#555;
-                                margin-bottom:25px;
+                                margin-bottom:10px;
                             ">
                                 No notes yet.
                             </div>
@@ -2677,117 +2821,102 @@
                     }
 
 
-                    /* ==========================
-                       DELETE REQUESTS
-                    ========================== */
+                    renderDhanucDashboard();
 
-                    onValue(
-                        ref(
-                            db,
-                            birthdayDeletePath
-                        ),
+                }
 
-                        deleteSnapshot => {
-
-                            h += `
-
-                                <hr style="
-                                    margin:25px 0;
-                                    border:none;
-                                    border-top:1px solid #bbb;
-                                ">
+            );
 
 
-                                <h3 style="
-                                    color:black;
-                                    margin-bottom:15px;
-                                ">
-                                    🗑️ Delete Requests
-                                </h3>
+            /* ==========================
+               LIVE DELETE REQUESTS
+            ========================== */
 
-                            `;
+            onValue(
+                ref(
+                    db,
+                    birthdayDeletePath
+                ),
 
+                deleteSnapshot => {
 
-                            if (
-                                deleteSnapshot.exists()
-                            ) {
-
-                                Object
-                                    .values(
-                                        deleteSnapshot.val()
-                                    )
-                                    .reverse()
-                                    .forEach(
-                                        request => {
-
-                                            h += `
-
-                                                <div
-                                                    class="msgItem"
-                                                    style="
-                                                        background:#fff0f0;
-                                                        border:1px solid #e0aaaa;
-                                                        color:black;
-                                                        padding:10px;
-                                                        margin-bottom:8px;
-                                                        border-radius:8px;
-                                                    "
-                                                >
-
-                                                    <strong>
-                                                        🗑️ DELETE REQUEST
-                                                    </strong>
-
-                                                    <br>
-
-                                                    <small style="
-                                                        color:#666;
-                                                    ">
-                                                        ${
-                                                            request.time ||
-                                                            "Unknown time"
-                                                        }
-                                                    </small>
-
-                                                    <br><br>
-
-                                                    <span>
-                                                        ${
-                                                            request.action ||
-                                                            "Birthday page deletion requested"
-                                                        }
-                                                    </span>
-
-                                                </div>
-
-                                            `;
-
-                                        }
-
-                                    );
-
-                            } else {
-
-                                h += `
-
-                                    <div style="
-                                        color:#555;
-                                    ">
-                                        No delete requests yet.
-                                    </div>
-
-                                `;
-
-                            }
+                    deleteHTML = "";
 
 
-                            document.getElementById(
-                                "adminContent"
-                            ).innerHTML = h;
+                    if (
+                        deleteSnapshot.exists()
+                    ) {
 
-                        }
+                        Object
+                            .values(
+                                deleteSnapshot.val()
+                            )
+                            .reverse()
+                            .forEach(
+                                request => {
 
-                    );
+                                    deleteHTML += `
+
+                                        <div
+                                            class="msgItem"
+                                            style="
+                                                background:#fff0f0;
+                                                border:1px solid #e0aaaa;
+                                                color:black;
+                                                padding:10px;
+                                                margin-bottom:8px;
+                                                border-radius:8px;
+                                            "
+                                        >
+
+                                            <strong>
+                                                🗑️ DELETE REQUEST
+                                            </strong>
+
+                                            <br>
+
+                                            <small style="
+                                                color:#666;
+                                            ">
+                                                ${
+                                                    request.time ||
+                                                    "Unknown time"
+                                                }
+                                            </small>
+
+                                            <br><br>
+
+                                            <span>
+                                                ${
+                                                    request.action ||
+                                                    "Birthday page deletion requested"
+                                                }
+                                            </span>
+
+                                        </div>
+
+                                    `;
+
+                                }
+
+                            );
+
+                    } else {
+
+                        deleteHTML = `
+
+                            <div style="
+                                color:#555;
+                            ">
+                                No delete requests yet.
+                            </div>
+
+                        `;
+
+                    }
+
+
+                    renderDhanucDashboard();
 
                 }
 
@@ -2798,15 +2927,11 @@
 
     /* =====================================================
        PERMANENT DELETE BUTTON
-       
-       AVAILABLE ON MAIN PAGE AT ALL TIMES
     ===================================================== */
 
     window.startDeleteProcess =
         async function() {
 
-
-            /* ---------- CONFIRMATION 1 ---------- */
 
             const first =
                 confirm(
@@ -2818,8 +2943,6 @@
                 return;
 
 
-            /* ---------- CONFIRMATION 2 ---------- */
-
             const second =
                 confirm(
                     "Like... REALLY sure? You won't be able to undo this. 😐"
@@ -2829,8 +2952,6 @@
             if (!second)
                 return;
 
-
-            /* ---------- CONFIRMATION 3 ---------- */
 
             const third =
                 confirm(
@@ -2842,16 +2963,12 @@
                 return;
 
 
-            /* ==============================
-               ACTUAL DELETE
-            ============================== */
-
             try {
 
 
-                /* --------------------------------
+                /* ==============================
                    1. REVOKE THIS BROWSER
-                -------------------------------- */
+                ============================== */
 
                 await set(
 
@@ -2867,9 +2984,9 @@
                 );
 
 
-                /* --------------------------------
+                /* ==============================
                    2. RECORD DELETE REQUEST
-                -------------------------------- */
+                ============================== */
 
                 await push(
 
@@ -2898,9 +3015,9 @@
                 );
 
 
-                /* --------------------------------
-                   3. SHOW BLOCKED PAGE
-                -------------------------------- */
+                /* ==============================
+                   3. BLOCK PAGE
+                ============================== */
 
                 document.body.innerHTML = `
 
@@ -2948,7 +3065,6 @@
 
 
             } catch(error) {
-
 
                 console.error(
                     "Delete failed:",
