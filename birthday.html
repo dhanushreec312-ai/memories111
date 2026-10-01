@@ -37,6 +37,7 @@
             overflow: hidden;
         }
 
+
         /* =========================
            START SCREEN
         ========================= */
@@ -107,6 +108,7 @@
 
         }
 
+
         /* =========================
            VIDEO SCREEN
         ========================= */
@@ -144,6 +146,7 @@
             background: black;
 
         }
+
 
         /* =========================
            MAIN CONTENT
@@ -205,6 +208,7 @@
 
         }
 
+
         /* =========================
            DRAWING
         ========================= */
@@ -220,6 +224,7 @@
             margin-top: 15px;
 
         }
+
 
         /* =========================
            DELETE SECTION
@@ -255,8 +260,9 @@
 
         }
 
+
         /* =========================
-           ACCESS DENIED SCREEN
+           BLOCKED SCREEN
         ========================= */
 
         #blockedScreen {
@@ -547,10 +553,7 @@
 
 
     /* =====================================================
-       TEST SWITCH
-
-       TRUE  = testing mode
-       FALSE = REAL / FINAL mode
+       IMPORTANT
     ===================================================== */
 
     const TEST_MODE = false;
@@ -620,7 +623,7 @@
 
 
     /* =====================================================
-       CREATE / GET BROWSER TOKEN
+       BROWSER TOKEN
     ===================================================== */
 
     function getBrowserToken() {
@@ -654,7 +657,7 @@
 
 
     /* =====================================================
-       CHECK WHETHER THIS BROWSER IS ALREADY REVOKED
+       CHECK ACCESS
     ===================================================== */
 
     async function checkAccess() {
@@ -736,10 +739,7 @@
 
 
     /* =====================================================
-       UNIVERSAL COUNTER
-
-       Uses Firebase transaction so simultaneous
-       visits/clicks don't overwrite each other.
+       COUNTER
     ===================================================== */
 
     async function incrementCounter(counterName) {
@@ -787,12 +787,7 @@
 
 
     /* =====================================================
-       RECORD PAGE VIEW
-
-       Runs when birthday page loads.
-
-       Firebase:
-       stats/pageVisits
+       BIRTHDAY PAGE OPEN
     ===================================================== */
 
     async function recordPageView() {
@@ -805,13 +800,7 @@
 
 
     /* =====================================================
-       RECORD BUTTON CLICK
-
-       Runs ONLY when "Tap to begin"
-       is clicked.
-
-       Firebase:
-       stats/birthdayButtonClicks
+       TAP TO BEGIN
     ===================================================== */
 
     async function recordBirthdayButtonClick() {
@@ -824,7 +813,7 @@
 
 
     /* =====================================================
-       INITIAL ACCESS CHECK
+       INITIALIZE
     ===================================================== */
 
     async function initializeBirthdayPage() {
@@ -836,10 +825,6 @@
         if (!allowed)
             return;
 
-
-        /*
-         * Count page opening.
-         */
 
         await recordPageView();
 
@@ -913,13 +898,6 @@
 
     window.startVideo = async function() {
 
-        /*
-         * IMPORTANT:
-         * This counts the button click.
-         *
-         * The video does NOT need to finish.
-         */
-
         await recordBirthdayButtonClick();
 
 
@@ -979,8 +957,6 @@
     window.startDeleteProcess = async function() {
 
 
-        /* ---------- CONFIRMATION 1 ---------- */
-
         const first =
             confirm(
                 "Are you sure you want to delete this? 😭"
@@ -990,8 +966,6 @@
         if (!first)
             return;
 
-
-        /* ---------- CONFIRMATION 2 ---------- */
 
         const second =
             confirm(
@@ -1003,8 +977,6 @@
             return;
 
 
-        /* ---------- CONFIRMATION 3 ---------- */
-
         const third =
             confirm(
                 "Last chance. Delete it for real? 💔"
@@ -1015,17 +987,10 @@
             return;
 
 
-        /* =================================================
-           FINAL DELETE
-        ================================================= */
-
-
         try {
 
 
-            /* ---------------------------------------------
-               1. REVOKE THIS BROWSER'S ACCESS
-            --------------------------------------------- */
+            /* REVOKE BROWSER */
 
             await set(
 
@@ -1041,9 +1006,7 @@
             );
 
 
-            /* ---------------------------------------------
-               2. RECORD DELETE REQUEST
-            --------------------------------------------- */
+            /* RECORD DELETE REQUEST */
 
             await push(
 
@@ -1073,15 +1036,12 @@
             );
 
 
-            /* ---------------------------------------------
-               3. BLOCK THIS PAGE IMMEDIATELY
-            --------------------------------------------- */
+            /* BLOCK */
 
             blockPage();
 
 
         } catch(error) {
-
 
             console.error(
                 "Delete failed:",
@@ -1096,7 +1056,6 @@
         }
 
     };
-
 
 </script>
 
